@@ -88,7 +88,7 @@ const EverythingInOneSection = () => {
   return (
     <section
       id="everything-package"
-      className="relative overflow-hidden bg-[#080808] py-14 sm:py-20 px-4 sm:px-6 isolate"
+      className="eiop-section relative overflow-hidden bg-[#080808] py-16 sm:py-20 px-4 sm:px-6 isolate w-full flex flex-col items-center justify-center text-center"
       ref={sectionRef}
     >
       {/* ── Ambient glow + streaks ── */}
@@ -120,11 +120,12 @@ const EverythingInOneSection = () => {
         ))}
       </div>
 
-      <div className="relative z-[2] max-w-[1060px] mx-auto">
+      {/* ── Central Content Container: Always Centered on Any Screen Size ── */}
+      <div className="relative z-[2] max-w-[1060px] w-full mx-auto flex flex-col items-center justify-center">
 
         {/* ── Header ── */}
         <div
-          className="flex flex-col items-center text-center mb-8 sm:mb-10 transition-all duration-700"
+          className="flex flex-col items-center text-center w-full max-w-[650px] mx-auto mb-8 sm:mb-10 transition-all duration-700"
           style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(24px)' }}
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-[rgba(126,211,33,0.08)] border border-[rgba(126,211,33,0.25)] rounded-full font-mono text-[0.7rem] font-bold tracking-[0.14em] text-[#7ed321] uppercase mb-3 shadow-[0_0_15px_rgba(126,211,33,0.15)]">
@@ -134,13 +135,13 @@ const EverythingInOneSection = () => {
           <h2 className="font-sans text-[clamp(1.8rem,4vw,2.8rem)] font-extrabold text-white leading-[1.15] tracking-[-0.015em] mb-2.5">
             Everything In <em className="not-italic eiop__title-gradient">One Package.</em>
           </h2>
-          <p className="text-[clamp(0.82rem,1.3vw,0.95rem)] text-white/60 max-w-[500px] leading-[1.55]">
+          <p className="text-[clamp(0.82rem,1.3vw,0.95rem)] text-white/60 max-w-[500px] leading-[1.55] mx-auto">
             Starting out? Scaling up? Going all in? Get every premium theme and all lifetime updates in one complete bundle.
           </p>
         </div>
 
-        {/* ── Main Layout: Perfectly Proportioned 3-Column Layout ── */}
-        <div className="eiop__layout flex items-start justify-center gap-3 sm:gap-6 max-w-[940px] mx-auto w-full">
+        {/* ── Main Layout: Perfectly Centered 3-Column Layout ── */}
+        <div className="eiop__layout flex items-start justify-center gap-3 sm:gap-6 max-w-[960px] w-full mx-auto">
 
           {/* Left Callout Column */}
           <div
@@ -159,7 +160,7 @@ const EverythingInOneSection = () => {
 
           {/* Center Column: Top Pill + Product Card */}
           <div
-            className="flex-shrink-0 w-full max-w-[380px] flex flex-col items-center transition-all duration-700 delay-100"
+            className="flex-shrink-0 w-full max-w-[380px] flex flex-col items-center mx-auto transition-all duration-700 delay-100"
             style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(24px)' }}
           >
             {/* Top Callout Pill */}
@@ -173,7 +174,7 @@ const EverythingInOneSection = () => {
             {/* Product Card with 3-D Tilt */}
             <div
               ref={cardRef}
-              className="eiop__card relative w-full rounded-[20px] overflow-hidden border border-white/[0.14] backdrop-blur-xl cursor-default bg-gradient-to-b from-[#181c18] via-[#101310] to-[#0a0d0a] shadow-[0_20px_50px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.15)]"
+              className="eiop__card relative w-full rounded-[20px] overflow-hidden border border-white/[0.14] backdrop-blur-xl cursor-default bg-gradient-to-b from-[#181c18] via-[#101310] to-[#0a0d0a] shadow-[0_20px_50px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.15)] mx-auto"
               style={{
                 transform: `perspective(900px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg) scale3d(1,1,1)`,
                 transition: 'transform 0.12s ease-out, box-shadow 0.4s ease, border-color 0.4s ease',
@@ -197,12 +198,12 @@ const EverythingInOneSection = () => {
                 <img
                   src="/everythinginonepage/FC6750AB-9ABC-4D70-BDB8-4E357A3E70E0.webp"
                   alt="Elite Theme Package box"
-                  className="eiop__box-img relative z-[2] w-[80%] max-w-[240px] h-auto object-contain block"
+                  className="eiop__box-img relative z-[2] w-[80%] max-w-[240px] h-auto object-contain block mx-auto"
                 />
               </div>
 
               {/* Card Body */}
-              <div className="p-5 flex flex-col gap-3.5">
+              <div className="p-5 flex flex-col gap-3.5 text-left">
                 <div className="flex justify-between items-baseline gap-2">
                   <h3 className="font-sans text-[1.1rem] font-bold text-white tracking-tight">Elite Theme Package</h3>
                   <div className="flex items-baseline gap-1.5">

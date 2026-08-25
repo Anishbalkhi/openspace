@@ -4,6 +4,25 @@
    shimmer, tilt, gradient text.
    ============================================= */
 
+/* ── Section & Container Centering ── */
+.eiop-section {
+  width: 100% !important;
+  max-width: 100vw !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box;
+}
+
+.eiop__layout {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  justify-content: center !important;
+}
+
 /* ── Ambient Glow Orb ── */
 .eiop__glow-orb {
   position: absolute;
