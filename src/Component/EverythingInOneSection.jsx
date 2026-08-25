@@ -217,60 +217,68 @@ const EverythingInOneSection = () => {
                 </div>
 
                 {/* Card Body */}
-                <div className="px-5 pt-4 pb-5 flex flex-col gap-4 text-left">
+                <div className="px-5 pt-5 pb-5 flex flex-col gap-3.5 text-left">
 
-                  {/* Title + Price Block */}
-                  <div className="flex flex-col gap-1">
-                    <div className="flex items-center justify-between gap-2 flex-wrap">
-                      <h3 className="font-sans text-[1.05rem] font-bold text-white tracking-tight leading-tight">Elite Theme Package</h3>
-                      {/* Star Rating */}
-                      <div className="flex items-center gap-1">
-                        <span className="text-amber-400 text-[0.75rem] tracking-tight">★★★★★</span>
-                        <span className="font-mono text-[0.65rem] text-white/50">4.9</span>
+                  {/* ── Top Row: Title + Stars ── */}
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <h3 className="font-sans text-[1.1rem] font-bold text-white tracking-tight leading-tight m-0">Elite Theme Package</h3>
+                      <p className="text-[0.7rem] text-white/40 mt-0.5 font-mono m-0">Premium Shopify & Web themes bundle</p>
+                    </div>
+                    <div className="flex flex-col items-end gap-0.5 flex-shrink-0">
+                      <div className="flex gap-[2px]">
+                        {[1,2,3,4,5].map(i => <span key={i} style={{color:'#f59e0b',fontSize:'0.7rem'}}>★</span>)}
                       </div>
+                      <span className="font-mono text-[0.6rem] text-white/40">4.9 · 8,500+ reviews</span>
                     </div>
-                    {/* Price Row */}
-                    <div className="flex items-end gap-2 mt-1">
-                      <span className="font-mono text-[0.8rem] text-white/35 line-through leading-none">$249</span>
-                      <span ref={priceRef} className="font-mono text-[2rem] font-extrabold text-[#7ed321] leading-none tracking-tight">
-                        ${price}
-                      </span>
-                      <span className="font-mono text-[0.68rem] text-white/45 leading-none mb-1">one-time</span>
-                    </div>
-                    <p className="text-[0.74rem] text-white/55 leading-[1.45] mt-0.5">
-                      Every premium theme + lifetime updates in one complete bundle.
-                    </p>
                   </div>
 
-                  {/* Divider */}
-                  <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                  {/* ── Price + Savings ── */}
+                  <div className="flex items-end justify-between gap-2 py-3 px-3.5 rounded-xl" style={{background:'rgba(126,211,33,0.07)', border:'1px solid rgba(126,211,33,0.18)'}}>
+                    <div className="flex flex-col gap-0.5">
+                      <span className="font-mono text-[0.7rem] text-white/35 line-through leading-none">Was $249</span>
+                      <div className="flex items-end gap-1.5">
+                        <span ref={priceRef} className="font-mono text-[2.2rem] font-extrabold text-[#7ed321] leading-none tracking-[-0.03em]">${price}</span>
+                        <span className="font-mono text-[0.7rem] text-white/45 leading-none mb-1">/ one-time</span>
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-end gap-1">
+                      <span className="font-mono text-[0.65rem] font-extrabold text-[#080808] bg-[#7ed321] px-2 py-0.5 rounded-md tracking-wide">SAVE 80%</span>
+                      <span className="font-mono text-[0.6rem] text-[#7ed321]/70">Lifetime access</span>
+                    </div>
+                  </div>
 
-                  {/* Features — styled as individual pills */}
-                  <div className="flex flex-col gap-2">
-                    <span className="font-mono text-[0.62rem] text-white/35 tracking-[0.1em] uppercase">What's included</span>
-                    <div className="grid grid-cols-2 gap-2">
+                  {/* ── What's Included ── */}
+                  <div className="flex flex-col gap-1.5">
+                    <span className="font-mono text-[0.58rem] text-white/30 tracking-[0.12em] uppercase">What's included</span>
+                    <div className="grid grid-cols-2 gap-1.5">
                       {[
-                        ['All Themes',      '5 premium themes'],
-                        ['Lifetime Updates', 'Free forever'],
-                        ['Full Source Files','Everything editable'],
-                        ['Priority Support', '24/7 reply'],
-                      ].map(([title, sub]) => (
-                        <div key={title} className="flex items-start gap-2 p-2 rounded-lg bg-white/[0.04] border border-white/[0.06] hover:border-[rgba(126,211,33,0.25)] transition-colors duration-200">
-                          <span className="text-[#7ed321] text-[0.75rem] mt-[1px] flex-shrink-0 font-bold">✓</span>
-                          <div className="flex flex-col gap-0.5 min-w-0">
-                            <span className="text-[0.72rem] text-white font-semibold leading-tight truncate">{title}</span>
-                            <span className="text-[0.62rem] text-white/45 leading-tight">{sub}</span>
+                        ['🎨', 'All Themes',       '5 premium'],
+                        ['♾️', 'Lifetime Updates', 'Free forever'],
+                        ['📁', 'Source Files',      'Full access'],
+                        ['🎯', 'Priority Support',  '24/7 reply'],
+                      ].map(([icon, title, sub]) => (
+                        <div key={title} className="flex items-center gap-2 p-2 rounded-lg transition-all duration-200 group"
+                          style={{background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.07)'}}>
+                          <span className="text-[0.85rem] flex-shrink-0">{icon}</span>
+                          <div className="flex flex-col gap-0 min-w-0">
+                            <span className="text-[0.7rem] text-white font-semibold leading-tight">{title}</span>
+                            <span className="text-[0.6rem] text-white/40 leading-tight">{sub}</span>
                           </div>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  {/* CTA Button */}
+                  {/* ── CTA Button ── */}
                   <button
                     type="button"
-                    className="eiop__cta-btn inline-flex items-center justify-center gap-2 w-full py-3.5 px-5 font-sans text-[0.9rem] font-bold rounded-xl cursor-pointer border-none overflow-hidden relative"
-                    style={{ background: 'linear-gradient(135deg, #7ed321 0%, #a3e635 100%)', color: '#080808', boxShadow: '0 4px 20px rgba(126,211,33,0.4)' }}
+                    className="eiop__cta-btn inline-flex items-center justify-center gap-2 w-full py-3.5 px-5 font-sans text-[0.92rem] font-bold rounded-xl cursor-pointer border-none overflow-hidden relative transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                    style={{
+                      background: 'linear-gradient(135deg, #7ed321 0%, #a3e635 60%, #c8f547 100%)',
+                      color: '#080808',
+                      boxShadow: '0 6px 24px rgba(126,211,33,0.45), 0 1px 0 rgba(255,255,255,0.3) inset'
+                    }}
                     onClick={() => {
                       const el = document.getElementById('themes') || document.getElementById('pick-theme');
                       if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -278,13 +286,15 @@ const EverythingInOneSection = () => {
                   >
                     <span className="eiop__cta-shine" aria-hidden="true" />
                     <span className="relative z-[1] tracking-tight">Get Complete Access</span>
-                    <span className="relative z-[1] eiop__cta-arrow font-bold">→</span>
+                    <span className="relative z-[1] eiop__cta-arrow font-bold text-[1rem]">→</span>
                   </button>
 
-                  {/* Trust line */}
-                  <p className="text-[0.62rem] text-white/30 text-center font-mono m-0 leading-relaxed">
-                    🛡 100% Money-back Guarantee &nbsp;·&nbsp; 8,500+ stores
-                  </p>
+                  {/* ── Trust bar ── */}
+                  <div className="flex items-center justify-center gap-3">
+                    <span className="text-[0.6rem] text-white/30 font-mono">🛡 Money-back guarantee</span>
+                    <span className="text-white/15 text-[0.5rem]">|</span>
+                    <span className="text-[0.6rem] text-white/30 font-mono">⚡ Instant delivery</span>
+                  </div>
 
                 </div>
               </div>
