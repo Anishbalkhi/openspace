@@ -221,41 +221,75 @@ const EverythingInOneSection = () => {
                 </div>
 
                 {/* Card Body */}
-                <div className="p-5 flex flex-col gap-3.5 text-left">
-                  <div className="flex justify-between items-baseline gap-2">
-                    <h3 className="font-sans text-[1.1rem] font-bold text-white tracking-tight">Elite Theme Package</h3>
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="font-mono text-[0.82rem] text-white/40 line-through">$249</span>
-                      <span ref={priceRef} className="font-mono text-[1.25rem] font-extrabold text-[#7ed321]">
+                <div className="px-5 pt-4 pb-5 flex flex-col gap-4 text-left">
+
+                  {/* Title + Price Block */}
+                  <div className="flex flex-col gap-1">
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                      <h3 className="font-sans text-[1.05rem] font-bold text-white tracking-tight leading-tight">Elite Theme Package</h3>
+                      {/* Star Rating */}
+                      <div className="flex items-center gap-1">
+                        <span className="text-amber-400 text-[0.75rem] tracking-tight">★★★★★</span>
+                        <span className="font-mono text-[0.65rem] text-white/50">4.9</span>
+                      </div>
+                    </div>
+                    {/* Price Row */}
+                    <div className="flex items-end gap-2 mt-1">
+                      <span className="font-mono text-[0.8rem] text-white/35 line-through leading-none">$249</span>
+                      <span ref={priceRef} className="font-mono text-[2rem] font-extrabold text-[#7ed321] leading-none tracking-tight">
                         ${price}
                       </span>
+                      <span className="font-mono text-[0.68rem] text-white/45 leading-none mb-1">one-time</span>
+                    </div>
+                    <p className="text-[0.74rem] text-white/55 leading-[1.45] mt-0.5">
+                      Every premium theme + lifetime updates in one complete bundle.
+                    </p>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+                  {/* Features — styled as individual pills */}
+                  <div className="flex flex-col gap-2">
+                    <span className="font-mono text-[0.62rem] text-white/35 tracking-[0.1em] uppercase">What's included</span>
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        ['All Themes',      '5 premium themes'],
+                        ['Lifetime Updates', 'Free forever'],
+                        ['Full Source Files','Everything editable'],
+                        ['Priority Support', '24/7 reply'],
+                      ].map(([title, sub]) => (
+                        <div key={title} className="flex items-start gap-2 p-2 rounded-lg bg-white/[0.04] border border-white/[0.06] hover:border-[rgba(126,211,33,0.25)] transition-colors duration-200">
+                          <span className="text-[#7ed321] text-[0.75rem] mt-[1px] flex-shrink-0 font-bold">✓</span>
+                          <div className="flex flex-col gap-0.5 min-w-0">
+                            <span className="text-[0.72rem] text-white font-semibold leading-tight truncate">{title}</span>
+                            <span className="text-[0.62rem] text-white/45 leading-tight">{sub}</span>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
-                  <p className="text-[0.78rem] text-white/70 leading-[1.5] m-0">
-                    Premium Shopify &amp; Web themes suite built for high-growth modern brands.
-                  </p>
-
-                  {/* Features List */}
-                  <div className="grid grid-cols-2 gap-1.5 p-2.5 bg-white/[0.03] border border-white/[0.07] rounded-lg">
-                    {['✓ All Themes Included', '✓ Lifetime Updates', '✓ Full Source Files', '✓ 24/7 Priority Support'].map((f) => (
-                      <span key={f} className="text-[0.72rem] text-[#d1fae5] font-medium tracking-tight">{f}</span>
-                    ))}
-                  </div>
-
-                  {/* Action CTA Button */}
+                  {/* CTA Button */}
                   <button
                     type="button"
-                    className="eiop__cta-btn inline-flex items-center justify-center gap-2 w-full py-3 px-5 bg-[#7ed321] text-[#080808] font-sans text-[0.88rem] font-bold rounded-lg cursor-pointer border-none overflow-hidden relative shadow-[0_4px_16px_rgba(126,211,33,0.35)] hover:bg-[#8eef2a]"
+                    className="eiop__cta-btn inline-flex items-center justify-center gap-2 w-full py-3.5 px-5 font-sans text-[0.9rem] font-bold rounded-xl cursor-pointer border-none overflow-hidden relative"
+                    style={{ background: 'linear-gradient(135deg, #7ed321 0%, #a3e635 100%)', color: '#080808', boxShadow: '0 4px 20px rgba(126,211,33,0.4)' }}
                     onClick={() => {
                       const el = document.getElementById('themes') || document.getElementById('pick-theme');
                       if (el) el.scrollIntoView({ behavior: 'smooth' });
                     }}
                   >
                     <span className="eiop__cta-shine" aria-hidden="true" />
-                    <span className="relative z-[1]">Get Complete Access</span>
-                    <span className="relative z-[1] eiop__cta-arrow text-sm">→</span>
+                    <span className="relative z-[1] tracking-tight">Get Complete Access</span>
+                    <span className="relative z-[1] eiop__cta-arrow font-bold">→</span>
                   </button>
+
+                  {/* Trust line */}
+                  <p className="text-[0.62rem] text-white/30 text-center font-mono m-0 leading-relaxed">
+                    🛡 100% Money-back Guarantee &nbsp;·&nbsp; 8,500+ stores
+                  </p>
+
                 </div>
               </div>
             </div>
