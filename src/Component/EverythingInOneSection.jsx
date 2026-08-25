@@ -148,7 +148,7 @@ const EverythingInOneSection = () => {
             className="eiop__callout--left flex-1 min-w-0 max-w-[240px] flex flex-col items-end text-right pt-4 transition-all duration-700 delay-200"
             style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateX(0)' : 'translateX(-30px)' }}
           >
-            <ArrowCurveLeft />
+            <ArrowCurveRight />
             <p className="text-[0.88rem] text-[#7ed321] leading-[1.55] italic mt-1 break-words">
               Providing a <strong className="font-bold not-italic">hundredfold more value</strong> than any alternative package offered.
             </p>
@@ -279,7 +279,7 @@ const EverythingInOneSection = () => {
             className="eiop__callout--right flex-1 min-w-0 max-w-[240px] flex flex-col items-start text-left pt-4 transition-all duration-700 delay-200"
             style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateX(0)' : 'translateX(30px)' }}
           >
-            <ArrowCurveRight />
+            <ArrowCurveLeft />
             <p className="text-[0.88rem] text-[#7ed321] leading-[1.55] italic mt-1 break-words">
               Outperforming <strong className="font-bold not-italic">every rival package</strong> with one hundred times the value.
             </p>
