@@ -140,33 +140,29 @@ const EverythingInOneSection = () => {
           </p>
         </div>
 
-        {/* ── Main Layout: Perfectly Centered 3-Column Layout ── */}
-        <div className="eiop__layout flex items-start justify-center gap-3 sm:gap-6 max-w-[960px] w-full mx-auto">
+        {/* ── Main Layout: Wide 3-Column matching reference image ── */}
+        <div className="eiop__layout flex items-start justify-center gap-2 sm:gap-4 max-w-[1100px] w-full mx-auto">
 
-          {/* Left Callout Column — arrow above text */}
+          {/* Left Callout Column — large arrow then plain text */}
           <div
-            className="eiop__callout--left flex-1 min-w-0 max-w-[210px] flex flex-col items-end text-right pt-2 transition-all duration-700 delay-200"
-            style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateX(0)' : 'translateX(-24px)' }}
+            className="eiop__callout--left flex-1 min-w-0 max-w-[240px] flex flex-col items-end text-right pt-4 transition-all duration-700 delay-200"
+            style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateX(0)' : 'translateX(-30px)' }}
           >
-            <div className="pr-2 mb-1">
-              <ArrowCurveLeft />
-            </div>
-            <div className="bg-[rgba(18,24,18,0.85)] border border-[rgba(126,211,33,0.25)] rounded-xl p-3.5 backdrop-blur-md shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_15px_rgba(126,211,33,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(126,211,33,0.5)]">
-              <p className="text-[0.8rem] text-[#a3e635] leading-[1.45] italic m-0 break-words">
-                Providing a <strong className="text-white font-bold not-italic">hundredfold more value</strong> than any alternative package offered.
-              </p>
-            </div>
+            <ArrowCurveLeft />
+            <p className="text-[0.88rem] text-[#7ed321] leading-[1.55] italic mt-1 break-words">
+              Providing a <strong className="font-bold not-italic">hundredfold more value</strong> than any alternative package offered.
+            </p>
           </div>
 
-          {/* Center Column: Top Pill + Product Card */}
+          {/* Center Column: Plain green text + arrow + Card */}
           <div
-            className="flex-shrink-0 min-w-0 w-full max-w-[380px] flex flex-col items-center mx-auto transition-all duration-700 delay-100"
+            className="flex-shrink-0 min-w-0 w-full max-w-[400px] flex flex-col items-center mx-auto transition-all duration-700 delay-100"
             style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(24px)' }}
           >
-            {/* Top Callout Pill */}
-            <div className="flex flex-col items-center gap-0.5 mb-1.5">
-              <p className="text-[0.82rem] text-[#a3e635] italic text-center bg-[rgba(18,24,18,0.92)] border border-[rgba(126,211,33,0.3)] rounded-full px-4 py-1.5 backdrop-blur-md shadow-[0_4px_16px_rgba(0,0,0,0.4)] whitespace-nowrap m-0">
-                <strong className="not-italic text-white font-bold">100X the value</strong> of any other package.
+            {/* Plain green "100X" text + arrow — matches image 2 */}
+            <div className="flex flex-col items-center gap-0 mb-0">
+              <p className="text-[1rem] text-[#7ed321] font-semibold text-center leading-[1.4] m-0">
+                100X the value of<br />any other package.
               </p>
               <ArrowDown />
             </div>
@@ -295,19 +291,15 @@ const EverythingInOneSection = () => {
             </div>
           </div>
 
-          {/* Right Callout Column — arrow above text */}
+          {/* Right Callout Column — large arrow then plain text */}
           <div
-            className="eiop__callout--right flex-1 min-w-0 max-w-[210px] flex flex-col items-start text-left pt-2 transition-all duration-700 delay-200"
-            style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateX(0)' : 'translateX(24px)' }}
+            className="eiop__callout--right flex-1 min-w-0 max-w-[240px] flex flex-col items-start text-left pt-4 transition-all duration-700 delay-200"
+            style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateX(0)' : 'translateX(30px)' }}
           >
-            <div className="pl-2 mb-1">
-              <ArrowCurveRight />
-            </div>
-            <div className="bg-[rgba(18,24,18,0.85)] border border-[rgba(126,211,33,0.25)] rounded-xl p-3.5 backdrop-blur-md shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_15px_rgba(126,211,33,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(126,211,33,0.5)]">
-              <p className="text-[0.8rem] text-[#a3e635] leading-[1.45] italic m-0 break-words">
-                Outperforming <strong className="text-white font-bold not-italic">every rival package</strong> with one hundred times the value.
-              </p>
-            </div>
+            <ArrowCurveRight />
+            <p className="text-[0.88rem] text-[#7ed321] leading-[1.55] italic mt-1 break-words">
+              Outperforming <strong className="font-bold not-italic">every rival package</strong> with one hundred times the value.
+            </p>
           </div>
 
         </div>
