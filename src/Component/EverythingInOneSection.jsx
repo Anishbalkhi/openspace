@@ -1,56 +1,49 @@
 import './EverythingInOneSection.css';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-/* ── SVG arrows provided by user (Exact Unchanged SVGs) ── */
+/* ── SVG arrows (user's originals — unchanged) ── */
 const ArrowDown = () => (
-  <svg
-    className="eiop__arrow-down"
-    viewBox="0 0 100 100"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg className="eiop__arrow-down" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M10 20 C 40 20, 60 60, 90 60" stroke="currentColor" strokeWidth="6" strokeLinecap="round" fill="none" />
     <path d="M75 45 L90 60 L75 75" stroke="currentColor" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
   </svg>
 );
 
 const ArrowCurveRight = () => (
-  <svg
-    className="eiop__arrow-curve-left"
-    viewBox="0 0 100 200"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M 85 10 C 105 100, 95 160, 45 180 L 60 170 L 25 183 L 55 197 L 52 185 C 100 165, 110 100, 85 10 Z"
-      fill="currentColor"
-    />
+  <svg className="eiop__arrow-curve-left" viewBox="0 0 100 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 85 10 C 105 100, 95 160, 45 180 L 60 170 L 25 183 L 55 197 L 52 185 C 100 165, 110 100, 85 10 Z" fill="currentColor" />
   </svg>
 );
 
 const ArrowCurveLeft = () => (
-  <svg
-    className="eiop__arrow-curve-right"
-    viewBox="0 0 100 200"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M90,10 C115,100 95,170 35,185 L52,172 L18,188 L48,205 L44,192 C100,175 125,100 90,10 Z"
-      fill="currentColor"
-    />
+  <svg className="eiop__arrow-curve-right" viewBox="0 0 100 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M90,10 C115,100 95,170 35,185 L52,172 L18,188 L48,205 L44,192 C100,175 125,100 90,10 Z" fill="currentColor" />
   </svg>
 );
 
-const EverythingInOneSection = () => {
-  const sectionRef = useRef(null);
+/* ── Floating particle sparks ── */
+const SPARKS = Array.from({ length: 18 }, (_, i) => ({
+  id: i,
+  size: 2 + Math.random() * 3,
+  left: 5 + Math.random() * 90,
+  delay: Math.random() * 6,
+  duration: 4 + Math.random() * 5,
+  opacity: 0.15 + Math.random() * 0.4,
+}));
 
-  /* Floating animation on the 3D box */
+const EverythingInOneSection = () => {
+  const sectionRef   = useRef(null);
+  const cardRef      = useRef(null);
+  const priceRef     = useRef(null);
+  const [visible, setVisible] = useState(false);
+  const [price, setPrice]     = useState(249);
+  const [tilt, setTilt]       = useState({ x: 0, y: 0 });
+
+  /* ── Floating box animation ── */
   useEffect(() => {
     const box = sectionRef.current?.querySelector('.eiop__box-img');
     if (!box) return;
-    let frame;
-    let t = 0;
+    let frame, t = 0;
     const tick = () => {
       t += 0.015;
       box.style.transform = `translateY(${Math.sin(t) * 10}px) rotate(${Math.sin(t * 0.6) * 1.2}deg)`;
@@ -60,27 +53,81 @@ const EverythingInOneSection = () => {
     return () => cancelAnimationFrame(frame);
   }, []);
 
+  /* ── Scroll-reveal + price counter ── */
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !visible) {
+          setVisible(true);
+          // Count down 249 → 49.99
+          let current = 249;
+          const target = 49.99;
+          const step   = () => {
+            current = Math.max(target, current - 4.5);
+            setPrice(parseFloat(current.toFixed(2)));
+            if (current > target) requestAnimationFrame(step);
+          };
+          setTimeout(() => requestAnimationFrame(step), 400);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, [visible]);
+
+  /* ── 3-D card tilt on mouse move ── */
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width  - 0.5) * 14;
+    const y = ((e.clientY - rect.top)  / rect.height - 0.5) * -14;
+    setTilt({ x, y });
+  };
+  const resetTilt = () => setTilt({ x: 0, y: 0 });
+
   return (
     <section
       id="everything-package"
       className="relative overflow-hidden bg-[#080808] py-24 px-6 isolate"
       ref={sectionRef}
     >
-      {/* ── Ambient Background Glow ── */}
-      <div className="eiop__backdrop absolute inset-0 pointer-events-none z-0" aria-hidden="true">
+      {/* ── Ambient glow + streaks ── */}
+      <div className="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
         <div className="eiop__glow-orb" />
       </div>
-
-      {/* ── Decorative Streaks ── */}
       <div className="eiop__streaks absolute inset-0 pointer-events-none z-0" aria-hidden="true">
         <div className="eiop__streak eiop__streak--1" />
         <div className="eiop__streak eiop__streak--2" />
         <div className="eiop__streak eiop__streak--3" />
       </div>
 
+      {/* ── Floating particle sparks ── */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+        {SPARKS.map((s) => (
+          <span
+            key={s.id}
+            className="eiop__spark absolute rounded-full bg-[#7ed321]"
+            style={{
+              width:  s.size,
+              height: s.size,
+              left:   `${s.left}%`,
+              bottom: '-10px',
+              opacity: s.opacity,
+              animationDelay:    `${s.delay}s`,
+              animationDuration: `${s.duration}s`,
+            }}
+          />
+        ))}
+      </div>
+
       <div className="relative z-[2] max-w-[1100px] mx-auto">
+
         {/* ── Header ── */}
-        <div className="reveal flex flex-col items-center text-center mb-14">
+        <div
+          className="flex flex-col items-center text-center mb-14 transition-all duration-700"
+          style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(32px)' }}
+        >
           <div className="inline-flex items-center gap-2 px-4 py-[0.35rem] bg-[rgba(126,211,33,0.08)] border border-[rgba(126,211,33,0.25)] rounded-full font-mono text-[0.72rem] font-bold tracking-[0.14em] text-[#7ed321] uppercase mb-4">
             <span className="eiop__badge-dot w-[6px] h-[6px] rounded-full bg-[#7ed321]" />
             ALL-IN-ONE BUNDLE
@@ -93,12 +140,15 @@ const EverythingInOneSection = () => {
           </p>
         </div>
 
-        {/* ── Main layout: left callout · card · right callout ── */}
-        <div className="reveal grid grid-cols-[1fr_auto_1fr] items-center justify-items-center gap-6 max-w-[1020px] mx-auto">
+        {/* ── Main 3-column layout ── */}
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center justify-items-center gap-6 max-w-[1020px] mx-auto eiop__layout">
 
-          {/* Left callout */}
-          <div className="flex flex-col items-end text-right translate-y-[-15px] max-w-[250px]">
-            <div className="eiop__callout-bubble bg-[rgba(18,24,18,0.7)] border border-[rgba(126,211,33,0.2)] rounded-xl p-[0.8rem_1rem] backdrop-blur-[10px] shadow-[0_8px_24px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[rgba(126,211,33,0.4)]">
+          {/* Left callout — slides in from left */}
+          <div
+            className="flex flex-col items-end text-right max-w-[250px] transition-all duration-700 delay-200"
+            style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateX(0)' : 'translateX(-40px)' }}
+          >
+            <div className="eiop__callout-bubble bg-[rgba(18,24,18,0.7)] border border-[rgba(126,211,33,0.2)] rounded-xl p-[0.8rem_1rem] backdrop-blur-[10px] shadow-[0_8px_24px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(126,211,33,0.5)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.5),0_0_20px_rgba(126,211,33,0.12)]">
               <p className="text-[0.84rem] text-[#a3e635] leading-[1.5] italic m-0">
                 Providing a <strong className="text-white font-bold not-italic">hundredfold more value</strong> than any alternative package offered.
               </p>
@@ -106,23 +156,44 @@ const EverythingInOneSection = () => {
             <ArrowCurveLeft />
           </div>
 
-          {/* Centre column: top-callout + card */}
-          <div className="flex flex-col items-center w-full max-w-[400px]">
+          {/* Centre: top callout + 3-D card */}
+          <div
+            className="flex flex-col items-center w-full max-w-[400px] transition-all duration-700 delay-100"
+            style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(40px)' }}
+          >
             <div className="flex flex-col items-center gap-[0.35rem] mb-[0.35rem]">
-              <p className="eiop__callout-text--top text-[0.88rem] text-[#a3e635] italic text-center bg-[rgba(18,24,18,0.85)] border border-[rgba(126,211,33,0.25)] rounded-full px-[1.1rem] py-[0.4rem] backdrop-blur-[10px] whitespace-nowrap">
+              <p className="text-[0.88rem] text-[#a3e635] italic text-center bg-[rgba(18,24,18,0.85)] border border-[rgba(126,211,33,0.25)] rounded-full px-[1.1rem] py-[0.4rem] backdrop-blur-[10px] whitespace-nowrap">
                 <strong className="not-italic text-white">100X the value</strong> of any other package.
               </p>
               <ArrowDown />
             </div>
 
-            {/* Product card */}
-            <div className="relative w-full bg-gradient-to-b from-[rgba(26,28,26,0.75)] to-[rgba(12,14,12,0.95)] border border-white/[0.12] rounded-[22px] overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-[16px] transition-all duration-400 hover:border-[rgba(126,211,33,0.4)] hover:shadow-[0_0_0_1px_rgba(126,211,33,0.3),0_30px_80px_rgba(0,0,0,0.85),0_0_35px_rgba(126,211,33,0.15)] hover:-translate-y-1">
-              <div className="absolute top-[0.9rem] right-[0.9rem] z-[5] bg-gradient-to-br from-[#7ed321] to-[#a3e635] text-[#080808] font-mono text-[0.65rem] font-extrabold tracking-[0.08em] px-[0.65rem] py-[0.25rem] rounded-full shadow-[0_2px_10px_rgba(126,211,33,0.4)]">
+            {/* Product card with 3-D tilt */}
+            <div
+              ref={cardRef}
+              className="eiop__card relative w-full rounded-[22px] overflow-hidden border border-white/[0.12] backdrop-blur-[16px] cursor-default"
+              style={{
+                background: 'linear-gradient(180deg, rgba(26,28,26,0.75) 0%, rgba(12,14,12,0.95) 100%)',
+                boxShadow: '0 25px 60px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.12)',
+                transform: `perspective(900px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg) scale3d(1,1,1)`,
+                transition: 'transform 0.12s ease-out, box-shadow 0.4s ease, border-color 0.4s ease',
+                transformStyle: 'preserve-3d',
+              }}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={resetTilt}
+            >
+              {/* Shimmer border animation */}
+              <div className="eiop__card-shimmer" aria-hidden="true" />
+
+              {/* SAVE badge */}
+              <div className="absolute top-[0.9rem] right-[0.9rem] z-[5] bg-gradient-to-br from-[#7ed321] to-[#a3e635] text-[#080808] font-mono text-[0.65rem] font-extrabold tracking-[0.08em] px-[0.65rem] py-[0.25rem] rounded-full shadow-[0_2px_10px_rgba(126,211,33,0.4)] eiop__ribbon-pulse">
                 SAVE 80%
               </div>
 
-              <div className="relative bg-[radial-gradient(ellipse_at_50%_65%,#182218_0%,#0a0e0a_100%)] px-4 pt-7 pb-5 flex items-center justify-center min-h-[270px] border-b border-white/[0.06]">
+              {/* Image area */}
+              <div className="relative bg-[radial-gradient(ellipse_at_50%_65%,#182218_0%,#0a0e0a_100%)] px-4 pt-8 pb-5 flex items-center justify-center min-h-[280px] border-b border-white/[0.06]">
                 <div className="eiop__card-glow" />
+                <div className="eiop__box-shadow-ground" />
                 <img
                   src="/everythinginonepage/FC6750AB-9ABC-4D70-BDB8-4E357A3E70E0.webp"
                   alt="Elite Theme Package box"
@@ -130,12 +201,15 @@ const EverythingInOneSection = () => {
                 />
               </div>
 
+              {/* Card body */}
               <div className="px-6 pt-[1.4rem] pb-[1.6rem] flex flex-col gap-[0.9rem]">
                 <div className="flex justify-between items-baseline gap-2">
                   <h3 className="font-sans text-[1.2rem] font-bold text-white">Elite Theme Package</h3>
                   <div className="flex items-baseline gap-[0.4rem]">
                     <span className="font-mono text-[0.85rem] text-white/40 line-through">$249</span>
-                    <span className="font-mono text-[1.35rem] font-extrabold text-[#7ed321]">$49.99</span>
+                    <span ref={priceRef} className="font-mono text-[1.35rem] font-extrabold text-[#7ed321]">
+                      ${price}
+                    </span>
                   </div>
                 </div>
 
@@ -151,22 +225,26 @@ const EverythingInOneSection = () => {
 
                 <button
                   type="button"
-                  className="inline-flex items-center justify-center gap-2 w-full py-[0.85rem] px-[1.4rem] bg-[#7ed321] text-[#080808] font-sans text-[0.92rem] font-bold rounded-[10px] cursor-pointer border-none transition-all duration-200 shadow-[0_4px_18px_rgba(126,211,33,0.3)] hover:bg-[#8eef2a] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(126,211,33,0.45)]"
+                  className="eiop__cta-btn inline-flex items-center justify-center gap-2 w-full py-[0.9rem] px-[1.4rem] bg-[#7ed321] text-[#080808] font-sans text-[0.92rem] font-bold rounded-[10px] cursor-pointer border-none overflow-hidden relative"
                   onClick={() => {
                     const el = document.getElementById('themes');
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
-                  Get Complete Access
-                  <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+                  <span className="eiop__cta-shine" aria-hidden="true" />
+                  <span className="relative z-[1]">Get Complete Access</span>
+                  <span className="relative z-[1] eiop__cta-arrow">→</span>
                 </button>
               </div>
             </div>
           </div>
 
-          {/* Right callout */}
-          <div className="flex flex-col items-start text-left translate-y-[-15px] max-w-[250px]">
-            <div className="eiop__callout-bubble bg-[rgba(18,24,18,0.7)] border border-[rgba(126,211,33,0.2)] rounded-xl p-[0.8rem_1rem] backdrop-blur-[10px] shadow-[0_8px_24px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[rgba(126,211,33,0.4)]">
+          {/* Right callout — slides in from right */}
+          <div
+            className="flex flex-col items-start text-left max-w-[250px] transition-all duration-700 delay-200"
+            style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateX(0)' : 'translateX(40px)' }}
+          >
+            <div className="eiop__callout-bubble bg-[rgba(18,24,18,0.7)] border border-[rgba(126,211,33,0.2)] rounded-xl p-[0.8rem_1rem] backdrop-blur-[10px] shadow-[0_8px_24px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(126,211,33,0.5)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.5),0_0_20px_rgba(126,211,33,0.12)]">
               <p className="text-[0.84rem] text-[#a3e635] leading-[1.5] italic m-0">
                 Outperforming <strong className="text-white font-bold not-italic">every rival package</strong> with one hundred times the value.
               </p>
