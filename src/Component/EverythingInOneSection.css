@@ -89,24 +89,29 @@
   background-clip: text;
 }
 
-/* ── SVG Arrow Sizing ── */
+/* ── SVG Arrow Sizing & Orientations ── */
 .eiop__arrow-curve-left,
 .eiop__arrow-curve-right {
-  width: 90px;
-  height: 175px;
+  width: 75px;
+  height: 140px;
   color: #7ed321;
   flex-shrink: 0;
   filter: drop-shadow(0 2px 8px rgba(126,211,33,0.35));
-  margin-top: 0.25rem;
 }
 
+/* Left side arrow: points down-right towards the card */
 .eiop__arrow-curve-right {
   transform: scaleX(-1);
 }
 
+/* Right side arrow: points down-left towards the card */
+.eiop__arrow-curve-left {
+  transform: none;
+}
+
 .eiop__arrow-down {
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   color: #7ed321;
   transform: rotate(90deg);
   filter: drop-shadow(0 2px 6px rgba(126,211,33,0.35));
@@ -120,10 +125,10 @@
 
 /* ── Card Hover Glow ── */
 .eiop__card:hover {
-  box-shadow: 0 0 0 1px rgba(126,211,33,0.4),
+  box-shadow: 0 0 0 1px rgba(126,211,33,0.45),
               0 35px 80px rgba(0,0,0,0.9),
-              0 0 50px rgba(126,211,33,0.18) !important;
-  border-color: rgba(126,211,33,0.45) !important;
+              0 0 45px rgba(126,211,33,0.2) !important;
+  border-color: rgba(126,211,33,0.5) !important;
 }
 
 /* ── Shimmer border on card (rotating gradient) ── */
@@ -196,8 +201,7 @@
 
 /* ── CTA Button: shimmer sweep + arrow bounce ── */
 .eiop__cta-btn {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 18px rgba(126,211,33,0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 .eiop__cta-btn:hover {
   transform: translateY(-2px);
@@ -227,22 +231,16 @@
   transform: translateX(5px);
 }
 
-/* ── Responsive ── */
-@media (max-width: 960px) {
+/* ── Responsive Stacking ── */
+@media (max-width: 1024px) {
   .eiop__layout {
     grid-template-columns: 1fr !important;
     gap: 1.5rem !important;
   }
 
-  /* Hide side callouts on tablet/mobile — card centres nicely alone */
-  .eiop__layout > div:first-child,
-  .eiop__layout > div:last-child {
-    display: none;
-  }
-
-  .eiop__arrow-curve-left,
-  .eiop__arrow-curve-right {
-    display: none;
+  .eiop__callout--left,
+  .eiop__callout--right {
+    display: none !important;
   }
 
   .eiop__card-shimmer {
