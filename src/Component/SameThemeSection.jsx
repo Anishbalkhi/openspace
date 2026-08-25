@@ -61,25 +61,31 @@ const SameThemeSection = () => {
           </div>
         ))}
 
-        {/* Centre CTA block */}
-        <div className="smt__center reveal relative z-[5] text-center flex flex-col items-center gap-5 max-w-[520px] px-8 py-12 bg-[rgba(8,8,8,0.7)] border border-white/[0.08] rounded-3xl backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_30px_80px_rgba(0,0,0,0.7)]">
+        {/* Centre CTA block — no border box, open layout */}
+        <div className="smt__center reveal relative z-[5] text-center flex flex-col items-center gap-6 max-w-[500px]">
+
+          {/* Eyebrow */}
           <div className="flex items-center gap-[0.45rem] font-mono text-[0.72rem] font-bold tracking-[0.12em] text-[#7ed321] uppercase">
             <span className="smt__eyebrow-dot w-[7px] h-[7px] rounded-full bg-[#7ed321]" />
             6 Store Styles Available
           </div>
 
-          <h2 className="font-[var(--font-pixel)] text-[clamp(1.1rem,3vw,1.7rem)] font-normal text-white leading-[1.5] tracking-[0.03em] uppercase m-0">
+          {/* Heading */}
+          <h2 className="font-[var(--font-pixel)] text-[clamp(1.8rem,4vw,3rem)] font-normal text-white leading-[1.3] tracking-[0.03em] uppercase m-0">
             SAME THEME.<br />MORE TO BUILD WITH.
           </h2>
 
-          <p className="text-[0.9rem] text-white/60 leading-[1.65] max-w-[380px] m-0">
+          {/* Sub */}
+          <p className="text-[0.9rem] text-white/55 leading-[1.7] max-w-[360px] m-0">
             Walk through live interactive demos, pick a licence, and start from a full production-ready theme.
           </p>
 
+          {/* Buttons */}
           <div className="flex gap-3 flex-wrap justify-center">
             <button
               type="button"
-              className="group inline-flex items-center gap-2 px-7 py-3 font-sans text-sm font-bold rounded-full cursor-pointer border-none transition-all duration-200 bg-[#e8ff4d] text-[#080808] shadow-[0_4px_18px_rgba(232,255,77,0.3)] hover:bg-[#f0ff70] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(232,255,77,0.45)]"
+              className="group inline-flex items-center gap-2 px-8 py-3.5 font-sans text-[0.9rem] font-bold rounded-full cursor-pointer border-none transition-all duration-200 hover:-translate-y-0.5"
+              style={{ background: '#e8ff4d', color: '#080808', boxShadow: '0 4px 18px rgba(232,255,77,0.3)' }}
               onClick={scrollToThemes}
             >
               Browse All Themes
@@ -87,20 +93,23 @@ const SameThemeSection = () => {
             </button>
             <button
               type="button"
-              className="inline-flex items-center gap-2 px-7 py-3 font-sans text-sm font-bold rounded-full cursor-pointer transition-all duration-200 bg-transparent text-white border border-white/20 hover:border-white/50 hover:-translate-y-0.5 hover:bg-white/[0.04]"
+              className="inline-flex items-center gap-2 px-8 py-3.5 font-sans text-[0.9rem] font-bold rounded-full cursor-pointer transition-all duration-200 hover:-translate-y-0.5"
+              style={{ background: 'transparent', color: 'rgba(255,255,255,0.75)', border: '1px solid rgba(255,255,255,0.2)' }}
               onClick={scrollToThemes}
             >
               View Live Demos
             </button>
           </div>
 
-          <p className="text-[0.72rem] text-white/40 font-mono m-0 leading-[1.6]">
+          {/* Trust line */}
+          <p className="text-[0.7rem] text-white/35 font-mono m-0 leading-[1.6]">
             One-time payment &nbsp;·&nbsp; 100% Money-back Guarantee &nbsp;·&nbsp; Free install help
           </p>
 
-          <div className="flex items-center gap-[0.6rem] text-[0.78rem] text-white/50">
-            <span className="font-semibold text-white cursor-pointer hover:text-[#e8ff4d] transition-colors duration-200">← All brand types</span>
-            <span className="inline-block w-px h-[14px] bg-white/20" />
+          {/* Nav hints */}
+          <div className="flex items-center gap-[0.6rem] text-[0.78rem] text-white/40">
+            <span className="cursor-pointer hover:text-[#e8ff4d] transition-colors duration-200">← All brand types</span>
+            <span className="inline-block w-px h-[14px] bg-white/15" />
             <span className="cursor-pointer hover:text-[#e8ff4d] transition-colors duration-200">Plain Jane →</span>
           </div>
         </div>
