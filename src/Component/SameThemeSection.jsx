@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import './SameThemeSection.css';
 
 const FLOATING_PREVIEWS = [
@@ -10,8 +11,19 @@ const FLOATING_PREVIEWS = [
 ];
 
 const SameThemeSection = () => {
+  const [showSticky, setShowSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Only show sticky purchase bar when scrolled down into the themes area
+      setShowSticky(window.scrollY > 700);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const scrollToThemes = () => {
-    const el = document.getElementById('themes');
+    const el = document.getElementById('themes') || document.getElementById('pick-theme');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -95,23 +107,29 @@ const SameThemeSection = () => {
       </section>
 
       {/* ── Sticky bottom purchase bar ── */}
-      <div className="sticky bottom-0 left-0 right-0 z-[100] bg-[rgba(12,14,12,0.92)] border-t border-white/10 backdrop-blur-xl shadow-[0_-4px_30px_rgba(0,0,0,0.6)]" role="complementary" aria-label="Quick purchase bar">
-        <div className="max-w-[1100px] mx-auto px-6 py-[0.7rem] flex items-center justify-between gap-4">
-          <div className="flex items-center gap-[0.9rem]">
+      <div
+        className={`fixed bottom-0 left-0 right-0 z-[90] bg-[rgba(12,14,12,0.94)] border-t border-white/10 backdrop-blur-xl shadow-[0_-4px_30px_rgba(0,0,0,0.7)] transition-all duration-300 ${
+          showSticky ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 pointer-events-none'
+        }`}
+        role="complementary"
+        aria-label="Quick purchase bar"
+      >
+        <div className="max-w-[1100px] mx-auto px-6 py-2.5 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5">
             <img
               src="/images/justdrop5-optimized.avif"
               alt="Theme thumbnail"
               className="w-10 h-10 object-cover rounded-[6px] border border-white/10 flex-shrink-0"
             />
-            <div className="flex flex-col gap-[0.2rem]">
-              <div className="font-sans text-[0.85rem] text-white font-semibold flex items-center gap-[0.35rem] flex-wrap">
+            <div className="flex flex-col gap-0.5">
+              <div className="font-sans text-[0.85rem] text-white font-semibold flex items-center gap-1.5 flex-wrap">
                 Elite Theme Package
                 <span className="font-normal text-white/75"> · Standard&nbsp;<strong>$49.99</strong></span>
                 <span className="text-[0.78rem] text-white/50 font-normal">
                   or&nbsp;<a href="#everything-package" className="text-[#e8ff4d] underline decoration-[rgba(232,255,77,0.4)]">4 monthly payments of $12.50</a>
                 </span>
               </div>
-              <div className="flex items-center gap-[0.3rem] text-[0.72rem] text-white/50 font-mono">
+              <div className="flex items-center gap-1 text-[0.72rem] text-white/50 font-mono">
                 <span className="text-amber-400 text-[0.8rem]">★★★★★</span>
                 <span className="font-bold text-white/85">4.9/5</span>
                 <span className="opacity-40">·</span>
@@ -123,7 +141,7 @@ const SameThemeSection = () => {
           </div>
           <button
             type="button"
-            className="bg-[#e8ff4d] text-[#080808] font-sans text-[0.9rem] font-bold px-7 py-[0.65rem] rounded-full border-none cursor-pointer whitespace-nowrap transition-all duration-200 shadow-[0_3px_14px_rgba(232,255,77,0.3)] hover:bg-[#f0ff70] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(232,255,77,0.45)] flex-shrink-0"
+            className="bg-[#e8ff4d] text-[#080808] font-sans text-[0.88rem] font-bold px-6 py-2.5 rounded-full border-none cursor-pointer whitespace-nowrap transition-all duration-200 shadow-[0_3px_14px_rgba(232,255,77,0.3)] hover:bg-[#f0ff70] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(232,255,77,0.45)] flex-shrink-0"
             onClick={scrollToThemes}
           >
             Get Started

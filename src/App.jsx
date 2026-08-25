@@ -126,8 +126,12 @@ const App = () => {
       {/* ── Pick Your Theme ── */}
       <PickYourThemeSection />
 
+      <div className="divider" />
+
       {/* ── Everything In One Package ── */}
       <EverythingInOneSection />
+
+      <div className="divider" />
 
       {/* ── Reviews / Testimonials ── */}
       <TestimonialsSection />
