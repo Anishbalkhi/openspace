@@ -149,8 +149,8 @@ const EverythingInOneSection = () => {
             style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateX(0)' : 'translateX(-30px)' }}
           >
             <ArrowCurveRight />
-            <p className="text-[0.88rem] text-[#7ed321] leading-[1.55] italic mt-1 break-words">
-              Providing a <strong className="font-bold not-italic">hundredfold more value</strong> than any alternative package offered.
+            <p className="text-[0.94rem] sm:text-[1rem] text-[#7ed321] leading-[1.6] italic font-medium mt-2 break-words">
+              Providing a <strong className="font-bold not-italic text-white">hundredfold more value</strong> than any alternative package offered.
             </p>
           </div>
 
@@ -159,9 +159,9 @@ const EverythingInOneSection = () => {
             className="flex-shrink-0 min-w-0 w-full max-w-[400px] flex flex-col items-center mx-auto transition-all duration-700 delay-100"
             style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(24px)' }}
           >
-            {/* Plain green "100X" text + arrow — matches image 2 */}
-            <div className="flex flex-col items-center gap-0 mb-0">
-              <p className="text-[1rem] text-[#7ed321] font-semibold text-center leading-[1.4] m-0">
+            {/* Plain green "100X" text + arrow — bigger, prominent */}
+            <div className="flex flex-col items-center gap-1 mb-1.5">
+              <p className="text-[1.18rem] sm:text-[1.3rem] font-bold text-[#7ed321] text-center leading-[1.35] tracking-tight m-0 drop-shadow-[0_2px_12px_rgba(126,211,33,0.35)]">
                 100X the value of<br />any other package.
               </p>
               <ArrowDown />
@@ -280,8 +280,8 @@ const EverythingInOneSection = () => {
             style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateX(0)' : 'translateX(30px)' }}
           >
             <ArrowCurveLeft />
-            <p className="text-[0.88rem] text-[#7ed321] leading-[1.55] italic mt-1 break-words">
-              Outperforming <strong className="font-bold not-italic">every rival package</strong> with one hundred times the value.
+            <p className="text-[0.94rem] sm:text-[1rem] text-[#7ed321] leading-[1.6] italic font-medium mt-2 break-words">
+              Outperforming <strong className="font-bold not-italic text-white">every rival package</strong> with one hundred times the value.
             </p>
           </div>
 
