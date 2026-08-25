@@ -93,7 +93,7 @@ function ThemeCard({ cat, delay }) {
       onMouseLeave={onMouseLeave}
     >
       
-      <img src={cat.img} alt={cat.name} className="whichone-card__img" />
+      <img src={cat.img} alt={cat.name} className="whichone-card__img" loading="lazy" decoding="async" />
       <div className="whichone-card__overlay" />
       {/* Glare layer */}
       <div className="whichone-card__shine" />

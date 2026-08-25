@@ -20,7 +20,7 @@ const STORE_CARDS = [
   { id: 6, cls: 'store-card--6', name: 'KOVA', badge: 'Circuit', img: '/images/justdrop8-optimized.avif' },
 ];
 
-// Intersection observer for scroll-reveal
+// Intersection observer for scroll-reveal (lower threshold = triggers sooner = feels faster)
 function useReveal() {
   useEffect(() => {
     const elements = document.querySelectorAll('.reveal');
@@ -33,12 +33,26 @@ function useReveal() {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
     );
     elements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 }
+
+const FOOTER_NAV = [
+  { heading: 'Themes', links: ['Plain Jane', 'Plain Jane Interactive', 'Plain Jane Starter', 'Elite Bundle'] },
+  { heading: 'Resources', links: ['Live Demos', 'Documentation', 'Setup Guide', 'Changelog'] },
+  { heading: 'Company', links: ['About', 'Blog', 'License', 'Affiliates'] },
+  { heading: 'Support', links: ['Contact Us', 'FAQs', 'Shopify Help', 'Refund Policy'] },
+];
+
+const SOCIALS = [
+  { label: 'Twitter / X', icon: '𝕏', href: '#' },
+  { label: 'Instagram', icon: '📸', href: '#' },
+  { label: 'TikTok', icon: '🎵', href: '#' },
+  { label: 'YouTube', icon: '▶', href: '#' },
+];
 
 const App = () => {
   useReveal();
@@ -123,14 +137,47 @@ const App = () => {
 
       {/* ── Footer ── */}
       <footer className="footer">
-        <div className="footer__brand">OpenSpaces</div>
-        <div className="footer__links">
-          <a href="#">Themes</a>
-          <a href="#">Demos</a>
-          <a href="#">Support</a>
-          <a href="#">License</a>
+        <div className="footer__top">
+          <div className="footer__brand-col">
+            <div className="footer__logo">OpenSpaces</div>
+            <p className="footer__tagline">
+              Premium Shopify themes built for activewear &amp; fashion brands that want to look expensive without the agency bill.
+            </p>
+            <div className="footer__socials">
+              {SOCIALS.map((s) => (
+                <a key={s.label} href={s.href} className="footer__social-btn" aria-label={s.label}>
+                  {s.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="footer__nav-grid">
+            {FOOTER_NAV.map((col) => (
+              <div key={col.heading} className="footer__nav-col">
+                <h4 className="footer__nav-heading">{col.heading}</h4>
+                <ul className="footer__nav-list">
+                  {col.links.map((link) => (
+                    <li key={link}>
+                      <a href="#" className="footer__nav-link">{link}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
-        <p className="footer__copy">© 2026 OpenSpaces. All rights reserved.</p>
+
+        <div className="footer__bottom">
+          <p className="footer__copy">© 2026 OpenSpaces. All rights reserved.</p>
+          <div className="footer__legal">
+            <a href="#">Privacy Policy</a>
+            <span>·</span>
+            <a href="#">Terms of Service</a>
+            <span>·</span>
+            <a href="#">Cookie Settings</a>
+          </div>
+        </div>
       </footer>
     </div>
   );

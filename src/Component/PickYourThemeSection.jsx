@@ -6,8 +6,10 @@ const THEMES = [
     badge: '↗ Growing & Levelling Up',
     badgeColor: '#e8ff4d',
     name: 'Plain Jane',
-    price: '$99',
+    priceStandard: '$99',
+    priceLifetime: '$199',
     billing: 'One-time payment · 12 months of updates',
+    billingLifetime: 'One-time payment · Lifetime updates',
     tagline: 'Deep customization and storytelling tools that grow with your brand.',
     taglineSelected: 'Deep customization, storytelling tools, and flexibility that grows with your brand.',
     features: [
@@ -28,8 +30,10 @@ const THEMES = [
     badge: '✦ Full Creative Control',
     badgeColor: '#ff9d6b',
     name: 'Plain Jane Interactive',
-    price: '$149',
+    priceStandard: '$149',
+    priceLifetime: '$299',
     billing: 'One-time payment · 12 months of updates',
+    billingLifetime: 'One-time payment · Lifetime updates',
     tagline: 'Interactive elements and immersive storytelling to stand out.',
     taglineSelected: 'Interactive elements, immersive storytelling, and the creative freedom to stand out.',
     features: [
@@ -47,8 +51,22 @@ const THEMES = [
   },
 ];
 
+const FEATURES_TABLE = [
+  { label: 'Lookbook pages',            pj: '9 pages',  pi: '9 pages'  },
+  { label: 'Countdown timers',          pj: true,       pi: true       },
+  { label: 'Custom font uploads',       pj: true,       pi: true       },
+  { label: 'Built-in music player',     pj: true,       pi: true       },
+  { label: 'Video backgrounds',         pj: true,       pi: true       },
+  { label: 'Password page + countdown', pj: true,       pi: true       },
+  { label: 'Immersive scenes',          pj: false,      pi: '8 scenes' },
+  { label: 'Interactive animations',    pj: false,      pi: true       },
+  { label: 'Floating product showcases',pj: false,      pi: true       },
+  { label: 'Preloader animations',      pj: false,      pi: true       },
+];
+
 const PickYourThemeSection = () => {
-  const [selected, setSelected] = useState(null);
+  const [selected,  setSelected]  = useState(null);
+  const [isLifetime, setIsLifetime] = useState(false);
 
   const toggle = (id) => setSelected((prev) => (prev === id ? null : id));
 
@@ -62,9 +80,22 @@ const PickYourThemeSection = () => {
           Plain Jane is where most brands land. Interactive adds motion
           and depth for stores that want to be remembered.
         </p>
+
+        {/* Billing toggle */}
         <div className="pyt__toggle reveal" style={{ transitionDelay: '0.15s' }}>
-          <span className="pyt__toggle-pill pyt__toggle-pill--active">Standard</span>
-          <span className="pyt__toggle-pill">Lifetime</span>
+          <button
+            className={`pyt__toggle-pill ${!isLifetime ? 'pyt__toggle-pill--active' : ''}`}
+            onClick={() => setIsLifetime(false)}
+          >
+            Standard
+          </button>
+          <button
+            className={`pyt__toggle-pill ${isLifetime ? 'pyt__toggle-pill--active' : ''}`}
+            onClick={() => setIsLifetime(true)}
+          >
+            Lifetime
+            <span className="pyt__toggle-badge">Best Value</span>
+          </button>
         </div>
       </div>
 
@@ -72,12 +103,9 @@ const PickYourThemeSection = () => {
       <div className="pyt__grid">
         {THEMES.map((t, i) => {
           const isSelected = selected === t.id;
+          const price   = isLifetime ? t.priceLifetime   : t.priceStandard;
+          const billing = isLifetime ? t.billingLifetime : t.billing;
 
-          /*
-            Outer wrapper handles scroll-reveal (opacity fade-up) with delay.
-            Inner .pyt-card handles selection border/glow with ZERO delay
-            so the color appears instantly on click.
-          */
           return (
             <div
               key={t.id}
@@ -95,7 +123,13 @@ const PickYourThemeSection = () => {
               >
                 {/* Image */}
                 <div className="pyt-card__img-wrap">
-                  <img src={t.img} alt={`${t.name} preview`} className="pyt-card__img" />
+                  <img
+                    src={t.img}
+                    alt={`${t.name} preview`}
+                    className="pyt-card__img"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
 
                 {/* Badge */}
@@ -111,10 +145,18 @@ const PickYourThemeSection = () => {
                 {/* Body */}
                 <div className="pyt-card__body">
                   <h3 className="pyt-card__name">{t.name}</h3>
-                  <div className="pyt-card__price" style={{ color: isSelected ? t.btnColor : 'var(--color-accent)' }}>
-                    {t.price}
+                  <div className="pyt-card__price-row">
+                    <div
+                      className="pyt-card__price"
+                      style={{ color: isSelected ? t.btnColor : 'var(--color-accent)' }}
+                    >
+                      {price}
+                    </div>
+                    {isLifetime && (
+                      <span className="pyt__lifetime-tag">Lifetime</span>
+                    )}
                   </div>
-                  <p className="pyt-card__billing">{t.billing}</p>
+                  <p className="pyt-card__billing">{billing}</p>
                   <p className="pyt-card__tagline">
                     {isSelected ? t.taglineSelected : t.tagline}
                   </p>
@@ -146,11 +188,10 @@ const PickYourThemeSection = () => {
         })}
       </div>
 
-      {/* ── Feature comparison — reacts to selected card ── */}
+      {/* ── Feature comparison ── */}
       <div className="pyt__compare reveal" style={{ transitionDelay: '0.28s' }}>
         <p className="pyt__compare-label">Compare plans</p>
         <div className="pyt__compare-grid">
-
           {/* Header row */}
           <div className="pyt__compare-row pyt__compare-row--head">
             <div className="pyt__compare-feature" />
@@ -163,7 +204,7 @@ const PickYourThemeSection = () => {
                   style={{
                     color: isActive ? t.btnColor : 'rgba(255,255,255,0.35)',
                     transform: isActive ? 'scale(1.05)' : 'scale(1)',
-                    transition: 'color 0.25s ease, transform 0.25s ease',
+                    transition: 'color 0.2s ease, transform 0.2s ease',
                     cursor: 'pointer',
                   }}
                   onClick={() => toggle(t.id)}
@@ -178,31 +219,19 @@ const PickYourThemeSection = () => {
           </div>
 
           {/* Feature rows */}
-          {[
-            { label: 'Lookbook pages',             pj: '9 pages',  pi: '9 pages'  },
-            { label: 'Countdown timers',            pj: true,       pi: true       },
-            { label: 'Custom font uploads',         pj: true,       pi: true       },
-            { label: 'Built-in music player',       pj: true,       pi: true       },
-            { label: 'Video backgrounds',           pj: true,       pi: true       },
-            { label: 'Password page + countdown',   pj: true,       pi: true       },
-            { label: 'Immersive scenes',            pj: false,      pi: '8 scenes' },
-            { label: 'Interactive animations',      pj: false,      pi: true       },
-            { label: 'Floating product showcases',  pj: false,      pi: true       },
-            { label: 'Preloader animations',        pj: false,      pi: true       },
-          ].map(({ label, pj, pi }) => {
+          {FEATURES_TABLE.map(({ label, pj, pi }) => {
             const pjActive = selected === 'plain-jane';
             const piActive = selected === 'plain-jane-interactive';
             return (
               <div key={label} className="pyt__compare-row">
                 <div className="pyt__compare-feature">{label}</div>
 
-                {/* Plain Jane cell */}
                 <div
                   className="pyt__compare-cell"
                   style={{
                     background: pjActive ? 'rgba(79,138,255,0.08)' : 'transparent',
                     opacity: selected && !pjActive ? 0.35 : 1,
-                    transition: 'background 0.25s ease, opacity 0.25s ease',
+                    transition: 'background 0.2s ease, opacity 0.2s ease',
                   }}
                 >
                   {pj === false
@@ -212,13 +241,12 @@ const PickYourThemeSection = () => {
                       </span>}
                 </div>
 
-                {/* Interactive cell */}
                 <div
                   className="pyt__compare-cell"
                   style={{
                     background: piActive ? 'rgba(255,77,184,0.08)' : 'transparent',
                     opacity: selected && !piActive ? 0.35 : 1,
-                    transition: 'background 0.25s ease, opacity 0.25s ease',
+                    transition: 'background 0.2s ease, opacity 0.2s ease',
                   }}
                 >
                   {pi === false
