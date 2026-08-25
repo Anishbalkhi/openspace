@@ -15,8 +15,8 @@ const SameThemeSection = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Only show sticky purchase bar when scrolled down into the themes area
-      setShowSticky(window.scrollY > 700);
+      // Show sticky bar only after scrolling well past the hero + globe sections
+      setShowSticky(window.scrollY > window.innerHeight * 1.5);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);

@@ -3,9 +3,8 @@
    ============================================= */
 
 #reviews {
-  padding: 6rem 0 0;
+  padding: 6rem 0 5rem;
   overflow: hidden;
-  
 }
 
 /* ── Header ── */
@@ -51,7 +50,7 @@
 /* ── Stage — clips the scrolling columns ── */
 .rev__stage {
   position: relative;
-  height: 680px;          /* viewport height for the scrolling cards */
+  height: min(680px, 85vh);  /* never taller than viewport */
   overflow: hidden;
 }
 
@@ -201,4 +200,11 @@
   }
   .rev__col-outer:not(:first-child) { display: none; }
   .rev__stage { height: 480px; }
+}
+
+/* ── Respect reduced-motion preference ── */
+@media (prefers-reduced-motion: reduce) {
+  .rev__col-track {
+    animation: none !important;
+  }
 }
