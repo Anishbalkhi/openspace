@@ -265,8 +265,8 @@ const PickYourThemeSection = () => {
       <div className="pyt__starter reveal" style={{ transitionDelay: '0.35s' }}>
         <div className="pyt__starter-label">Or a tighter budget</div>
         <div className="pyt__starter-body">
-          <div className="pyt__starter-info">
-            <div className="pyt__starter-header">
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-3 flex-wrap">
               <span className="pyt__starter-name">Plain Jane Starter</span>
               <span className="pyt__starter-price">$49 one-time</span>
             </div>
@@ -274,7 +274,7 @@ const PickYourThemeSection = () => {
               Clean product pages, a cart drawer and a fast launch.
               Enough to stop looking like a default theme.
             </p>
-            <p className="pyt__starter-without">
+            <p className="pyt__starter-desc" style={{ opacity: 0.55 }}>
               Without: Lookbooks · Custom fonts · Drop tools · Music player · Video backgrounds.
               If any of those matter, start with Plain Jane.
             </p>

@@ -108,8 +108,8 @@ const EverythingInOneSection = () => {
             key={s.id}
             className="eiop__spark absolute rounded-full bg-[#7ed321]"
             style={{
-              width:  s.size,
-              height: s.size,
+              width:  `${s.size}px`,
+              height: `${s.size}px`,
               left:   `${s.left}%`,
               bottom: '-10px',
               opacity: s.opacity,
@@ -256,7 +256,7 @@ const EverythingInOneSection = () => {
                     className="eiop__cta-btn inline-flex items-center justify-center gap-2 w-full mt-1 py-3 px-5 font-sans text-[0.88rem] font-bold rounded-lg cursor-pointer border-none overflow-hidden relative"
                     style={{ background: '#7ed321', color: '#080808', boxShadow: '0 4px 16px rgba(126,211,33,0.35)' }}
                     onClick={() => {
-                      const el = document.getElementById('themes') || document.getElementById('pick-theme');
+                      const el = document.getElementById('pick-theme');
                       if (el) el.scrollIntoView({ behavior: 'smooth' });
                     }}
                   >

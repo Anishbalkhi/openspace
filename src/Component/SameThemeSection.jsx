@@ -79,11 +79,11 @@ const SameThemeSection = () => {
           <div className="flex gap-3 flex-wrap justify-center">
             <button
               type="button"
-              className="inline-flex items-center gap-2 px-7 py-3 font-sans text-sm font-bold rounded-full cursor-pointer border-none transition-all duration-200 bg-[#e8ff4d] text-[#080808] shadow-[0_4px_18px_rgba(232,255,77,0.3)] hover:bg-[#f0ff70] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(232,255,77,0.45)]"
+              className="group inline-flex items-center gap-2 px-7 py-3 font-sans text-sm font-bold rounded-full cursor-pointer border-none transition-all duration-200 bg-[#e8ff4d] text-[#080808] shadow-[0_4px_18px_rgba(232,255,77,0.3)] hover:bg-[#f0ff70] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(232,255,77,0.45)]"
               onClick={scrollToThemes}
             >
               Browse All Themes
-              <span className="transition-transform duration-200 hover:translate-x-1">→</span>
+              <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
             </button>
             <button
               type="button"
