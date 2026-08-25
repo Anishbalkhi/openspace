@@ -217,10 +217,10 @@ const EverythingInOneSection = () => {
                 </div>
 
                 {/* Card Body — minimal */}
-                <div className="px-5 pt-4 pb-5 flex flex-col gap-3 text-left">
+                <div className="px-6 pt-5 pb-6 flex flex-col gap-3.5 text-left">
 
                   {/* Title row */}
-                  <div className="flex items-baseline justify-between gap-3 flex-wrap">
+                  <div className="flex items-baseline justify-between gap-4 flex-wrap">
                     <h3 className="font-sans text-[1.05rem] font-bold text-white tracking-tight m-0">Elite Theme Package</h3>
                     <div className="flex items-baseline gap-1.5 flex-shrink-0">
                       <span className="font-mono text-[0.78rem] text-white/30 line-through">$249</span>
@@ -228,7 +228,7 @@ const EverythingInOneSection = () => {
                     </div>
                   </div>
 
-                  <p className="text-[0.75rem] text-white/50 leading-[1.5] m-0">
+                  <p className="text-[0.75rem] text-white/50 leading-[1.5] m-0 -mt-1">
                     Every premium theme + lifetime updates in one complete bundle.
                   </p>
 
@@ -236,7 +236,7 @@ const EverythingInOneSection = () => {
                   <div className="h-px w-full bg-white/[0.08]" />
 
                   {/* Features — flat 2-col list */}
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 py-0.5">
                     {[
                       'All Themes Included',
                       'Lifetime Updates',
@@ -253,7 +253,7 @@ const EverythingInOneSection = () => {
                   {/* CTA */}
                   <button
                     type="button"
-                    className="eiop__cta-btn inline-flex items-center justify-center gap-2 w-full mt-1 py-3 px-5 font-sans text-[0.88rem] font-bold rounded-lg cursor-pointer border-none overflow-hidden relative"
+                    className="eiop__cta-btn inline-flex items-center justify-center gap-2 w-full py-3 px-5 font-sans text-[0.88rem] font-bold rounded-lg cursor-pointer border-none overflow-hidden relative"
                     style={{ background: '#7ed321', color: '#080808', boxShadow: '0 4px 16px rgba(126,211,33,0.35)' }}
                     onClick={() => {
                       const el = document.getElementById('pick-theme');
@@ -265,7 +265,7 @@ const EverythingInOneSection = () => {
                     <span className="relative z-[1] eiop__cta-arrow">→</span>
                   </button>
 
-                  <p className="text-[0.6rem] text-white/25 text-center font-mono m-0">
+                  <p className="text-[0.6rem] text-white/25 text-center font-mono m-0 mt-0.5">
                     🛡 Money-back guarantee &nbsp;·&nbsp; ⚡ Instant delivery
                   </p>
 
