@@ -261,11 +261,7 @@
   transform: translateX(4px);
 }
 
-/* ── Card body bottom breathing room, so the CTA never hugs the
-   rounded corner ── */
-.eiop__card .p-5:last-child {
-  padding-bottom: 1.5rem;
-}
+/* Card body padding is handled inline via Tailwind (pb-5) */
 
 /* ── Responsive Stacking ── */
 @media (max-width: 860px) {

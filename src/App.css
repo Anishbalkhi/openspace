@@ -219,6 +219,7 @@
 .section {
   padding: 6rem 1.5rem;
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -878,10 +879,7 @@
   max-width: 30ch;   /* keep lines short for readability */
 }
 
-/* Hairline divider between tagline and features */
-.pyt-card__body::before {
-  content: none;
-}
+/* body::before intentionally omitted — no pseudo element needed */
 
 .pyt-card__features {
   list-style: none;
@@ -1044,7 +1042,6 @@
 
 /* ── Starter offer ── */
 .pyt__starter {
-
   border: 1px solid var(--color-border);
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
@@ -1154,18 +1151,7 @@
   flex-wrap: wrap;
 }
 
-/* ---- Footer ---- */
-.footer {
-  border-top: 1px solid var(--color-border);
-  padding: 2rem 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+/* NOTE: .footer full definition is further below (line ~1521) */
 
 .footer__brand {
   font-family: var(--font-mono);
