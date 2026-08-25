@@ -7,6 +7,7 @@ import GlobeSection from './Component/GlobeSection.jsx';
 import CursorGlowTrail from './Component/CursorGlowTrail.jsx';
 import TestimonialsSection from './Component/TestimonialsSection.jsx';
 import EverythingInOneSection from './Component/EverythingInOneSection.jsx';
+import SameThemeSection from './Component/SameThemeSection.jsx';
 import './App.css';
 
 // Floating store preview cards data
@@ -116,6 +117,9 @@ const App = () => {
 
       {/* ── Reviews / Testimonials ── */}
       <TestimonialsSection />
+
+      {/* ── Same Theme. More to Build With. ── */}
+      <SameThemeSection />
 
       {/* ── Footer ── */}
       <footer className="footer">
