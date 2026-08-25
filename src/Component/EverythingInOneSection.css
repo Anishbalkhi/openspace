@@ -228,9 +228,16 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .eiop__layout {
     grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Hide side callouts on tablet/mobile — card centres nicely alone */
+  .eiop__layout > div:first-child,
+  .eiop__layout > div:last-child {
+    display: none;
   }
 
   .eiop__arrow-curve-left,
@@ -239,6 +246,6 @@
   }
 
   .eiop__card-shimmer {
-    display: none; /* perf on mobile */
+    display: none;
   }
 }

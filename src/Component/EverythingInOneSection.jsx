@@ -141,11 +141,11 @@ const EverythingInOneSection = () => {
         </div>
 
         {/* ── Main 3-column layout ── */}
-        <div className="grid grid-cols-[1fr_auto_1fr] items-center justify-items-center gap-6 max-w-[1020px] mx-auto eiop__layout">
+        <div className="grid grid-cols-[240px_1fr_240px] items-start justify-items-center gap-8 max-w-[1060px] mx-auto eiop__layout">
 
           {/* Left callout — slides in from left */}
           <div
-            className="flex flex-col items-end text-right max-w-[250px] transition-all duration-700 delay-200"
+            className="flex flex-col items-end text-right w-full pt-[160px] transition-all duration-700 delay-200"
             style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateX(0)' : 'translateX(-40px)' }}
           >
             <div className="eiop__callout-bubble bg-[rgba(18,24,18,0.7)] border border-[rgba(126,211,33,0.2)] rounded-xl p-[0.8rem_1rem] backdrop-blur-[10px] shadow-[0_8px_24px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(126,211,33,0.5)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.5),0_0_20px_rgba(126,211,33,0.12)]">
@@ -153,12 +153,14 @@ const EverythingInOneSection = () => {
                 Providing a <strong className="text-white font-bold not-italic">hundredfold more value</strong> than any alternative package offered.
               </p>
             </div>
-            <ArrowCurveLeft />
+            <div className="self-end">
+              <ArrowCurveLeft />
+            </div>
           </div>
 
           {/* Centre: top callout + 3-D card */}
           <div
-            className="flex flex-col items-center w-full max-w-[400px] transition-all duration-700 delay-100"
+            className="flex flex-col items-center w-full transition-all duration-700 delay-100"
             style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(40px)' }}
           >
             <div className="flex flex-col items-center gap-[0.35rem] mb-[0.35rem]">
@@ -241,7 +243,7 @@ const EverythingInOneSection = () => {
 
           {/* Right callout — slides in from right */}
           <div
-            className="flex flex-col items-start text-left max-w-[250px] transition-all duration-700 delay-200"
+            className="flex flex-col items-start text-left w-full pt-[160px] transition-all duration-700 delay-200"
             style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateX(0)' : 'translateX(40px)' }}
           >
             <div className="eiop__callout-bubble bg-[rgba(18,24,18,0.7)] border border-[rgba(126,211,33,0.2)] rounded-xl p-[0.8rem_1rem] backdrop-blur-[10px] shadow-[0_8px_24px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(126,211,33,0.5)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.5),0_0_20px_rgba(126,211,33,0.12)]">
@@ -249,7 +251,9 @@ const EverythingInOneSection = () => {
                 Outperforming <strong className="text-white font-bold not-italic">every rival package</strong> with one hundred times the value.
               </p>
             </div>
-            <ArrowCurveRight />
+            <div className="self-start">
+              <ArrowCurveRight />
+            </div>
           </div>
 
         </div>
