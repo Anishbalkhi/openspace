@@ -1,0 +1,257 @@
+/* =============================================
+   Everything In One Package section
+   ============================================= */
+
+#everything-package {
+  position: relative;
+  padding: 6rem 1.5rem 5rem;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+/* ── Blue diagonal streak decorations ── */
+.eiop__streaks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.eiop__streak {
+  position: absolute;
+  height: 2px;
+  border-radius: 999px;
+  opacity: 0.18;
+  background: linear-gradient(90deg, transparent, #3b9eff, transparent);
+  transform-origin: left center;
+}
+
+.eiop__streak--1 {
+  width: 70%;
+  top: 32%;
+  left: -5%;
+  transform: rotate(-10deg);
+  animation: streak-drift 8s ease-in-out infinite alternate;
+}
+
+.eiop__streak--2 {
+  width: 55%;
+  top: 38%;
+  right: -5%;
+  left: auto;
+  transform: rotate(-8deg);
+  animation: streak-drift 11s ease-in-out infinite alternate-reverse;
+  opacity: 0.12;
+}
+
+.eiop__streak--3 {
+  width: 40%;
+  top: 44%;
+  left: 20%;
+  transform: rotate(-6deg);
+  animation: streak-drift 9s ease-in-out infinite alternate;
+  opacity: 0.08;
+  height: 3px;
+}
+
+@keyframes streak-drift {
+  0%   { opacity: 0.08; transform: rotate(-10deg) scaleX(0.9); }
+  100% { opacity: 0.22; transform: rotate(-8deg)  scaleX(1.05); }
+}
+
+/* ── Header ── */
+.eiop__header {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 3.5rem;
+}
+
+.eiop__title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.75rem;
+}
+
+.eiop__sub {
+  font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+  color: var(--color-muted);
+  max-width: 440px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── 3-column layout ── */
+.eiop__layout {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Callout columns ── */
+.eiop__callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.eiop__callout--left {
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.eiop__callout--right {
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.eiop__callout-text {
+  font-family: var(--font-sans);
+  font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+  color: #7ed321;           /* green accent — matches image 2 */
+  line-height: 1.55;
+  font-style: italic;
+  max-width: 200px;
+  text-align: left;
+}
+
+.eiop__callout--right .eiop__callout-text { text-align: left; }
+
+/* Curved arrow SVGs */
+.eiop__arrow-curve-left,
+.eiop__arrow-curve-right {
+  width: 90px;
+  height: 220px;
+  color: #7ed321;
+  flex-shrink: 0;
+}
+
+.eiop__arrow-curve-right {
+  transform: scaleX(-1);
+}
+
+/* ── Centre column ── */
+.eiop__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* Top callout + down-arrow */
+.eiop__top-callout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.eiop__callout-text--top {
+  text-align: center;
+  max-width: none;
+  font-size: 0.82rem;
+  color: #7ed321;
+}
+
+.eiop__arrow-down {
+  width: 52px;
+  height: 52px;
+  color: #7ed321;
+  transform: rotate(90deg);
+}
+
+/* ── Product card ── */
+.eiop__card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  width: 390px;                /* was 460px */
+  text-align: center;
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.eiop__card:hover {
+  box-shadow: 0 0 0 1px rgba(126, 211, 33, 0.2),
+              0 20px 60px rgba(0, 0, 0, 0.6);
+  border-color: rgba(126, 211, 33, 0.25);
+}
+
+.eiop__card-img-wrap {
+  background: radial-gradient(ellipse at 50% 60%, #141414 0%, #080808 100%);
+  padding: 1rem 0.75rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;          /* was 420px */
+}
+
+.eiop__box-img {
+  width: 92%;                        /* was fixed 340px — now fills the wrap */
+  max-width: 420px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.7));
+  /* JS handles floating animation */
+}
+
+.eiop__card-body {
+  padding: 1.2rem 1.25rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.eiop__card-name {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.3rem;
+}
+
+.eiop__card-price {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: 0.4rem;
+}
+
+.eiop__card-desc {
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .eiop__layout {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .eiop__card { width: 100%; max-width: 380px; }
+
+  .eiop__callout {
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .eiop__callout-text { text-align: center; max-width: 260px; }
+
+  .eiop__arrow-curve-left,
+  .eiop__arrow-curve-right { display: none; }
+}

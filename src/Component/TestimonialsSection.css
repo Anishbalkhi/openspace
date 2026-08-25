@@ -1,0 +1,204 @@
+/* =============================================
+   Reviews / Testimonials Section
+   ============================================= */
+
+#reviews {
+  padding: 6rem 0 0;
+  overflow: hidden;
+  
+}
+
+/* ── Header ── */
+.rev__header {
+  text-align: center;
+  padding: 0 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.rev__title {
+  font-family: var(--font-pixel);
+  font-size: clamp(0.85rem, 2.2vw, 1.7rem);
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  margin-bottom: 0.85rem;
+}
+
+.rev__sub {
+  font-size: clamp(0.82rem, 1.2vw, 0.96rem);
+  color: var(--color-muted);
+  margin-bottom: 1.25rem;
+}
+
+.rev__stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+}
+
+.rev__star-icons {
+  display: inline-flex;
+  gap: 2px;
+  font-size: 1rem;
+}
+
+/* ── Stage — clips the scrolling columns ── */
+.rev__stage {
+  position: relative;
+  height: 680px;          /* viewport height for the scrolling cards */
+  overflow: hidden;
+}
+
+/* Top & bottom gradient fades — blend cards into page background */
+.rev__fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 130px;
+  z-index: 10;
+  pointer-events: none;
+}
+.rev__fade--top {
+  top: 0;
+  background: linear-gradient(to bottom, var(--color-bg) 0%, transparent 100%);
+}
+.rev__fade--bottom {
+  bottom: 0;
+  background: linear-gradient(to top, var(--color-bg) 0%, transparent 100%);
+}
+
+/* ── 4-column grid ── */
+.rev__masonry {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 270px));
+  justify-content: center;
+  gap: 2rem;
+  padding: 0 2rem;
+  height: 100%;
+  align-items: start;
+}
+
+/* ── Column outer — just a slot, no overflow needed (stage clips) ── */
+.rev__col-outer {
+  overflow: hidden;
+  height: 100%;
+}
+
+/* ── Animated track — scrolls upward continuously ── */
+.rev__col-track {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  animation: rev-marquee-up linear infinite;
+}
+.rev__col-outer:hover .rev__col-track {
+  animation-play-state: paused;
+}
+
+@keyframes rev-marquee-up {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+/* ── Individual review card ── */
+.rev-card {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0;
+  padding: 0 0.4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  transition: border-color 0.3s ease;
+}
+.rev-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.rev-card__text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  letter-spacing: 0.01em;
+}
+
+/* Author */
+.rev-card__author {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.rev-card__avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.rev-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.rev-card__name {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.rev-card__badge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--color-muted);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .rev__masonry {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 3rem;
+    gap: 1.2rem;
+  }
+  .rev__col-outer:nth-child(4) { display: none; }
+}
+
+@media (max-width: 720px) {
+  .rev__masonry {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 2rem;
+    gap: 1rem;
+  }
+  .rev__col-outer:nth-child(3),
+  .rev__col-outer:nth-child(4) { display: none; }
+  .rev__stage { height: 580px; }
+}
+
+@media (max-width: 440px) {
+  .rev__masonry {
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem;
+  }
+  .rev__col-outer:not(:first-child) { display: none; }
+  .rev__stage { height: 480px; }
+}

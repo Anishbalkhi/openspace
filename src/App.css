@@ -271,13 +271,16 @@
   border: 1px solid var(--color-border);
   border-radius: 16px;
   overflow: hidden;
-  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.4s ease,
+              transform 0.4s cubic-bezier(.03,.98,.52,.99),
+              box-shadow 0.4s ease;
   cursor: pointer;
 }
 .theme-card:hover {
-  border-color: var(--color-border-hover);
-  transform: translateY(-6px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  border-color: var(--tc, rgba(232,255,77,0.25));
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6),
+              0 0 0 1px color-mix(in srgb, var(--tc, #e8ff4d) 20%, transparent);
 }
 
 .theme-card__preview {
@@ -290,16 +293,20 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s cubic-bezier(.03,.98,.52,.99);
 }
 .theme-card:hover .theme-card__preview img {
-  transform: scale(1.05);
+  transform: scale(1.08) translateY(-4px);
 }
 
 .theme-card__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 60%, rgba(8,8,8,0.9));
+  background: linear-gradient(to bottom, transparent 50%, rgba(8,8,8,0.92));
+  transition: opacity 0.4s ease;
+}
+.theme-card:hover .theme-card__overlay {
+  opacity: 0.7;
 }
 
 .theme-card__body {
@@ -329,7 +336,8 @@
 .theme-card__price {
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  color: var(--color-accent);
+  color: var(--tc, var(--color-accent));   /* theme-specific colour */
+  transition: color 0.4s ease;
 }
 
 .theme-card__action {
@@ -339,9 +347,14 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  transition: color 0.2s;
+  transition: color 0.2s ease, gap 0.2s ease, letter-spacing 0.2s ease;
 }
-.theme-card:hover .theme-card__action { color: var(--color-text); }
+.theme-card:hover .theme-card__action {
+  color: var(--tc, var(--color-accent));
+  gap: 0.45rem;
+  letter-spacing: 0.02em;
+}
+
 
 /* ---- Features ---- */
 .features-grid {
@@ -757,6 +770,11 @@
   margin-bottom: 2rem;
 }
 
+/* Reveal wrapper — handles opacity fade-up with delay, separate from card interaction */
+.pyt-card-reveal {
+  display: contents; /* transparent to layout — grid still sees the inner card */
+}
+
 .pyt-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -765,15 +783,15 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  /* border-color + box-shadow transition for instant selection colour */
+  transition: transform 0.4s cubic-bezier(.03,.98,.52,.99),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease;
 }
 .pyt-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-4px) scale(1.005);
   box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-}
-.pyt-card--highlight {
-  border-color: rgba(232,255,77,0.35);
-  box-shadow: 0 0 0 1px rgba(232,255,77,0.15), 0 8px 30px rgba(232,255,77,0.06);
 }
 
 /* Image preview — contain shows full product mockup without cropping */
@@ -790,12 +808,12 @@
 .pyt-card__img {
   width: 100%;
   height: 100%;
-  object-fit: contain;   /* show full mockup, never crop */
+  object-fit: contain;
   display: block;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s cubic-bezier(.03,.98,.52,.99);
 }
 .pyt-card:hover .pyt-card__img {
-  transform: scale(1.03);
+  transform: scale(1.06) translateY(-4px);
 }
 
 /* Badge row below image */
@@ -817,10 +835,12 @@
 }
 
 .pyt-card__body {
-  padding: 1rem 1.25rem 1.25rem;
+  padding: 1rem 1.5rem 1.25rem;
   display: flex;
   flex-direction: column;
   flex: 1;
+  align-items: center;   /* centre all children horizontally */
+  text-align: center;
 }
 
 .pyt-card__name {
@@ -830,7 +850,7 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-text);
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.25rem;
 }
 
 .pyt-card__price {
@@ -838,31 +858,40 @@
   font-size: 1.6rem;
   font-weight: 700;
   color: var(--color-accent);
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.15rem;
+  transition: color 0.25s ease;
 }
 
 .pyt-card__billing {
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   color: var(--color-muted);
   letter-spacing: 0.03em;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 .pyt-card__tagline {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: var(--color-text);
-  line-height: 1.6;
+  line-height: 1.65;
   margin-bottom: 1rem;
+  max-width: 30ch;   /* keep lines short for readability */
+}
+
+/* Hairline divider between tagline and features */
+.pyt-card__body::before {
+  content: none;
 }
 
 .pyt-card__features {
   list-style: none;
   padding: 0;
-  margin: 0 0 1.2rem;
+  margin: 0 auto 1.2rem;   /* auto left/right centres the block */
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
   flex: 1;
+  width: fit-content;      /* shrink to longest item, then centre */
+  text-align: left;        /* text within each item stays left */
 }
 
 .pyt-card__feature {
@@ -880,11 +909,19 @@
   flex-shrink: 0;
 }
 
+/* Buttons wrapper — fades+slides up when card is selected */
+.pyt-card__btns {
+  animation: pyt-btns-in 0.28s cubic-bezier(.03,.98,.52,.99) both;
+}
+@keyframes pyt-btns-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
 .pyt-card__btn-primary {
   width: 100%;
   padding: 0.75rem;
   border-radius: 8px;
-  background: var(--color-accent);  /* yellow for all cards */
   color: #000;
   font-family: var(--font-sans);
   font-size: 0.78rem;
@@ -896,7 +933,7 @@
   margin-bottom: 0.5rem;
   transition: opacity 0.2s, transform 0.2s;
 }
-.pyt-card__btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.pyt-card__btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
 
 .pyt-card__btn-secondary {
   width: 100%;
@@ -915,8 +952,98 @@
   color: var(--color-text);
 }
 
-/* Starter offer */
+
+/* ── Feature comparison table ── */
+.pyt__compare {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+}
+
+.pyt__compare-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.pyt__compare-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pyt__compare-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 120px;
+  align-items: center;
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.045);
+  transition: background 0.2s ease;
+}
+.pyt__compare-row:last-child { border-bottom: none; }
+.pyt__compare-row:hover { background: rgba(255,255,255,0.03); border-radius: 6px; }
+
+.pyt__compare-row--head {
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 0.2rem;
+}
+.pyt__compare-row--head:hover { background: transparent; }
+
+.pyt__compare-feature {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.01em;
+}
+
+.pyt__compare-plan {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.pyt__compare-cell {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.pyt__compare-yes {
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+
+.pyt__compare-no {
+  color: rgba(255,255,255,0.2);
+  font-size: 0.85rem;
+}
+
+/* Coloured underline below active plan header */
+.pyt__compare-active-bar {
+  height: 2px;
+  border-radius: 2px;
+  margin-top: 4px;
+  width: 100%;
+  animation: pyt-bar-in 0.3s ease both;
+}
+@keyframes pyt-bar-in {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+
+/* ── Starter offer ── */
 .pyt__starter {
+
   border: 1px solid var(--color-border);
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
@@ -1183,3 +1310,90 @@
   .stat-item:last-child { border-bottom: none; }
   .cta-banner { padding: 2.5rem 1.5rem; margin: 0 0.75rem 4rem; }
 }
+
+/* =============================================
+   Spotlight Cursor — improved
+   ============================================= */
+
+/* Suppress OS cursor site-wide */
+*, *::before, *::after { cursor: none !important; }
+
+/* ── Base for the two glow layers ── */
+.spl-outer,
+.spl-inner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform, width, height;
+
+  /*
+    mix-blend-mode: screen — only ever ADDS light to whatever is below.
+    Works like a real spotlight: invisible on black, visible on content.
+  */
+  mix-blend-mode: screen;
+
+  /* Size transitions use spring easing */
+  transition:
+    width  0.5s cubic-bezier(.03,.98,.52,.99),
+    height 0.5s cubic-bezier(.03,.98,.52,.99);
+}
+
+/* ── Outer: large ambient halo ── */
+.spl-outer {
+  z-index: 99984;
+  width: 420px;
+  height: 420px;
+
+  /*
+    Hue is updated via CSS custom property --h (set by JS each frame).
+    This triggers only a cheap style recalculation — no layout, no paint.
+  */
+  background: radial-gradient(
+    circle at 50% 50%,
+    hsl(var(--h, 72) 95% 70% / 0.10)  0%,
+    hsl(var(--h, 72) 90% 55% / 0.04) 42%,
+    transparent 72%
+  );
+}
+
+/* ── Inner: tight bright hotspot ── */
+.spl-inner {
+  z-index: 99985;
+  width: 120px;
+  height: 120px;
+
+  background: radial-gradient(
+    circle at 50% 50%,
+    hsl(var(--h, 72) 100% 94% / 0.16)  0%,
+    hsl(var(--h, 72) 100% 76% / 0.07) 40%,
+    transparent 70%
+  );
+
+  /* Subtle breathing pulse — adds life even when cursor is still */
+  animation: spl-breathe 2.8s ease-in-out infinite;
+}
+
+@keyframes spl-breathe {
+  0%, 100% { opacity: 1;    }
+  50%       { opacity: 0.65; }
+}
+
+/* ── Ring-dot: fast-following thin circle (camera-focus feel) ── */
+.spl-rdot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid hsl(var(--h, 72) 100% 72% / 0.55);
+  pointer-events: none;
+  z-index: 99997;
+  will-change: transform;
+  /* Tiny inner glow that matches current hue */
+  box-shadow: 0 0 8px 0 hsl(var(--h, 72) 100% 65% / 0.20);
+}
+
+

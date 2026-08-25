@@ -4,6 +4,9 @@ import Box from './Component/Box.jsx';
 import WhichOneSection from './Component/WhichOneSection.jsx';
 import PickYourThemeSection from './Component/PickYourThemeSection.jsx';
 import GlobeSection from './Component/GlobeSection.jsx';
+import CursorGlowTrail from './Component/CursorGlowTrail.jsx';
+import TestimonialsSection from './Component/TestimonialsSection.jsx';
+import EverythingInOneSection from './Component/EverythingInOneSection.jsx';
 import './App.css';
 
 // Floating store preview cards data
@@ -41,6 +44,9 @@ const App = () => {
 
   return (
     <div className="app">
+      {/* ── Cursor glow trail — fixed canvas, pointer-events: none ── */}
+      <CursorGlowTrail />
+
       {/* ── Sticky Header ── */}
       <Header />
 
@@ -104,6 +110,12 @@ const App = () => {
 
       {/* ── Pick Your Theme ── */}
       <PickYourThemeSection />
+
+      {/* ── Everything In One Package ── */}
+      <EverythingInOneSection />
+
+      {/* ── Reviews / Testimonials ── */}
+      <TestimonialsSection />
 
       {/* ── Footer ── */}
       <footer className="footer">

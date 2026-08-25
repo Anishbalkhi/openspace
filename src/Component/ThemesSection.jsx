@@ -5,6 +5,7 @@ const THEMES = [
     desc: 'High-energy layouts with bold type and full-bleed imagery. Built for performance apparel.',
     price: '$280',
     img: '/images/justdrop2-optimized.avif',
+    color: '#ff6b35',   // energetic orange
   },
   {
     id: 'apex',
@@ -12,6 +13,7 @@ const THEMES = [
     desc: 'Minimalist and editorial. Let your products do the talking with clean whitespace and sharp grids.',
     price: '$240',
     img: '/images/justdrop5-optimized.avif',
+    color: '#4fffb0',   // clean mint-green
   },
   {
     id: 'circuit',
@@ -19,6 +21,7 @@ const THEMES = [
     desc: 'Tech-forward dark mode theme. Data-driven layouts with animated stats and feature callouts.',
     price: '$260',
     img: '/images/justdrop7-optimized.avif',
+    color: '#3b9eff',   // electric blue
   },
 ];
 
@@ -40,7 +43,10 @@ const ThemesSection = () => {
             key={t.id}
             id={`theme-card-${t.id}`}
             className="theme-card reveal"
-            style={{ transitionDelay: `${i * 0.1}s` }}
+            style={{
+              transitionDelay: `${i * 0.1}s`,
+              '--tc': t.color,           /* theme colour — used ONLY on hover in CSS */
+            }}
           >
             <div className="theme-card__preview">
               <img src={t.img} alt={`${t.name} theme preview`} />
@@ -64,3 +70,5 @@ const ThemesSection = () => {
 };
 
 export default ThemesSection;
+
+
