@@ -1,6 +1,7 @@
 import { useState, useMemo, Fragment } from 'react';
 import { FiCheck, FiX, FiShield, FiArrowRight, FiSearch, FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import Footer from '../../Layout/Footer.jsx';
+import DotGridPattern from '../../Component/DotGridPattern.jsx';
 import './ComparePage.css';
 
 const THEMES = [
@@ -174,6 +175,20 @@ const ComparePage = () => {
 
   return (
     <div className="cmp-page">
+      {/* ── Background Animations: Interactive Dot Grid + Neon Aurora Orbs ── */}
+      <DotGridPattern
+        dotSpacing={32}
+        baseRadius={1.6}
+        hoverRadius={230}
+        maxScale={5.5}
+      />
+      <div className="cmp-bg-orbs" aria-hidden="true">
+        <div className="cmp-orb cmp-orb--1" />
+        <div className="cmp-orb cmp-orb--2" />
+        <div className="cmp-orb cmp-orb--3" />
+        <div className="cmp-bg-grid-lines" />
+      </div>
+
       <section className="cmp-section">
         <div className="cmp-container">
           {/* ── Top Eyebrow & Main Title ── */}
