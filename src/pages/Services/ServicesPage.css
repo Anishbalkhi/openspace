@@ -119,11 +119,11 @@
 .srv-section {
   position: relative;
   z-index: 1;
-  padding: 6.5rem 1rem 7rem;
+  padding: 4.5rem 1rem 5rem;
 }
 @media (min-width: 768px) {
   .srv-section {
-    padding: 7.5rem 1.5rem 8rem;
+    padding: 5rem 1.5rem 6rem;
   }
 }
 
@@ -135,7 +135,7 @@
 /* ── Hero Header ── */
 .srv-header {
   text-align: center;
-  margin-bottom: 3.5rem;
+  margin-bottom: 2.25rem;
 }
 
 .srv-title {
@@ -146,7 +146,7 @@
   color: #EBEBEB;
   text-transform: uppercase;
   line-height: 1.3;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.85rem;
 }
 
 .srv-sub {
@@ -154,7 +154,7 @@
   max-width: 44rem;
   margin: 0 auto;
   font-size: 0.95rem;
-  line-height: 1.7;
+  line-height: 1.6;
   font-weight: 700;
   color: #EBEBEB;
 }
@@ -162,7 +162,7 @@
   display: block;
   font-weight: 400;
   color: #AAAAAA;
-  margin-top: 0.35rem;
+  margin-top: 0.25rem;
 }
 
 /* ── Filter Pills (Sticky) ── */
@@ -174,7 +174,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.4rem;
-  margin-bottom: 4.5rem;
+  margin-bottom: 2.75rem;
   padding: 0.35rem;
   width: fit-content;
   margin-left: auto;
@@ -215,12 +215,12 @@
 
 /* ── Section Groups ── */
 .srv-group {
-  margin-bottom: 5.5rem;
+  margin-bottom: 3.75rem;
 }
 
 .srv-group-header {
   text-align: center;
-  margin-bottom: 2.75rem;
+  margin-bottom: 1.75rem;
 }
 
 .srv-group-title {
@@ -230,7 +230,7 @@
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: #AAAAAA;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .srv-group-sub {
