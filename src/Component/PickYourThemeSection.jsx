@@ -51,19 +51,6 @@ const THEMES = [
   },
 ];
 
-const FEATURES_TABLE = [
-  { label: 'Lookbook pages',            pj: '9 pages',  pi: '9 pages'  },
-  { label: 'Countdown timers',          pj: true,       pi: true       },
-  { label: 'Custom font uploads',       pj: true,       pi: true       },
-  { label: 'Built-in music player',     pj: true,       pi: true       },
-  { label: 'Video backgrounds',         pj: true,       pi: true       },
-  { label: 'Password page + countdown', pj: true,       pi: true       },
-  { label: 'Immersive scenes',          pj: false,      pi: '8 scenes' },
-  { label: 'Interactive animations',    pj: false,      pi: true       },
-  { label: 'Floating product showcases',pj: false,      pi: true       },
-  { label: 'Preloader animations',      pj: false,      pi: true       },
-];
-
 const PickYourThemeSection = () => {
   const [selected,  setSelected]  = useState(null);
   const [isLifetime, setIsLifetime] = useState(false);
@@ -186,79 +173,6 @@ const PickYourThemeSection = () => {
             </div>
           );
         })}
-      </div>
-
-      {/* ── Feature comparison ── */}
-      <div className="pyt__compare reveal" style={{ transitionDelay: '0.28s' }}>
-        <p className="pyt__compare-label">Compare plans</p>
-        <div className="pyt__compare-grid">
-          {/* Header row */}
-          <div className="pyt__compare-row pyt__compare-row--head">
-            <div className="pyt__compare-feature" />
-            {THEMES.map((t) => {
-              const isActive = selected === t.id;
-              return (
-                <div
-                  key={t.id}
-                  className="pyt__compare-plan"
-                  style={{
-                    color: isActive ? t.btnColor : 'rgba(255,255,255,0.35)',
-                    transform: isActive ? 'scale(1.05)' : 'scale(1)',
-                    transition: 'color 0.2s ease, transform 0.2s ease',
-                    cursor: 'pointer',
-                  }}
-                  onClick={() => toggle(t.id)}
-                >
-                  {t.name}
-                  {isActive && (
-                    <div className="pyt__compare-active-bar" style={{ background: t.btnColor }} />
-                  )}
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Feature rows */}
-          {FEATURES_TABLE.map(({ label, pj, pi }) => {
-            const pjActive = selected === 'plain-jane';
-            const piActive = selected === 'plain-jane-interactive';
-            return (
-              <div key={label} className="pyt__compare-row">
-                <div className="pyt__compare-feature">{label}</div>
-
-                <div
-                  className="pyt__compare-cell"
-                  style={{
-                    background: pjActive ? 'rgba(79,138,255,0.08)' : 'transparent',
-                    opacity: selected && !pjActive ? 0.35 : 1,
-                    transition: 'background 0.2s ease, opacity 0.2s ease',
-                  }}
-                >
-                  {pj === false
-                    ? <span className="pyt__compare-no">—</span>
-                    : <span className="pyt__compare-yes" style={{ color: '#4f8aff' }}>
-                        {pj === true ? '✓' : pj}
-                      </span>}
-                </div>
-
-                <div
-                  className="pyt__compare-cell"
-                  style={{
-                    background: piActive ? 'rgba(255,77,184,0.08)' : 'transparent',
-                    opacity: selected && !piActive ? 0.35 : 1,
-                    transition: 'background 0.2s ease, opacity 0.2s ease',
-                  }}
-                >
-                  {pi === false
-                    ? <span className="pyt__compare-no">—</span>
-                    : <span className="pyt__compare-yes" style={{ color: '#ff4db8' }}>
-                        {pi === true ? '✓' : pi}
-                      </span>}
-                </div>
-              </div>
-            );
-          })}
-        </div>
       </div>
 
       {/* Starter */}
