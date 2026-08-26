@@ -98,7 +98,7 @@ const NAV_LINKS = [
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState('nav-home');
+  const [scrollActive, setScrollActive] = useState('nav-home');
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const headerRef = useRef(null);
@@ -106,70 +106,65 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Derive route-based active nav
+  const getRouteActive = (pathname) => {
+    if (
+      pathname.startsWith('/themes/demos') ||
+      pathname.startsWith('/demos') ||
+      pathname.startsWith('/compare')
+    ) {
+      return 'nav-themes';
+    }
+    if (
+      pathname.startsWith('/services') ||
+      pathname.startsWith('/collections/services')
+    ) {
+      return 'nav-services';
+    }
+    if (
+      pathname.startsWith('/add-ons') ||
+      pathname.startsWith('/addons') ||
+      pathname.startsWith('/collections/ai-tools-prompts') ||
+      pathname.startsWith('/collections/sections') ||
+      pathname.startsWith('/collections/e-books')
+    ) {
+      return 'nav-addons';
+    }
+    if (
+      pathname.startsWith('/learn') ||
+      pathname.startsWith('/docs') ||
+      pathname.startsWith('/blog')
+    ) {
+      return 'nav-learn';
+    }
+    return null;
+  };
+
+  const routeActive = getRouteActive(location.pathname);
+  const active = routeActive || scrollActive;
+
   /* Scroll-based background + active nav tracking */
   useEffect(() => {
-    if (
-      location.pathname.startsWith('/themes/demos') ||
-      location.pathname.startsWith('/demos') ||
-      location.pathname.startsWith('/compare')
-    ) {
-      setActive('nav-themes');
-      const onDemoScroll = () => setScrolled(window.scrollY > 20);
-      window.addEventListener('scroll', onDemoScroll, { passive: true });
-      return () => window.removeEventListener('scroll', onDemoScroll);
-    }
-
-    if (
-      location.pathname.startsWith('/services') ||
-      location.pathname.startsWith('/collections/services')
-    ) {
-      setActive('nav-services');
-      const onServiceScroll = () => setScrolled(window.scrollY > 20);
-      window.addEventListener('scroll', onServiceScroll, { passive: true });
-      return () => window.removeEventListener('scroll', onServiceScroll);
-    }
-
-    if (
-      location.pathname.startsWith('/add-ons') ||
-      location.pathname.startsWith('/addons') ||
-      location.pathname.startsWith('/collections/ai-tools-prompts') ||
-      location.pathname.startsWith('/collections/sections') ||
-      location.pathname.startsWith('/collections/e-books')
-    ) {
-      setActive('nav-addons');
-      const onAddonsScroll = () => setScrolled(window.scrollY > 20);
-      window.addEventListener('scroll', onAddonsScroll, { passive: true });
-      return () => window.removeEventListener('scroll', onAddonsScroll);
-    }
-
-    if (
-      location.pathname.startsWith('/learn') ||
-      location.pathname.startsWith('/docs') ||
-      location.pathname.startsWith('/blog')
-    ) {
-      setActive('nav-learn');
-      const onLearnScroll = () => setScrolled(window.scrollY > 20);
-      window.addEventListener('scroll', onLearnScroll, { passive: true });
-      return () => window.removeEventListener('scroll', onLearnScroll);
-    }
-
     const onScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      for (const link of NAV_LINKS) {
-        if (!link.target) continue;
-        const el = document.querySelector(link.target);
-        if (!el) continue;
-        const { top, bottom } = el.getBoundingClientRect();
-        if (top <= 140 && bottom > 0) {
-          setActive(link.id);
-          break;
+      if (!routeActive) {
+        for (const link of NAV_LINKS) {
+          if (!link.target) continue;
+          const el = document.querySelector(link.target);
+          if (!el) continue;
+          const { top, bottom } = el.getBoundingClientRect();
+          if (top <= 140 && bottom > 0) {
+            setScrollActive(link.id);
+            break;
+          }
         }
       }
     };
+
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, [location.pathname]);
+  }, [routeActive]);
 
   /* Close menu / dropdown on outside click */
   useEffect(() => {
