@@ -339,7 +339,14 @@ const ServicesPage = () => {
 
   return (
     <div className="srv-page">
+      {/* ── High-Intensity Cyber Grid + Animated Laser Scanlines + Ambient Aurora Orbs ── */}
       <div className="srv-grid-bg" />
+      <div className="srv-grid-laser-scan" aria-hidden="true" />
+      <div className="srv-bg-orbs" aria-hidden="true">
+        <div className="srv-orb srv-orb--purple" />
+        <div className="srv-orb srv-orb--cyan" />
+        <div className="srv-orb srv-orb--blue" />
+      </div>
 
       <section className="srv-section">
         <div className="srv-container">

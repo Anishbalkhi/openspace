@@ -5,23 +5,117 @@
 .srv-page {
   position: relative;
   min-height: 100vh;
-  background: #0B0B0B;
+  background: #070709;
   color: #EBEBEB;
   overflow-x: hidden;
 }
 
-/* Background grid animation */
+/* ── High-Intensity Cyber Background Grid ── */
 .srv-grid-bg {
   position: fixed;
   inset: 0;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 50px 50px;
-  mask-image: radial-gradient(circle at 50% 30%, black 40%, transparent 85%);
-  -webkit-mask-image: radial-gradient(circle at 50% 30%, black 40%, transparent 85%);
+    linear-gradient(to right, rgba(255, 255, 255, 0.14) 1.5px, transparent 1.5px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.14) 1.5px, transparent 1.5px),
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 64px 64px, 64px 64px, 16px 16px, 16px 16px;
+  background-position: center center;
+  mask-image: radial-gradient(ellipse 95% 85% at 50% 35%, #000 65%, rgba(0,0,0,0.4) 88%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 35%, #000 65%, rgba(0,0,0,0.4) 88%, transparent 100%);
   pointer-events: none;
   z-index: 0;
+}
+
+/* ── Dynamic Animated Laser Scan Beam ── */
+.srv-grid-laser-scan {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(168, 85, 247, 0.08) 45%,
+    rgba(34, 211, 238, 0.25) 50%,
+    rgba(168, 85, 247, 0.08) 55%,
+    transparent 100%
+  );
+  background-size: 100% 350px;
+  background-repeat: no-repeat;
+  animation: srvLaserScan 8s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes srvLaserScan {
+  0% {
+    background-position: 0 -350px;
+  }
+  100% {
+    background-position: 0 calc(100vh + 350px);
+  }
+}
+
+/* ── Ambient Glowing Aurora Orbs ── */
+.srv-bg-orbs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.srv-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  pointer-events: none;
+  opacity: 0.38;
+}
+
+.srv-orb--purple {
+  top: 10%;
+  left: 15%;
+  width: 580px;
+  height: 580px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(147, 51, 234, 0.15) 50%, transparent 75%);
+  animation: srvOrbFloat1 14s ease-in-out infinite alternate;
+}
+
+.srv-orb--cyan {
+  top: 35%;
+  right: 12%;
+  width: 620px;
+  height: 620px;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.35) 0%, rgba(6, 182, 212, 0.12) 50%, transparent 75%);
+  animation: srvOrbFloat2 18s ease-in-out infinite alternate;
+}
+
+.srv-orb--blue {
+  bottom: 12%;
+  left: 30%;
+  width: 700px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(37, 99, 235, 0.1) 55%, transparent 80%);
+  animation: srvOrbFloat3 20s ease-in-out infinite alternate;
+}
+
+@keyframes srvOrbFloat1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(70px, 50px) scale(1.14); }
+  100% { transform: translate(-40px, 80px) scale(0.92); }
+}
+
+@keyframes srvOrbFloat2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-60px, -45px) scale(1.1); }
+  100% { transform: translate(45px, 60px) scale(0.9); }
+}
+
+@keyframes srvOrbFloat3 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(50px, -50px) scale(1.15); }
+  100% { transform: translate(-60px, 30px) scale(0.9); }
 }
 
 .srv-section {
