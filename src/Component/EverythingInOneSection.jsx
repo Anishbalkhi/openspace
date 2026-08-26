@@ -33,11 +33,11 @@ const SPARKS = Array.from({ length: 18 }, (_, i) => ({
 }));
 
 const EverythingInOneSection = () => {
-  const sectionRef   = useRef(null);
-  const cardRef      = useRef(null);
-  const priceRef     = useRef(null);
+  const sectionRef = useRef(null);
+  const cardRef    = useRef(null);
+  const priceRef   = useRef(null);
   const [visible, setVisible] = useState(false);
-  const [price, setPrice]     = useState(249);
+  const [price, setPrice]     = useState('249.00');
   const [tilt, setTilt]       = useState({ x: 0, y: 0 });
 
   /* ── Floating box animation ── */
@@ -62,9 +62,9 @@ const EverythingInOneSection = () => {
           setVisible(true);
           let current = 249;
           const target = 49.99;
-          const step   = () => {
+          const step = () => {
             current = Math.max(target, current - 4.5);
-            setPrice(parseFloat(current.toFixed(2)));
+            setPrice(current.toFixed(2));
             if (current > target) requestAnimationFrame(step);
           };
           setTimeout(() => requestAnimationFrame(step), 300);
@@ -80,8 +80,8 @@ const EverythingInOneSection = () => {
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width  - 0.5) * 10;
-    const y = ((e.clientY - rect.top)  / rect.height - 0.5) * -10;
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -10;
     setTilt({ x, y });
   };
   const resetTilt = () => setTilt({ x: 0, y: 0 });
@@ -118,12 +118,12 @@ const EverythingInOneSection = () => {
             key={s.id}
             className="eiop__spark absolute rounded-full bg-[#7ed321]"
             style={{
-              width:  `${s.size}px`,
+              width: `${s.size}px`,
               height: `${s.size}px`,
-              left:   `${s.left}%`,
+              left: `${s.left}%`,
               bottom: '-10px',
               opacity: s.opacity,
-              animationDelay:    `${s.delay}s`,
+              animationDelay: `${s.delay}s`,
               animationDuration: `${s.duration}s`,
             }}
           />
@@ -150,7 +150,7 @@ const EverythingInOneSection = () => {
           </p>
         </div>
 
-        {/* ── Main Layout: Wide 3-Column matching reference image ── */}
+        {/* ── Main Layout: 3-Column with side callouts ── */}
         <div className="eiop__layout flex items-start justify-center gap-4 sm:gap-6 max-w-[1100px] w-full mx-auto">
 
           {/* Left Callout Column */}
@@ -166,11 +166,11 @@ const EverythingInOneSection = () => {
 
           {/* Center Column */}
           <div
-            className="flex-shrink-0 min-w-0 w-full max-w-[420px] flex flex-col items-center mx-auto transition-all duration-700 delay-100"
+            className="flex-shrink-0 min-w-0 w-full max-w-[430px] flex flex-col items-center mx-auto transition-all duration-700 delay-100"
             style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(24px)' }}
           >
             {/* Center Callout Text + Arrow */}
-            <div className="flex flex-col items-center gap-2 mb-4">
+            <div className="flex flex-col items-center gap-1 mb-4">
               <p className="text-[1.15rem] sm:text-[1.25rem] font-bold text-[#7ed321] text-center leading-[1.35] tracking-tight m-0 drop-shadow-[0_2px_12px_rgba(126,211,33,0.35)]">
                 100X the value of<br />any other package.
               </p>
@@ -196,7 +196,7 @@ const EverythingInOneSection = () => {
               >
                 <div className="eiop__card-shimmer" aria-hidden="true" />
 
-                <div className="absolute top-4 right-4 z-[15] bg-[#7ed321] text-[#080808] font-mono text-[0.65rem] font-extrabold tracking-[0.08em] px-3 py-1 rounded-full shadow-[0_2px_10px_rgba(126,211,33,0.5)] eiop__ribbon-pulse">
+                <div className="absolute top-4 right-4 z-[15] bg-[#7ed321] text-[#080808] font-mono text-[0.68rem] font-extrabold tracking-[0.08em] px-3 py-1 rounded-full shadow-[0_0_15px_rgba(126,211,33,0.6)] eiop__ribbon-pulse">
                   SAVE 80%
                 </div>
 
@@ -210,54 +210,56 @@ const EverythingInOneSection = () => {
                   />
                 </div>
 
-                <div className="px-6 pt-6 pb-5 flex flex-col gap-4 text-left">
+                <div className="px-8 sm:px-9 pt-6 pb-6 flex flex-col gap-4 text-left">
                   
-                  <div className="flex items-end justify-between gap-4 flex-wrap">
-                    <h3 className="font-sans text-[1.1rem] font-bold text-white tracking-tight m-0">Elite Theme Package</h3>
-                    <div className="flex items-center gap-2 flex-shrink-0">
-                      <span className="font-mono text-[0.8rem] text-white/40 line-through decoration-white/40">$249</span>
-                      <span ref={priceRef} className="font-mono text-[1.5rem] font-extrabold text-[#7ed321] leading-none">${price}</span>
+                  <div className="flex items-baseline justify-between gap-3 flex-wrap">
+                    <h3 className="font-sans text-[1.15rem] font-bold text-white tracking-tight m-0">Elite Theme Package</h3>
+                    <div className="flex items-baseline gap-2 flex-shrink-0">
+                      <span className="font-mono text-[0.85rem] text-white/40 line-through decoration-white/40">$249</span>
+                      <span ref={priceRef} className="font-mono text-[1.6rem] font-black text-[#7ed321] leading-none tracking-tight">${price}</span>
                     </div>
                   </div>
 
-                  <p className="text-[0.8rem] text-white/50 leading-[1.5] m-0 -mt-1">
+                  <p className="text-[0.82rem] text-white/60 leading-[1.5] m-0 -mt-2">
                     Every premium theme + lifetime updates in one complete bundle.
                   </p>
 
-                  <div className="h-px w-full bg-white/[0.08] my-1" />
+                  <div className="h-px w-full bg-white/[0.08] my-0.5" />
 
-                  <div className="grid grid-cols-2 gap-y-3 gap-x-2 py-1">
-                    {[
-                      'All Themes Included',
-                      'Lifetime Updates',
-                      'Full Source Files',
-                      '24/7 Priority Support',
-                    ].map((f) => (
-                      <div key={f} className="flex items-center gap-2">
-                        <span className="text-[#7ed321] text-[0.75rem] font-bold flex-shrink-0">✓</span>
-                        <span className="text-[0.75rem] text-white/75 leading-tight">{f}</span>
-                      </div>
-                    ))}
+                  {/* Centered Feature Checklist */}
+                  <div className="flex justify-center w-full py-1">
+                    <div className="grid grid-cols-2 gap-y-3 gap-x-6 sm:gap-x-8">
+                      {[
+                        'All Themes Included',
+                        'Lifetime Updates',
+                        'Full Source Files',
+                        '24/7 Priority Support',
+                      ].map((f) => (
+                        <div key={f} className="flex items-center gap-2">
+                          <span className="text-[#7ed321] text-[0.75rem] font-bold flex-shrink-0">✓</span>
+                          <span className="text-[0.75rem] text-white/85 leading-tight whitespace-nowrap">{f}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   <button
                     type="button"
-                    className="eiop__cta-btn inline-flex items-center justify-center gap-2 w-full py-3.5 px-5 mt-2 font-sans text-[0.9rem] font-bold rounded-lg cursor-pointer border-none overflow-hidden relative"
-                    style={{ background: '#7ed321', color: '#080808', boxShadow: '0 4px 16px rgba(126,211,33,0.25)' }}
+                    className="eiop__cta-btn inline-flex items-center justify-center gap-2 w-full py-3.5 px-5 mt-1 font-sans text-[0.95rem] font-bold rounded-xl cursor-pointer border-none overflow-hidden relative shadow-[0_4px_20px_rgba(126,211,33,0.35)]"
                   >
                     <span className="eiop__cta-shine" aria-hidden="true" />
                     <span className="relative z-[1]">Get Complete Access</span>
                     <span className="relative z-[1] eiop__cta-arrow">→</span>
                   </button>
 
-                  <div className="flex items-center justify-center gap-3 text-[0.65rem] text-white/30 font-mono mt-1">
-                    <span className="flex items-center gap-1">
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <div className="flex items-center justify-center gap-3 text-[0.7rem] text-white/40 font-mono mt-0.5">
+                    <span className="flex items-center gap-1.5">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                       Money-back guarantee
                     </span>
                     <span>·</span>
-                    <span className="flex items-center gap-1 text-[#7ed321]/70">
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span className="flex items-center gap-1.5 text-[#7ed321]/80">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                       Instant delivery
                     </span>
                   </div>

@@ -1,7 +1,5 @@
 /* =============================================
-   EverythingInOneSection — CSS-only:
-   animations, glows, SVG sizing, particles,
-   shimmer, tilt, gradient text.
+   EverythingInOneSection — CSS Styles
    ============================================= */
 
 /* ── Section & Container Centering ── */
@@ -111,12 +109,11 @@
 /* ── SVG Arrow Sizing & Orientations ── */
 .eiop__arrow-curve-left,
 .eiop__arrow-curve-right {
-  width: 90px;
-  height: 130px;
+  width: 170px;
+  height: 200px;
   color: #7ed321;
   flex-shrink: 0;
   filter: drop-shadow(0 2px 10px rgba(126,211,33,0.5));
-  /* Reduced top margin drastically to align with the middle/bottom of the card */
   margin-top: 175px; 
 }
 
@@ -135,8 +132,8 @@
 }
 
 .eiop__arrow-down {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 100px;
   color: #7ed321;
   transform: rotate(90deg);
   filter: drop-shadow(0 2px 8px rgba(126,211,33,0.5));
@@ -157,7 +154,7 @@
   border-color: rgba(126,211,33,0.4) !important;
 }
 
-/* ── Shimmer border on card (rotating gradient) ── */
+/* ── Shimmer border on card ── */
 .eiop__card-shimmer {
   position: absolute;
   inset: -1px;
@@ -209,7 +206,7 @@
   z-index: 1;
 }
 
-/* ── Box floating — driven by RAF in JS ── */
+/* ── Box floating ── */
 .eiop__box-img {
   filter: drop-shadow(0 18px 32px rgba(0,0,0,0.9));
   will-change: transform;
