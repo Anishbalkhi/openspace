@@ -1,0 +1,789 @@
+/* =============================================
+   Compare Themes — /compare (Ultra-Polished)
+   ============================================= */
+
+.cmp-page {
+  min-height: 100vh;
+  background: #0B0B0B;
+  color: #EBEBEB;
+}
+
+.cmp-section {
+  padding: 6.5rem 1rem 7rem;
+}
+@media (min-width: 768px) {
+  .cmp-section {
+    padding: 7.25rem 1.5rem 8rem;
+  }
+}
+
+.cmp-container {
+  max-width: 76rem;
+  margin: 0 auto;
+}
+
+/* ── Header ── */
+.cmp-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.cmp-eyebrow {
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.6rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: #888888;
+  margin-bottom: 1rem;
+}
+
+.cmp-title {
+  font-family: var(--font-pixel, monospace);
+  font-size: clamp(1.4rem, 3.5vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: #EBEBEB;
+  text-transform: uppercase;
+  line-height: 1.35;
+}
+
+.cmp-sub {
+  font-family: var(--font-mono, monospace);
+  max-width: 44rem;
+  margin: 1.25rem auto 2rem;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: #AAAAAA;
+}
+
+/* ── Billing Plan Switcher ── */
+.cmp-billing-toggle-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.cmp-billing-toggle {
+  display: inline-flex;
+  gap: 0.35rem;
+  padding: 0.35rem;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+}
+
+.cmp-billing-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.15rem;
+  border-radius: 100px;
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.52rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: transparent;
+  color: #888888;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.cmp-billing-btn--active {
+  background: #EBEBEB;
+  color: #0F0F0F;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.cmp-save-badge {
+  display: inline-block;
+  padding: 0.18rem 0.45rem;
+  border-radius: 100px;
+  font-size: 0.42rem;
+  background: #22c55e;
+  color: #000;
+  font-weight: 700;
+}
+
+/* ── Search & Filter Controls ── */
+.cmp-controls {
+  max-width: 52rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cmp-search-box {
+  position: relative;
+  width: 100%;
+}
+
+.cmp-search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666666;
+  width: 1rem;
+  height: 1rem;
+}
+
+.cmp-search-input {
+  width: 100%;
+  height: 2.85rem;
+  padding: 0 2.5rem 0 2.75rem;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #EBEBEB;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.cmp-search-input::placeholder { color: #555555; }
+.cmp-search-input:focus {
+  border-color: rgba(34, 211, 238, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.cmp-search-clear {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #888888;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.cmp-cat-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.cmp-cat-tab {
+  padding: 0.45rem 0.85rem;
+  border-radius: 100px;
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.5rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #888888;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.cmp-cat-tab:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #EBEBEB;
+}
+.cmp-cat-tab--active {
+  background: #DED950;
+  border-color: #DED950;
+  color: #0F0F0F;
+}
+
+/* ── Mobile Layout (< 768px) ── */
+.cmp-mobile {
+  display: block;
+}
+@media (min-width: 768px) {
+  .cmp-mobile {
+    display: none;
+  }
+}
+
+.cmp-mobile-tabs {
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.35rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 2rem;
+}
+
+.cmp-mobile-tab-btn {
+  flex: 1;
+  padding: 0.65rem 0.5rem;
+  border-radius: 8px;
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.52rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  color: #888888;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.cmp-mobile-tab-btn--active {
+  background: #EBEBEB;
+  color: #0F0F0F;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.cmp-mobile-card {
+  position: relative;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.cmp-mobile-card__img {
+  position: relative;
+  z-index: 2;
+  width: 140px;
+  height: 120px;
+  object-fit: contain;
+  margin: 0 auto 1rem;
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,0.8));
+}
+
+.cmp-mobile-badge {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.45rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: linear-gradient(90deg, #22d3ee 0%, #a855f7 100%);
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.cmp-mobile-card__title {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-pixel, monospace);
+  font-size: 1rem;
+  font-weight: 400;
+  color: #EBEBEB;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.cmp-mobile-card__price {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #22d3ee;
+}
+.cmp-mobile-card__billing {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: #888888;
+}
+
+.cmp-mobile-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.cmp-mobile-cat {
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.cmp-mobile-cat__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.cmp-mobile-cat__title {
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.55rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #EBEBEB;
+}
+
+.cmp-mobile-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.cmp-mobile-row__label {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  color: #CCCCCC;
+}
+
+.cmp-mobile-row__info {
+  display: block;
+  font-size: 0.65rem;
+  color: #777777;
+  margin-top: 0.2rem;
+}
+
+.cmp-mobile-cta {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.95rem 1rem;
+  border-radius: 100px;
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.6rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: #EBEBEB;
+  color: #0F0F0F;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  margin-bottom: 3rem;
+  text-decoration: none;
+}
+.cmp-mobile-cta--gradient {
+  background: linear-gradient(90deg, #22d3ee 0%, #a855f7 100%);
+  color: #ffffff;
+}
+
+/* ── Desktop Comparison Matrix (>= 768px) ── */
+.cmp-desktop {
+  display: none;
+}
+@media (min-width: 768px) {
+  .cmp-desktop {
+    display: block;
+  }
+}
+
+.cmp-matrix-container {
+  border-radius: 20px;
+  background: rgba(18, 18, 18, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  padding: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+}
+
+.cmp-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.cmp-table thead tr th {
+  padding-bottom: 2rem;
+  vertical-align: bottom;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cmp-th--feature {
+  width: 37%;
+  text-align: left;
+  padding-left: 1.5rem;
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.68rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #EBEBEB;
+}
+
+.cmp-th--col {
+  width: 21%;
+  text-align: center;
+  padding: 1rem 0.75rem 1.5rem;
+  position: relative;
+}
+
+.cmp-th--highlight {
+  background: rgba(34, 211, 238, 0.03);
+  border-radius: 16px 16px 0 0;
+}
+
+.cmp-theme-box-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  min-height: 140px;
+}
+
+.cmp-theme-box-glow {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  filter: blur(20px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cmp-theme-box-img {
+  position: relative;
+  z-index: 2;
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.85));
+  transition: transform 0.4s ease;
+}
+.cmp-th--col:hover .cmp-theme-box-img {
+  transform: scale(1.08) translateY(-4px);
+}
+
+.cmp-badge-popular {
+  display: inline-block;
+  padding: 0.22rem 0.65rem;
+  border-radius: 100px;
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.45rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: linear-gradient(90deg, #22d3ee 0%, #a855f7 100%);
+  color: #ffffff;
+  margin-bottom: 0.6rem;
+  box-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+}
+
+.cmp-theme-name {
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #EBEBEB;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.cmp-theme-price-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.cmp-theme-price {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #22d3ee;
+}
+
+.cmp-theme-billing {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  color: #777777;
+}
+
+/* Category header row */
+.cmp-tr--category {
+  cursor: pointer;
+  user-select: none;
+}
+.cmp-tr--category:hover .cmp-cat-badge {
+  color: #DED950;
+}
+
+.cmp-tr--category td {
+  padding: 2.25rem 1.5rem 0.75rem;
+}
+
+.cmp-cat-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.5rem;
+}
+
+.cmp-cat-badge {
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.55rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #AAAAAA;
+  transition: color 0.2s ease;
+}
+
+.cmp-cat-toggle-icon {
+  color: #666666;
+  font-size: 0.9rem;
+}
+
+/* Data row */
+.cmp-tr {
+  transition: background 0.15s ease;
+}
+.cmp-tr:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.cmp-tr td {
+  padding: 0.95rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.cmp-td--feature {
+  padding-left: 1.5rem !important;
+}
+
+.cmp-feat-title {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.76rem;
+  color: #CCCCCC;
+}
+
+.cmp-feat-info {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.64rem;
+  color: #666666;
+  margin-top: 0.2rem;
+}
+
+.cmp-td--val {
+  text-align: center;
+}
+
+.cmp-td--highlight {
+  background: rgba(34, 211, 238, 0.02);
+}
+
+/* Icons */
+.cmp-check-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.1);
+}
+.cmp-check-wrap--pj {
+  background: rgba(34, 211, 238, 0.15);
+}
+.cmp-check-wrap--interactive {
+  background: rgba(236, 72, 153, 0.15);
+}
+
+.cmp-icon-check {
+  color: #22c55e;
+  width: 1rem;
+  height: 1rem;
+}
+
+.cmp-icon-x {
+  color: rgba(255, 255, 255, 0.12);
+  width: 0.95rem;
+  height: 0.95rem;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.cmp-no-results {
+  text-align: center;
+  padding: 4rem 1rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  color: #777777;
+}
+
+/* ── Desktop CTA Buttons Row ── */
+.cmp-cta-grid {
+  display: grid;
+  grid-template-columns: 37% 21% 21% 21%;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cmp-cta-info {
+  padding-left: 1.5rem;
+}
+.cmp-cta-info-title {
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.65rem;
+  color: #EBEBEB;
+  text-transform: uppercase;
+}
+.cmp-cta-info-sub {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  color: #888888;
+  margin-top: 0.25rem;
+}
+
+.cmp-cta-col {
+  padding: 0 0.65rem;
+  text-align: center;
+}
+
+.cmp-btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  border-radius: 100px;
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.55rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.cmp-btn-cta--white {
+  background: #EBEBEB;
+  color: #0F0F0F;
+  border: 1px solid #EBEBEB;
+}
+.cmp-btn-cta--white:hover {
+  background: #DED950;
+  border-color: #DED950;
+  transform: translateY(-2px);
+}
+
+.cmp-btn-cta--gradient {
+  background: linear-gradient(90deg, #22d3ee 0%, #a855f7 100%);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.35);
+}
+.cmp-btn-cta--gradient:hover {
+  opacity: 0.92;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(168, 85, 247, 0.55);
+}
+
+/* ── Moneyback Guarantee Card ── */
+.cmp-guarantee-card {
+  max-width: 48rem;
+  margin: 3.5rem auto 2.5rem;
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.cmp-guarantee-head {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: #EBEBEB;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.cmp-guarantee-head svg {
+  color: #22c55e;
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.cmp-guarantee-text {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.76rem;
+  line-height: 1.65;
+  color: #AAAAAA;
+}
+
+/* ── Bottom Upsell Banner ── */
+.cmp-upsell-banner {
+  position: relative;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 2.75rem 2rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  text-align: center;
+  overflow: hidden;
+}
+
+.cmp-upsell-glow {
+  position: absolute;
+  inset: -50px;
+  background: radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.15) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.cmp-upsell-title {
+  position: relative;
+  font-family: var(--font-pixel, monospace);
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: #EBEBEB;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.cmp-upsell-sub {
+  position: relative;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  line-height: 1.65;
+  color: #AAAAAA;
+  margin-bottom: 1.5rem;
+}
+
+.cmp-upsell-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #EBEBEB;
+  text-decoration: none;
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+.cmp-upsell-link:hover {
+  gap: 0.85rem;
+  color: #22d3ee;
+}

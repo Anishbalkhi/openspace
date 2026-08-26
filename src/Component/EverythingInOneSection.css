@@ -32,7 +32,7 @@
   width: 540px;
   height: 540px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(126,211,33,0.14) 0%, rgba(59,158,255,0.09) 50%, transparent 75%);
+  background: radial-gradient(circle, rgba(126,211,33,0.12) 0%, rgba(59,158,255,0.06) 50%, transparent 75%);
   filter: blur(90px);
   pointer-events: none;
   animation: eiopGlowPulse 6s ease-in-out infinite alternate;
@@ -97,7 +97,7 @@
 
 @keyframes eiopBadgePulse {
   0%, 100% { box-shadow: 0 0 6px #7ed321; transform: scale(1); }
-  50%       { box-shadow: 0 0 18px #7ed321, 0 0 32px rgba(126,211,33,0.5); transform: scale(1.25); }
+  50%       { box-shadow: 0 0 16px #7ed321, 0 0 28px rgba(126,211,33,0.4); transform: scale(1.25); }
 }
 
 /* ── Gradient Title Text ── */
@@ -111,55 +111,62 @@
 /* ── SVG Arrow Sizing & Orientations ── */
 .eiop__arrow-curve-left,
 .eiop__arrow-curve-right {
-  width: 100px;
-  height: 160px;
+  width: 90px;
+  height: 130px;
   color: #7ed321;
   flex-shrink: 0;
   filter: drop-shadow(0 2px 10px rgba(126,211,33,0.5));
+  /* Reduced top margin drastically to align with the middle/bottom of the card */
+  margin-top: 175px; 
 }
 
 /* Left side arrow: curves down-right towards the card */
 .eiop__arrow-curve-right {
   transform: scaleX(-1);
+  margin-right: 25px;
+  margin-bottom: 15px;
 }
 
 /* Right side arrow: curves down-left towards the card */
 .eiop__arrow-curve-left {
   transform: none;
+  margin-left: 25px;
+  margin-bottom: 15px;
 }
 
 .eiop__arrow-down {
-  width: 44px;
-  height: 44px;
+  width: 60px;
+  height: 60px;
   color: #7ed321;
   transform: rotate(90deg);
   filter: drop-shadow(0 2px 8px rgba(126,211,33,0.5));
   animation: eiopArrowBounce 1.5s ease-in-out infinite;
+  margin: -5px 0 10px 0;
 }
 
 @keyframes eiopArrowBounce {
   0%, 100% { transform: rotate(90deg) translateX(0); }
-  50%       { transform: rotate(90deg) translateX(4px); }
+  50%       { transform: rotate(90deg) translateX(6px); }
 }
 
 /* ── Card Hover Glow ── */
 .eiop__card:hover {
   box-shadow: 0 0 0 1px rgba(126,211,33,0.45),
               0 30px 70px rgba(0,0,0,0.9),
-              0 0 40px rgba(126,211,33,0.2) !important;
-  border-color: rgba(126,211,33,0.5) !important;
+              0 0 40px rgba(126,211,33,0.15) !important;
+  border-color: rgba(126,211,33,0.4) !important;
 }
 
 /* ── Shimmer border on card (rotating gradient) ── */
 .eiop__card-shimmer {
   position: absolute;
   inset: -1px;
-  border-radius: 20px;
+  border-radius: 24px;
   background: conic-gradient(
     from 0deg,
     transparent 0%,
     rgba(126,211,33,0.6) 20%,
-    rgba(59,158,255,0.4) 40%,
+    rgba(59,158,255,0.3) 40%,
     transparent 60%
   );
   animation: eiopShimmerSpin 4s linear infinite;
@@ -181,11 +188,11 @@
 /* ── Glow behind box image ── */
 .eiop__card-glow {
   position: absolute;
-  width: 170px;
-  height: 170px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(126,211,33,0.22) 0%, transparent 70%);
-  filter: blur(25px);
+  background: radial-gradient(circle, rgba(126,211,33,0.2) 0%, transparent 70%);
+  filter: blur(28px);
   pointer-events: none;
   animation: eiopGlowPulse 3s ease-in-out infinite alternate;
 }
@@ -193,10 +200,10 @@
 /* ── Ground shadow under box ── */
 .eiop__box-shadow-ground {
   position: absolute;
-  bottom: 12px;
-  width: 50%;
-  height: 14px;
-  background: radial-gradient(ellipse at center, rgba(0,0,0,0.7) 0%, transparent 70%);
+  bottom: 15px;
+  width: 55%;
+  height: 16px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 1;
@@ -204,7 +211,7 @@
 
 /* ── Box floating — driven by RAF in JS ── */
 .eiop__box-img {
-  filter: drop-shadow(0 14px 28px rgba(0,0,0,0.9));
+  filter: drop-shadow(0 18px 32px rgba(0,0,0,0.9));
   will-change: transform;
 }
 
@@ -214,25 +221,20 @@
 }
 
 @keyframes eiopRibbonPulse {
-  0%, 100% { box-shadow: 0 2px 10px rgba(126,211,33,0.4); }
-  50%       { box-shadow: 0 2px 20px rgba(126,211,33,0.75), 0 0 25px rgba(126,211,33,0.3); }
+  0%, 100% { box-shadow: 0 2px 10px rgba(126,211,33,0.3); }
+  50%       { box-shadow: 0 2px 20px rgba(126,211,33,0.65), 0 0 20px rgba(126,211,33,0.25); }
 }
 
-/* ── CTA Button: hardened styling + shimmer sweep + arrow bounce ──
-   These !important overrides guarantee the button keeps its lime
-   background / black text / no border even if a global `button {}`
-   or `.app button {}` rule elsewhere in the site has higher
-   specificity than a bare Tailwind utility class. */
+/* ── CTA Button ── */
 .eiop__cta-btn {
   background-color: #7ed321 !important;
   color: #080808 !important;
   border: none !important;
-  margin-top: 0.25rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 .eiop__cta-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(126,211,33,0.5);
+  box-shadow: 0 8px 24px rgba(126,211,33,0.4);
   background-color: #8eef2a !important;
 }
 .eiop__cta-btn:active {
@@ -261,14 +263,12 @@
   transform: translateX(4px);
 }
 
-/* Card body padding is handled inline via Tailwind (pb-5) */
-
 /* ── Responsive Stacking ── */
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   .eiop__layout {
     flex-direction: column !important;
     align-items: center !important;
-    gap: 1.5rem !important;
+    gap: 2rem !important;
   }
 
   .eiop__callout--left,

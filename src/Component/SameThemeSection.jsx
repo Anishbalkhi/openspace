@@ -1,4 +1,5 @@
 import './SameThemeSection.css';
+import { useNavigate } from 'react-router-dom';
 
 const FLOATING_PREVIEWS = [
   { id: 1, cls: 'smt__preview--tl', img: '/images/justdrop5-optimized.avif', name: 'STRYDE' },
@@ -10,6 +11,8 @@ const FLOATING_PREVIEWS = [
 ];
 
 const SameThemeSection = () => {
+  const navigate = useNavigate();
+
   const scrollToThemes = () => {
     const el = document.getElementById('pick-theme');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -82,7 +85,7 @@ const SameThemeSection = () => {
             type="button"
             className="inline-flex items-center gap-2 px-8 py-3.5 font-sans text-[0.9rem] font-bold rounded-full cursor-pointer transition-all duration-200 hover:-translate-y-0.5"
             style={{ background: 'transparent', color: 'rgba(255,255,255,0.75)', border: '1px solid rgba(255,255,255,0.2)' }}
-            onClick={scrollToThemes}
+            onClick={() => navigate('/themes/demos')}
           >
             View Live Demos
           </button>
