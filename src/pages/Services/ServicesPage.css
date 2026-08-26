@@ -25,35 +25,6 @@
   z-index: 0;
 }
 
-/* ── Dynamic Animated Laser Scan Beam ── */
-.srv-grid-laser-scan {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(168, 85, 247, 0.08) 45%,
-    rgba(34, 211, 238, 0.25) 50%,
-    rgba(168, 85, 247, 0.08) 55%,
-    transparent 100%
-  );
-  background-size: 100% 350px;
-  background-repeat: no-repeat;
-  animation: srvLaserScan 8s linear infinite;
-  opacity: 0.8;
-}
-
-@keyframes srvLaserScan {
-  0% {
-    background-position: 0 -350px;
-  }
-  100% {
-    background-position: 0 calc(100vh + 350px);
-  }
-}
-
 /* ── Ambient Glowing Aurora Orbs ── */
 .srv-bg-orbs {
   position: fixed;
