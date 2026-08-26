@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Footer from '../../Layout/Footer.jsx';
+import DotGridPattern from '../../Component/DotGridPattern.jsx';
 import './AddOnsPage.css';
 
 const AI_PROMPT_PRODUCTS = [
@@ -151,7 +152,13 @@ const AddOnsPage = () => {
 
   return (
     <div className="addons-page">
-      <div className="addons-bg-grid" />
+      <DotGridPattern
+        clusters={[
+          { top: '25%', left: '15%' },
+          { top: '45%', left: '85%' },
+          { top: '75%', left: '50%' },
+        ]}
+      />
 
       <div className="addons-container">
         {/* ── Category Filter Tabs ── */}

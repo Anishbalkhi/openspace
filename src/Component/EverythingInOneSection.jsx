@@ -1,5 +1,6 @@
 import './EverythingInOneSection.css';
 import { useEffect, useRef, useState } from 'react';
+import DotGridPattern from './DotGridPattern.jsx';
 
 /* ── SVG arrows ── */
 const ArrowDown = () => (
@@ -91,6 +92,15 @@ const EverythingInOneSection = () => {
       className="eiop-section relative overflow-hidden bg-[#080808] py-16 sm:py-24 px-4 sm:px-6 isolate w-full flex flex-col items-center justify-center text-center"
       ref={sectionRef}
     >
+      {/* ── Dot Grid Matrix with Concentric Illuminated Pattern ── */}
+      <DotGridPattern
+        clusters={[
+          { top: '48%', left: '50%' },
+          { top: '30%', left: '18%' },
+          { top: '65%', left: '82%' },
+        ]}
+      />
+
       {/* ── Ambient glow + streaks ── */}
       <div className="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
         <div className="eiop__glow-orb" />

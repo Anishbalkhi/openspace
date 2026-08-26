@@ -1,0 +1,86 @@
+/* =============================================
+   DotGridPattern — Concentric Illuminated Dot Grid
+   ============================================= */
+
+.dot-grid-pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Base Uniform Dot Matrix */
+.dot-grid-pattern__base {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.18) 1.5px, transparent 1.5px);
+  background-size: 36px 36px;
+  background-position: center center;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 60%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 60%, transparent 100%);
+}
+
+/* Concentric Illuminated Dot Cluster */
+.dot-grid-pattern__cluster {
+  position: absolute;
+  top: var(--cluster-top, 50%);
+  left: var(--cluster-left, 50%);
+  transform: translate(-50%, -50%);
+  width: 288px;
+  height: 288px;
+  display: grid;
+  grid-template-columns: repeat(7, 36px);
+  grid-template-rows: repeat(7, 36px);
+  align-items: center;
+  justify-items: center;
+  pointer-events: none;
+}
+
+.dot-grid-pattern__dot {
+  border-radius: 50%;
+  background: #ffffff;
+  transition: all 0.3s ease;
+}
+
+/* Center core dot */
+.dot-grid-pattern__dot--core {
+  width: 6.5px;
+  height: 6.5px;
+  background: #ffffff;
+  box-shadow: 0 0 14px 2px rgba(255, 255, 255, 0.9), 0 0 4px rgba(255, 255, 255, 1);
+  animation: dotCorePulse 3.5s ease-in-out infinite alternate;
+}
+
+/* Level 1 ring dots */
+.dot-grid-pattern__dot--lvl1 {
+  width: 4.5px;
+  height: 4.5px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* Level 2 ring dots */
+.dot-grid-pattern__dot--lvl2 {
+  width: 3.5px;
+  height: 3.5px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Level 3 ring dots */
+.dot-grid-pattern__dot--lvl3 {
+  width: 2.5px;
+  height: 2.5px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+@keyframes dotCorePulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px 1px rgba(255, 255, 255, 0.7);
+  }
+  100% {
+    transform: scale(1.25);
+    box-shadow: 0 0 18px 3px rgba(255, 255, 255, 0.95), 0 0 6px #fff;
+  }
+}
