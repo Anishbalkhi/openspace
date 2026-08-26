@@ -19,6 +19,7 @@
   height: 100%;
   display: block;
   pointer-events: none;
-  mask-image: radial-gradient(ellipse 80% 75% at 50% 50%, #000 65%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 75% at 50% 50%, #000 65%, transparent 100%);
+  mask-image: radial-gradient(ellipse 90% 85% at 50% 50%, #000 80%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 85% at 50% 50%, #000 80%, transparent 100%);
 }
+
