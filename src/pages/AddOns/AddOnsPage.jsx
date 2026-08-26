@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Footer from '../../Layout/Footer.jsx';
 import './AddOnsPage.css';
 

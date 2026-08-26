@@ -11,22 +11,11 @@ import {
   LuChevronDown,
   LuArrowRight,
   LuStore,
-  LuBox,
-  LuShirt,
 } from 'react-icons/lu';
 import Footer from '../../Layout/Footer.jsx';
 import './ServicesPage.css';
 import ModelViewer from '../../Component/ModelViewer.jsx';
 
-
-const DecorativeMarks = () => (
-  <div className="srv-deco-marks" aria-hidden="true">
-    <span className="srv-deco-dots srv-deco-dots--tl" />
-    <span className="srv-deco-plus srv-deco-plus--tr">+</span>
-    <span className="srv-deco-dots srv-deco-dots--br" />
-    <span className="srv-deco-plus srv-deco-plus--bl">+</span>
-  </div>
-);
 
 const SERVICES_DATA = [
   {

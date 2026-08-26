@@ -5,12 +5,8 @@ import {
   LuGlobe,
   LuChevronRight,
   LuArrowUpRight,
-  LuSparkles,
-  LuCheck,
-  LuPackage,
   LuLayers,
 } from 'react-icons/lu';
-import { FaDiscord } from 'react-icons/fa';
 import './LearnPage.css';
 
 const SIDEBAR_SECTIONS = [

@@ -16,7 +16,6 @@ import {
   LuBuilding2,
   LuCrown,
   LuBookOpen,
-  LuCode,
   LuFileText,
 } from 'react-icons/lu';
 import { RxHamburgerMenu, RxCross1 } from 'react-icons/rx';
