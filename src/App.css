@@ -802,14 +802,14 @@
 
 /* ---- Which One Are You? Section ---- */
 .whichone-section {
-  padding: 6rem 1.5rem;
+  padding: 4.5rem 1.5rem 3.5rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .whichone__header {
   text-align: center;
-  margin-bottom: 3.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .whichone__title {
@@ -961,7 +961,7 @@
 /* ---- Globe Section ---- */
 .globe-section {
   background: #080808;
-  padding: 0 0 5rem;
+  padding: 0 0 3.75rem;
   overflow: hidden;
 }
 
@@ -1070,7 +1070,7 @@
 
 /* ---- Pick Your Theme Section ---- */
 .pyt-section {
-  padding: 6rem 1.5rem;
+  padding: 4.5rem 1.5rem 3.5rem;
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
@@ -1078,7 +1078,7 @@
 
 .pyt__header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2.25rem;
 }
 
 .pyt__title {
@@ -1625,7 +1625,9 @@
 .divider {
   height: 1px;
   background: linear-gradient(to right, transparent, var(--color-border), transparent);
-  margin: 0 1.5rem;
+  margin: 1rem auto;
+  max-width: 1000px;
+  width: calc(100% - 3rem);
 }
 
 /* ---- Animations ---- */

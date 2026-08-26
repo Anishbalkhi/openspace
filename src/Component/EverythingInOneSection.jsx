@@ -89,7 +89,7 @@ const EverythingInOneSection = () => {
   return (
     <section
       id="everything-package"
-      className="eiop-section relative overflow-hidden bg-[#080808] py-16 sm:py-24 px-4 sm:px-6 isolate w-full flex flex-col items-center justify-center text-center"
+      className="eiop-section relative overflow-hidden bg-[#080808] py-12 sm:py-18 px-4 sm:px-6 isolate w-full flex flex-col items-center justify-center text-center"
       ref={sectionRef}
     >
       {/* ── Dot Grid Matrix with Concentric Illuminated Pattern ── */}

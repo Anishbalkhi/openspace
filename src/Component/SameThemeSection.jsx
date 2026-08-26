@@ -19,7 +19,7 @@ const SameThemeSection = () => {
   };
 
   return (
-    <section id="same-theme" className="smt-section relative min-h-screen flex items-center justify-center overflow-hidden bg-[#080808] py-20 px-6">
+    <section id="same-theme" className="smt-section relative min-h-screen flex items-center justify-center overflow-hidden bg-[#080808] py-16 px-6">
       {/* Ambient background */}
       <div className="smt__bg absolute inset-0 pointer-events-none z-0" aria-hidden="true">
         <div className="smt__glow smt__glow--left" />
