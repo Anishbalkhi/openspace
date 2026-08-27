@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Footer from '../../Layout/Footer.jsx';
-import DotGridPattern from '../../Component/DotGridPattern.jsx';
+import { Footer } from '../../Layout';
+import { DotGridPattern, useCart } from '../../components';
 import './AddOnsPage.css';
 
 const AI_PROMPT_PRODUCTS = [
@@ -145,10 +145,30 @@ const EBOOKS_PRODUCTS = [
 
 const AddOnsPage = () => {
   const [activeTab, setActiveTab] = useState('ai-tools');
+  const { addItem } = useCart();
 
   let currentProducts = AI_PROMPT_PRODUCTS;
-  if (activeTab === 'sections') currentProducts = SECTIONS_PRODUCTS;
-  if (activeTab === 'ebooks') currentProducts = EBOOKS_PRODUCTS;
+  let categoryLabel = 'AI Tools & Prompts';
+  if (activeTab === 'sections') {
+    currentProducts = SECTIONS_PRODUCTS;
+    categoryLabel = 'Custom Section';
+  }
+  if (activeTab === 'ebooks') {
+    currentProducts = EBOOKS_PRODUCTS;
+    categoryLabel = 'E-Book Guide';
+  }
+
+  const handleAddAddon = (item) => {
+    addItem({
+      id: item.id,
+      name: item.title,
+      subtitle: categoryLabel,
+      price: item.price,
+      image: item.image,
+      fallbackImage: item.fallbackImage,
+      tag: categoryLabel,
+    });
+  };
 
   return (
     <div className="addons-page">
@@ -190,7 +210,14 @@ const AddOnsPage = () => {
         {/* ── Products Grid ── */}
         <div className="addons-grid">
           {currentProducts.map((item) => (
-            <article key={item.id} className="addon-card">
+            <article
+              key={item.id}
+              className="addon-card"
+              onClick={() => handleAddAddon(item)}
+              style={{ cursor: 'pointer' }}
+              role="button"
+              tabIndex={0}
+            >
               <div className="addon-card__media">
                 <img
                   src={item.image}
@@ -206,7 +233,10 @@ const AddOnsPage = () => {
               </div>
 
               <h2 className="addon-card__title">{item.title}</h2>
-              <div className="addon-card__price">{item.price}</div>
+              <div className="addon-card__price" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span>{item.price}</span>
+                <span style={{ fontSize: '0.75rem', color: '#e8ff4d', fontWeight: 'bold' }}>+ Add to Cart</span>
+              </div>
             </article>
           ))}
         </div>

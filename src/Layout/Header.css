@@ -1,0 +1,487 @@
+/* =============================================
+   Header — Responsive Navigation Bar & Dropdowns
+   ============================================= */
+
+/* ── Fixed Top Header Bar ── */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 62px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background: rgba(8, 8, 8, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header--scrolled {
+  background: rgba(8, 8, 8, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* ── Brand Logo ── */
+.header__brand {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #ffffff;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+.header__brand:hover {
+  opacity: 0.85;
+}
+
+/* ── Desktop Floating Capsule Nav in Center ── */
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  background: rgba(14, 14, 16, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  padding: 0.2rem 0.3rem;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.header__nav-item {
+  position: relative;
+}
+
+.header__nav-btn {
+  display: flex;
+  align-items: center;
+  padding: 0.38rem 0.7rem;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+  perspective: 600px;
+}
+
+/* Ambient Top Light Beam - disabled for clean color style */
+.header__nav-spotlight {
+  display: none !important;
+}
+
+.header__nav-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.38rem;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.header__nav-icon {
+  font-size: 0.84rem;
+  flex-shrink: 0;
+  opacity: 0.85;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.header__nav-text {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.01em;
+}
+
+.header__nav-chevron {
+  font-size: 0.72rem;
+  opacity: 0.6;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.header__nav-chevron--open {
+  transform: rotate(180deg);
+}
+
+/* Hover & Active base states */
+.header__nav-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+}
+.header__nav-btn:hover .header__nav-icon {
+  color: #ffffff;
+}
+
+.header__nav-btn--active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* ── Individual Distinct Clean Colors on the Icon (Matching Official Site) ── */
+
+/* Blue / Sky — Home */
+.header__nav-btn--blue:hover .header__nav-icon,
+.header__nav-btn--blue.header__nav-btn--active .header__nav-icon {
+  color: #38bdf8 !important;
+}
+
+/* Green — Themes */
+.header__nav-btn--green:hover .header__nav-icon,
+.header__nav-btn--green.header__nav-btn--active .header__nav-icon {
+  color: #4ade80 !important;
+}
+
+/* Yellow — Built for */
+.header__nav-btn--yellow:hover .header__nav-icon,
+.header__nav-btn--yellow.header__nav-btn--active .header__nav-icon {
+  color: #facc15 !important;
+}
+
+/* Sky / Cyan — Services */
+.header__nav-btn--sky:hover .header__nav-icon,
+.header__nav-btn--sky.header__nav-btn--active .header__nav-icon {
+  color: #22d3ee !important;
+}
+
+/* Purple — Add-Ons */
+.header__nav-btn--purple:hover .header__nav-icon,
+.header__nav-btn--purple.header__nav-btn--active .header__nav-icon {
+  color: #c084fc !important;
+}
+
+/* Red / Rose — Learn */
+.header__nav-btn--red:hover .header__nav-icon,
+.header__nav-btn--red.header__nav-btn--active .header__nav-icon {
+  color: #fb7185 !important;
+}
+
+/* Orange — Live Support */
+.header__nav-btn--orange:hover .header__nav-icon,
+.header__nav-btn--orange.header__nav-btn--active .header__nav-icon {
+  color: #fb923c !important;
+}
+
+/* ── Desktop Dropdown Menu ── */
+.header__dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 250px;
+  background: rgba(12, 14, 12, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 0.45rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  z-index: 1100;
+  animation: hdrDropdownIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes hdrDropdownIn {
+  from { opacity: 0; transform: translate(-50%, -6px) scale(0.96); }
+  to   { opacity: 1; transform: translate(-50%, 0) scale(1); }
+}
+
+.header__dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 9px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease;
+  width: 100%;
+}
+.header__dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.header__dropdown-item-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  color: var(--color-accent, #e8ff4d);
+  flex-shrink: 0;
+}
+
+.header__dropdown-item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.header__dropdown-item-title {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.header__dropdown-item-sub {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.35;
+  white-space: pre-line;
+}
+
+/* ── Header Actions (Cart, Hamburger) ── */
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header__icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.header__icon-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.header__hamburger {
+  display: none;
+}
+
+/* ── Mobile Menu Overlay & Drawer ── */
+.header__mobile-overlay {
+  display: none;
+}
+
+.header__mobile-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0.75rem;
+  right: 0.75rem;
+  background: rgba(12, 14, 12, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+  z-index: 1200;
+  animation: hdrMobileMenuIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+
+@keyframes hdrMobileMenuIn {
+  from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.header__mobile-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.header__mobile-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  color: rgba(240, 240, 240, 0.8);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 500;
+  padding: 0.7rem 0.9rem;
+  text-align: left;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  width: 100%;
+}
+.header__mobile-link-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+.header__mobile-link-icon {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.15s ease;
+}
+
+.header__mobile-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+.header__mobile-link--active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* ── Mobile Color Themes Exclusively for Icons on Selection ── */
+.header__mobile-link--blue.header__mobile-link--active .header__mobile-link-icon { color: #38bdf8; }
+.header__mobile-link--green.header__mobile-link--active .header__mobile-link-icon { color: #4ade80; }
+.header__mobile-link--yellow.header__mobile-link--active .header__mobile-link-icon { color: #facc15; }
+.header__mobile-link--sky.header__mobile-link--active .header__mobile-link-icon { color: #22d3ee; }
+.header__mobile-link--purple.header__mobile-link--active .header__mobile-link-icon { color: #c084fc; }
+.header__mobile-link--red.header__mobile-link--active .header__mobile-link-icon { color: #fb7185; }
+.header__mobile-link--orange.header__mobile-link--active .header__mobile-link-icon { color: #fb923c; }
+
+.header__mobile-sublist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.25rem 0.5rem 0.5rem 2.4rem;
+}
+
+.header__mobile-subitem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.header__mobile-subitem:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.header__mobile-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0.4rem 0;
+}
+
+.header__mobile-cta {
+  background: var(--color-accent, #e8ff4d);
+  color: #080808;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.header__mobile-cta:hover {
+  background: #f0ff70;
+  transform: translateY(-1px);
+}
+
+/* ── Responsive Breakpoints ── */
+@media (min-width: 861px) {
+  .header__mobile-menu {
+    display: none !important;
+  }
+  .header__hamburger {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  .header {
+    padding: 0 1.25rem;
+  }
+  .header__nav-btn {
+    padding: 0.35rem 0.55rem;
+    font-size: 0.68rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .header__nav {
+    display: none !important;
+  }
+  .header__hamburger {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0 1rem;
+    height: 58px;
+  }
+  .header__brand {
+    font-size: 0.88rem;
+    letter-spacing: 0.14em;
+  }
+}
+
+/* ── Cart badge ── */
+.header__cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #fff;
+  color: #000;
+  font-size: 9px;
+  font-weight: 800;
+  border-radius: 99px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  pointer-events: none;
+  animation: badgePop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes badgePop {
+  from { transform: scale(0.4); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+

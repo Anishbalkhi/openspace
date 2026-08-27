@@ -1,7 +1,7 @@
 import { useState, useMemo, Fragment } from 'react';
 import { FiCheck, FiX, FiShield, FiArrowRight, FiSearch, FiChevronDown, FiChevronUp } from 'react-icons/fi';
-import Footer from '../../Layout/Footer.jsx';
-import DotGridPattern from '../../Component/DotGridPattern.jsx';
+import { Footer } from '../../Layout';
+import { DotGridPattern, useCart } from '../../components';
 import './ComparePage.css';
 
 const THEMES = [
@@ -138,6 +138,24 @@ const ComparePage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [collapsedCategories, setCollapsedCategories] = useState({});
+  const { addItem } = useCart();
+
+  const handleBuyTheme = (theme) => {
+    const isLifetime = billingPlan === 'lifetime';
+    const priceStr = isLifetime ? theme.priceLifetime : theme.priceStandard;
+    const billingStr = isLifetime ? theme.billingLifetime : theme.billingStandard;
+    const priceNum = parseFloat(priceStr.replace(/[^0-9.]/g, '')) || 99;
+
+    addItem({
+      id: isLifetime && theme.id !== 'starter' ? `${theme.id}-lifetime` : theme.id,
+      name: isLifetime && theme.id !== 'starter' ? `${theme.fullName} (Lifetime)` : `${theme.fullName} Theme`,
+      subtitle: billingStr,
+      price: priceNum,
+      image: theme.img,
+      tag: isLifetime ? 'Lifetime' : 'Standard',
+      badge: theme.badge || '',
+    });
+  };
 
   const toggleCategoryCollapse = (catId) => {
     setCollapsedCategories((prev) => ({
@@ -208,14 +226,14 @@ const ComparePage = () => {
                   onClick={() => setBillingPlan('standard')}
                   className={`cmp-billing-btn ${billingPlan === 'standard' ? 'cmp-billing-btn--active' : ''}`}
                 >
-                  Standard (12M Updates)
+                  <span>Standard <span className="cmp-btn-subtext">(12M Updates)</span></span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setBillingPlan('lifetime')}
                   className={`cmp-billing-btn ${billingPlan === 'lifetime' ? 'cmp-billing-btn--active' : ''}`}
                 >
-                  Lifetime (Forever Updates)
+                  <span>Lifetime <span className="cmp-btn-subtext">(Forever)</span></span>
                   <span className="cmp-save-badge">Save 40%</span>
                 </button>
               </div>
@@ -333,14 +351,15 @@ const ComparePage = () => {
               ))}
             </div>
 
-            <a
-              href={selectedTheme.url}
+            <button
+              type="button"
+              onClick={() => handleBuyTheme(selectedTheme)}
               className={`cmp-mobile-cta ${
                 selectedTheme.btnVariant === 'gradient' ? 'cmp-mobile-cta--gradient' : ''
               }`}
             >
               Get {selectedTheme.name} →
-            </a>
+            </button>
           </div>
 
           {/* ── Desktop Comparison Matrix (>= 768px) ── */}
@@ -468,8 +487,9 @@ const ComparePage = () => {
                 </div>
                 {THEMES.map((theme) => (
                   <div key={theme.id} className="cmp-cta-col">
-                    <a
-                      href={theme.url}
+                    <button
+                      type="button"
+                      onClick={() => handleBuyTheme(theme)}
                       className={`cmp-btn-cta ${
                         theme.btnVariant === 'gradient'
                           ? 'cmp-btn-cta--gradient'
@@ -477,7 +497,7 @@ const ComparePage = () => {
                       }`}
                     >
                       {theme.btnLabel}
-                    </a>
+                    </button>
                   </div>
                 ))}
               </div>
@@ -505,10 +525,15 @@ const ComparePage = () => {
               It&apos;s our most popular theme for a reason — everything in Plain Jane plus 8
               interactive 3D spaces that make brands go viral. 8,500+ stores can&apos;t be wrong.
             </p>
-            <a href="/products/plain-jane-interactive" className="cmp-upsell-link">
-              <span>See Plain Jane Interactive</span>
+            <button
+              type="button"
+              onClick={() => handleBuyTheme(THEMES[2])}
+              className="cmp-upsell-link"
+              style={{ cursor: 'pointer', border: 'none', background: 'transparent' }}
+            >
+              <span>Get Plain Jane Interactive</span>
               <FiArrowRight />
-            </a>
+            </button>
           </div>
         </div>
       </section>

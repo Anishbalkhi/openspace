@@ -1,6 +1,7 @@
 import './EverythingInOneSection.css';
 import { useEffect, useRef, useState } from 'react';
-import DotGridPattern from './DotGridPattern.jsx';
+import DotGridPattern from '../../../components/DotGridPattern.jsx';
+import { useCart } from '../../../components/Cart';
 
 /* ── SVG arrows ── */
 const ArrowDown = () => (
@@ -39,6 +40,19 @@ const EverythingInOneSection = () => {
   const [visible, setVisible] = useState(false);
   const [price, setPrice]     = useState('249.00');
   const [tilt, setTilt]       = useState({ x: 0, y: 0 });
+  const { addItem } = useCart();
+
+  const handleAddToCart = () => {
+    addItem({
+      id: 'elite-bundle',
+      name: 'Elite Theme Package — All-In-One',
+      subtitle: 'Every premium theme + lifetime updates included',
+      price: parseFloat(price) || 49.99,
+      image: '/everythinginonepage/FC6750AB-9ABC-4D70-BDB8-4E357A3E70E0.webp',
+      tag: 'Save 80%',
+      badge: 'All Themes',
+    });
+  };
 
   /* ── Floating box animation ── */
   useEffect(() => {
@@ -122,7 +136,7 @@ const EverythingInOneSection = () => {
               height: `${s.size}px`,
               left: `${s.left}%`,
               bottom: '-10px',
-              opacity: s.opacity,
+              '--spark-opacity': s.opacity,
               animationDelay: `${s.delay}s`,
               animationDuration: `${s.duration}s`,
             }}
@@ -196,69 +210,72 @@ const EverythingInOneSection = () => {
               >
                 <div className="eiop__card-shimmer" aria-hidden="true" />
 
-                <div className="absolute top-4 right-4 z-[15] bg-[#7ed321] text-[#080808] font-mono text-[0.68rem] font-extrabold tracking-[0.08em] px-3 py-1 rounded-full shadow-[0_0_15px_rgba(126,211,33,0.6)] eiop__ribbon-pulse">
+                <div className="eiop__badge">
                   SAVE 80%
                 </div>
 
-                <div className="relative bg-[radial-gradient(ellipse_at_50%_65%,#1c261c_0%,#0c100c_100%)] px-4 pt-10 pb-8 flex items-center justify-center min-h-[250px] border-b border-white/[0.06]">
+                <div className="eiop__card-top">
                   <div className="eiop__card-glow" />
                   <div className="eiop__box-shadow-ground" />
                   <img
                     src="/everythinginonepage/FC6750AB-9ABC-4D70-BDB8-4E357A3E70E0.webp"
                     alt="Elite Theme Package box"
-                    className="eiop__box-img relative z-[2] w-[75%] max-w-[260px] h-auto object-contain block mx-auto"
+                    className="eiop__box-img"
                   />
                 </div>
 
-                <div className="px-8 sm:px-9 pt-6 pb-6 flex flex-col gap-4 text-left">
-                  
-                  <div className="flex items-baseline justify-between gap-3 flex-wrap">
-                    <h3 className="font-sans text-[1.15rem] font-bold text-white tracking-tight m-0">Elite Theme Package</h3>
-                    <div className="flex items-baseline gap-2 flex-shrink-0">
-                      <span className="font-mono text-[0.85rem] text-white/40 line-through decoration-white/40">$249</span>
-                      <span ref={priceRef} className="font-mono text-[1.6rem] font-black text-[#7ed321] leading-none tracking-tight">${price}</span>
+                <div className="eiop__card-body">
+                  {/* Header: Title & Price */}
+                  <div className="eiop__card-header">
+                    <h3 className="eiop__card-title">Elite Theme Package</h3>
+                    <div className="eiop__card-pricing">
+                      <span className="eiop__card-original-price">$249</span>
+                      <span ref={priceRef} className="eiop__card-current-price">${price}</span>
                     </div>
                   </div>
 
-                  <p className="text-[0.82rem] text-white/60 leading-[1.5] m-0 -mt-2">
+                  {/* Subtitle */}
+                  <p className="eiop__card-subtitle">
                     Every premium theme + lifetime updates in one complete bundle.
                   </p>
 
-                  <div className="h-px w-full bg-white/[0.08] my-0.5" />
+                  {/* Divider Line */}
+                  <div className="eiop__card-divider" />
 
-                  {/* Centered Feature Checklist */}
-                  <div className="flex justify-center w-full py-1">
-                    <div className="grid grid-cols-2 gap-y-3 gap-x-6 sm:gap-x-8">
-                      {[
-                        'All Themes Included',
-                        'Lifetime Updates',
-                        'Full Source Files',
-                        '24/7 Priority Support',
-                      ].map((f) => (
-                        <div key={f} className="flex items-center gap-2">
-                          <span className="text-[#7ed321] text-[0.75rem] font-bold flex-shrink-0">✓</span>
-                          <span className="text-[0.75rem] text-white/85 leading-tight whitespace-nowrap">{f}</span>
-                        </div>
-                      ))}
-                    </div>
+                  {/* Feature Checklist (2x2 Grid) */}
+                  <div className="eiop__checklist">
+                    {[
+                      'All Themes Included',
+                      'Lifetime Updates',
+                      'Full Source Files',
+                      '24/7 Priority Support',
+                    ].map((f) => (
+                      <div key={f} className="eiop__checklist-item">
+                        <span className="eiop__check-icon">✓</span>
+                        <span className="eiop__check-text">{f}</span>
+                      </div>
+                    ))}
                   </div>
 
+                  {/* CTA Button */}
                   <button
                     type="button"
-                    className="eiop__cta-btn inline-flex items-center justify-center gap-2 w-full py-3.5 px-5 mt-1 font-sans text-[0.95rem] font-bold rounded-xl cursor-pointer border-none overflow-hidden relative shadow-[0_4px_20px_rgba(126,211,33,0.35)]"
+                    onClick={handleAddToCart}
+                    className="eiop__cta-btn"
                   >
                     <span className="eiop__cta-shine" aria-hidden="true" />
-                    <span className="relative z-[1]">Get Complete Access</span>
-                    <span className="relative z-[1] eiop__cta-arrow">→</span>
+                    <span className="eiop__cta-text">Get Complete Access</span>
+                    <span className="eiop__cta-arrow">→</span>
                   </button>
 
-                  <div className="flex items-center justify-center gap-3 text-[0.7rem] text-white/40 font-mono mt-0.5">
-                    <span className="flex items-center gap-1.5">
+                  {/* Footer Guarantee & Delivery */}
+                  <div className="eiop__card-footer">
+                    <span className="eiop__footer-badge">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                       Money-back guarantee
                     </span>
-                    <span>·</span>
-                    <span className="flex items-center gap-1.5 text-[#7ed321]/80">
+                    <span className="eiop__footer-dot">·</span>
+                    <span className="eiop__footer-badge eiop__footer-badge--green">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                       Instant delivery
                     </span>

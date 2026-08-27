@@ -176,30 +176,30 @@
 @media (max-width: 1100px) {
   .rev__masonry {
     grid-template-columns: repeat(3, 1fr);
-    padding: 0 3rem;
+    padding: 0 2rem;
     gap: 1.2rem;
   }
   .rev__col-outer:nth-child(4) { display: none; }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .rev__masonry {
     grid-template-columns: repeat(2, 1fr);
-    padding: 0 2rem;
+    padding: 0 1.25rem;
     gap: 1rem;
   }
   .rev__col-outer:nth-child(3),
   .rev__col-outer:nth-child(4) { display: none; }
-  .rev__stage { height: 580px; }
+  .rev__stage { height: 520px; }
 }
 
-@media (max-width: 440px) {
+@media (max-width: 480px) {
   .rev__masonry {
     grid-template-columns: 1fr;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
   }
   .rev__col-outer:not(:first-child) { display: none; }
-  .rev__stage { height: 480px; }
+  .rev__stage { height: 420px; }
 }
 
 /* ── Respect reduced-motion preference ── */

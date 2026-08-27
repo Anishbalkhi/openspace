@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Box from '../../Component/Box.jsx';
-import WhichOneSection from '../../Component/WhichOneSection.jsx';
-import PickYourThemeSection from '../../Component/PickYourThemeSection.jsx';
-import GlobeSection from '../../Component/GlobeSection.jsx';
-import TestimonialsSection from '../../Component/TestimonialsSection.jsx';
-import EverythingInOneSection from '../../Component/EverythingInOneSection.jsx';
-import SameThemeSection from '../../Component/SameThemeSection.jsx';
-import Footer from '../../Layout/Footer.jsx';
+import {
+  Box,
+  WhichOneSection,
+  PickYourThemeSection,
+  GlobeSection,
+  TestimonialsSection,
+  EverythingInOneSection,
+  SameThemeSection,
+} from './components';
+import { Footer } from '../../Layout';
 
 // Floating store preview cards data
 const STORE_CARDS = [

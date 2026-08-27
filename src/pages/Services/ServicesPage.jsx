@@ -12,9 +12,9 @@ import {
   LuArrowRight,
   LuStore,
 } from 'react-icons/lu';
-import Footer from '../../Layout/Footer.jsx';
+import { Footer } from '../../Layout';
+import { ModelViewer, useCart } from '../../components';
 import './ServicesPage.css';
-import ModelViewer from '../../Component/ModelViewer.jsx';
 
 
 const SERVICES_DATA = [
@@ -328,6 +328,19 @@ const FAQS = [
 const ServicesPage = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [openFaq, setOpenFaq] = useState(null);
+  const { addItem } = useCart();
+
+  const handleAddService = (item, e) => {
+    e.preventDefault();
+    addItem({
+      id: item.id,
+      name: item.title,
+      subtitle: item.desc,
+      price: item.price,
+      image: 'https://cdn.shopify.com/s/files/1/0734/5501/0114/files/theme-installation-photo.png?v=1784261615',
+      tag: item.timeline || 'Service Package',
+    });
+  };
 
   const toggleFaq = (index) => {
     setOpenFaq((prev) => (prev === index ? null : index));
@@ -414,14 +427,15 @@ const ServicesPage = () => {
                           </div>
                         )}
 
-                        <a
-                          href={item.url}
+                        <button
+                          type="button"
+                          onClick={(e) => handleAddService(item, e)}
                           className={`srv-card__btn ${
                             item.isHighlightBtn ? 'srv-card__btn--highlight' : ''
                           }`}
                         >
                           {item.btnText}
-                        </a>
+                        </button>
                       </div>
                     </article>
                   );

@@ -2,6 +2,8 @@ import './ThemeDemos.css';
 import { useState, useMemo } from 'react';
 import { HiOutlineMail } from 'react-icons/hi';
 import { FiCheck, FiExternalLink } from 'react-icons/fi';
+import { Footer } from '../../Layout';
+import { useCart } from '../../components/Cart';
 
 const DEMOS = [
   {
@@ -215,6 +217,39 @@ const ThemeDemos = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [email, setEmail] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const { addItem } = useCart();
+
+  const handleBuyDemoTheme = (demo) => {
+    let id = 'plain-jane';
+    let name = 'Plain Jane Theme';
+    let price = 99;
+    let subtitle = 'Lookbooks, drop timers, custom fonts';
+    let image = '/pickyourtheme/2_e4952070-9788-46f2-8798-5305c910d8d9.avif';
+
+    if (demo.plan === 'Plain Jane Interactive') {
+      id = 'plain-jane-interactive';
+      name = 'Plain Jane Interactive Theme';
+      price = 149;
+      subtitle = '8 3D worlds, kinetic motion & audio player';
+      image = '/pickyourtheme/3_cf50cd1f-2b11-45c2-ac71-b585cc64e5aa.avif';
+    } else if (demo.plan === 'Plain Jane Starter') {
+      id = 'starter';
+      name = 'Plain Jane Starter Theme';
+      price = 59;
+      subtitle = 'Clean product pages & rapid checkout setup';
+      image = '/pickyourtheme/2_e4952070-9788-46f2-8798-5305c910d8d9.avif';
+    }
+
+    addItem({
+      id,
+      name,
+      subtitle,
+      price,
+      image,
+      tag: demo.name,
+      badge: demo.plan,
+    });
+  };
 
   const filteredDemos = useMemo(() => {
     if (activeFilter === 'All') return DEMOS;
@@ -341,9 +376,13 @@ const ThemeDemos = () => {
                     >
                       View Demo <FiExternalLink />
                     </a>
-                    <a href={demo.productUrl} className="td-card__btn td-card__btn--secondary">
-                      {demo.productLabel}
-                    </a>
+                    <button
+                      type="button"
+                      onClick={() => handleBuyDemoTheme(demo)}
+                      className="td-card__btn td-card__btn--secondary"
+                    >
+                      {demo.productLabel} →
+                    </button>
                   </div>
                 </div>
               </article>
@@ -357,15 +396,22 @@ const ThemeDemos = () => {
         <div className="td-sticky-bar__inner">
           <p className="td-sticky-bar__text">Ready to make your store look less basic?</p>
           <div className="td-sticky-bar__actions">
-            <a href="/collections/themes" className="td-sticky-bar__btn td-sticky-bar__btn--primary">
+            <button
+              type="button"
+              onClick={() => handleBuyDemoTheme({ plan: 'Plain Jane', name: 'Plain Jane Theme' })}
+              className="td-sticky-bar__btn td-sticky-bar__btn--primary"
+            >
               Shop Themes
-            </a>
+            </button>
             <a href="/compare" className="td-sticky-bar__btn td-sticky-bar__btn--secondary">
               Compare Themes
             </a>
           </div>
         </div>
       </div>
+
+      {/* ── Footer ── */}
+      <Footer />
     </div>
   );
 };

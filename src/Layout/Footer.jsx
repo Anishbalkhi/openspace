@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { FaInstagram, FaYoutube } from 'react-icons/fa';
+import './Footer.css';
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -83,7 +84,13 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#testimonials" onClick={(e) => handleLinkClick(e, '#testimonials')}>
+                  <a
+                    href="#live-support"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.dispatchEvent(new CustomEvent('open-live-support'));
+                    }}
+                  >
                     Live Support
                   </a>
                 </li>

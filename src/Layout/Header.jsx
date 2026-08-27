@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { IoCartOutline } from 'react-icons/io5';
+import { useCart } from '../components/Cart/CartContext';
 import {
   LuHouse,
   LuPanelsTopLeft,
@@ -19,6 +20,7 @@ import {
   LuFileText,
 } from 'react-icons/lu';
 import { RxHamburgerMenu, RxCross1 } from 'react-icons/rx';
+import './Header.css';
 
 const NAV_LINKS = [
   { id: 'nav-home', label: 'Home', icon: LuHouse, target: '#home', color: 'blue' },
@@ -51,21 +53,28 @@ const NAV_LINKS = [
     color: 'yellow',
     dropdown: [
       {
-        title: 'Startups',
-        subtitle: 'Launch fast with lean speed',
-        icon: LuRocket,
+        title: 'Streetwear',
+        subtitle: 'Drops, restocks, sold-out states',
         target: '#which-one',
       },
       {
-        title: 'Agencies',
-        subtitle: 'Client-ready storefront packages',
-        icon: LuBuilding2,
+        title: 'Activewear',
+        subtitle: 'Fabric, fit and colorways',
         target: '#which-one',
       },
       {
-        title: 'Enterprise',
-        subtitle: 'Custom drop systems at scale',
-        icon: LuCrown,
+        title: 'Fashion',
+        subtitle: 'Editorial imagery, quiet type',
+        target: '#which-one',
+      },
+      {
+        title: 'Jewelry & Accessories',
+        subtitle: 'Macro detail, materials, scale',
+        target: '#which-one',
+      },
+      {
+        title: 'Swimwear',
+        subtitle: 'Location-led, seasonal drops',
         target: '#which-one',
       },
     ],
@@ -101,7 +110,9 @@ const Header = () => {
   const [scrollActive, setScrollActive] = useState('nav-home');
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [mobileSubOpen, setMobileSubOpen] = useState({});
   const headerRef = useRef(null);
+  const { toggleCart, totalQty } = useCart();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -179,6 +190,24 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handler);
   }, [menuOpen, openDropdown]);
 
+  /* Automatically reset mobile menu when resizing to desktop or on route change */
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth > 860) {
+        setMenuOpen(false);
+        setMobileSubOpen({});
+      }
+    };
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  useEffect(() => {
+    setMenuOpen(false);
+    setOpenDropdown(null);
+    setMobileSubOpen({});
+  }, [location.pathname]);
+
   const handleBrandClick = () => {
     setOpenDropdown(null);
     setMenuOpen(false);
@@ -190,6 +219,13 @@ const Header = () => {
   };
 
   const handleNavClick = (link) => {
+    if (link.id === 'nav-support') {
+      setOpenDropdown(null);
+      setMenuOpen(false);
+      window.dispatchEvent(new CustomEvent('open-live-support'));
+      return;
+    }
+
     if (link.dropdown) {
       setOpenDropdown((cur) => (cur === link.id ? null : link.id));
     } else {
@@ -322,22 +358,15 @@ const Header = () => {
       <div className="header__actions">
         <button
           id="header-cart"
-          className="header__icon-btn"
-          aria-label="Cart"
-          onClick={() => {
-            if (location.pathname !== '/') {
-              navigate('/');
-              setTimeout(() => {
-                const el = document.getElementById('everything-package');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }, 100);
-            } else {
-              const el = document.getElementById('everything-package');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }
-          }}
+          className="header__icon-btn header__cart-btn"
+          aria-label={`Cart${totalQty > 0 ? `, ${totalQty} items` : ''}`}
+          onClick={toggleCart}
+          style={{ position: 'relative' }}
         >
           <IoCartOutline />
+          {totalQty > 0 && (
+            <span className="header__cart-badge">{totalQty}</span>
+          )}
         </button>
         {/* Mobile hamburger */}
         <button
@@ -353,15 +382,56 @@ const Header = () => {
       {/* Mobile dropdown menu */}
       {menuOpen && (
         <div className="header__mobile-menu" role="dialog" aria-modal="true">
-          {NAV_LINKS.map((link) => (
-            <button
-              key={link.id}
-              className={`header__mobile-link ${active === link.id ? 'header__mobile-link--active' : ''}`}
-              onClick={() => handleNavClick(link)}
-            >
-              {link.label}
-            </button>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const Icon = link.icon;
+            const hasSub = link.dropdown && link.dropdown.length > 0;
+            const isSubOpen = !!mobileSubOpen[link.id];
+
+            return (
+              <div key={link.id} className="header__mobile-item">
+                <button
+                  className={`header__mobile-link header__mobile-link--${link.color} ${
+                    active === link.id ? 'header__mobile-link--active' : ''
+                  }`}
+                  onClick={() => {
+                    if (hasSub) {
+                      setMobileSubOpen((prev) => ({ ...prev, [link.id]: !prev[link.id] }));
+                    } else {
+                      handleNavClick(link);
+                    }
+                  }}
+                >
+                  <div className="header__mobile-link-inner">
+                    <Icon className="header__mobile-link-icon" />
+                    <span>{link.label}</span>
+                  </div>
+                  {hasSub && (
+                    <LuChevronDown
+                      className={`header__nav-chevron ${isSubOpen ? 'header__nav-chevron--open' : ''}`}
+                    />
+                  )}
+                </button>
+
+                {hasSub && isSubOpen && (
+                  <div className="header__mobile-sublist">
+                    {link.dropdown.map((sub) => {
+                      const SubIcon = sub.icon;
+                      return (
+                        <button
+                          key={sub.title}
+                          className="header__mobile-subitem"
+                          onClick={() => handleDropdownItemClick(sub, link)}
+                        >
+                          {SubIcon && <SubIcon className="text-white/40" />}
+                          <span>{sub.title}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
           <div className="header__mobile-divider" />
           <button
             className="header__mobile-cta"

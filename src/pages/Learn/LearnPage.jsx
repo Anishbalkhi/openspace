@@ -147,6 +147,22 @@ const LearnPage = () => {
 
         {/* Right Article Main Content */}
         <main className="docs-main">
+          {/* Mobile Topic Selector (< 900px) */}
+          <div className="docs-mobile-topics" aria-label="Documentation Topics">
+            {SIDEBAR_SECTIONS.map((sec) => (
+              <button
+                key={sec.id}
+                type="button"
+                className={`docs-mobile-topic-btn ${
+                  activeSection === sec.id ? 'docs-mobile-topic-btn--active' : ''
+                }`}
+                onClick={() => selectSection(sec.id)}
+              >
+                {sec.title}
+              </button>
+            ))}
+          </div>
+
           {/* Main Title */}
           <h1 className="docs-title">
             {activeSection === 'intro' && 'Welcome to the official OpenSpaces Themes Documentation'}

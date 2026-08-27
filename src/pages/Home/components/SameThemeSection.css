@@ -1,0 +1,387 @@
+/* =============================================
+   SameThemeSection — Minimal & Clean Aesthetic
+   ============================================= */
+
+.smt-section {
+  position: relative;
+  background-color: #080808 !important;
+  color: #ffffff;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Ambient Fluid Canvas ── */
+.smt__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Subtle Ambient Glow Orbs ── */
+.smt__glow {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.1;
+}
+
+.smt__glow--left {
+  background: #7ed321;
+  top: 25%;
+  left: 10%;
+}
+
+.smt__glow--right {
+  background: #38bdf8;
+  top: 30%;
+  right: 10%;
+}
+
+/* ── Top Animated Laser Divider & Light Flare ── */
+.smt__top-laser {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.smt__top-laser-line {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.08) 50%, transparent 100%);
+}
+
+.smt__top-laser-flare {
+  position: absolute;
+  top: 0;
+  left: -20%;
+  width: 250px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(126, 211, 33, 0.8) 50%, rgba(232, 255, 77, 1) 70%, transparent 100%);
+  filter: blur(1px);
+  box-shadow: 0 0 16px rgba(126, 211, 33, 0.8), 0 0 30px rgba(232, 255, 77, 0.6);
+  animation: smtLaserScan 6s ease-in-out infinite alternate;
+}
+
+@keyframes smtLaserScan {
+  0%   { left: -10%; opacity: 0.3; }
+  50%  { opacity: 1; }
+  100% { left: 90%; opacity: 0.3; }
+}
+
+/* ── Top Floating Telemetry Bar ── */
+.smt__top-bar {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.smt__top-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(18, 20, 18, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.06em;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.smt__top-chip--left {
+  animation: smtTopFloatA 5s ease-in-out infinite alternate;
+}
+
+.smt__top-chip--right {
+  animation: smtTopFloatB 6s ease-in-out infinite alternate;
+}
+
+@keyframes smtTopFloatA {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-5px); }
+}
+
+@keyframes smtTopFloatB {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-6px); }
+}
+
+.smt__top-chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7ed321;
+  box-shadow: 0 0 8px #7ed321;
+  animation: smtPulseDot 2s ease-in-out infinite;
+}
+
+.smt__top-chip-icon {
+  color: #e8ff4d;
+  font-size: 0.75rem;
+}
+
+.smt__top-chip-badge {
+  font-size: 0.58rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(126, 211, 33, 0.15);
+  color: #7ed321;
+  border: 1px solid rgba(126, 211, 33, 0.3);
+}
+
+.smt__top-chip-badge--lime {
+  background: rgba(232, 255, 77, 0.15);
+  color: #e8ff4d;
+  border-color: rgba(232, 255, 77, 0.3);
+}
+
+/* ── Top Corner HUD Reticles ── */
+.smt__corner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.35;
+  transition: opacity 0.3s ease;
+}
+
+.smt__corner--tl {
+  top: 24px;
+  left: 24px;
+}
+
+.smt__corner--tr {
+  top: 24px;
+  right: 24px;
+  align-items: flex-end;
+}
+
+.smt__corner-text {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.smt__corner-line-h {
+  width: 20px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.smt__corner-line-v {
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Eyebrow Badge ── */
+.smt__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #7ed321;
+  text-transform: uppercase;
+  background: rgba(126, 211, 33, 0.06);
+  border: 1px solid rgba(126, 211, 33, 0.2);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+}
+
+.smt__eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7ed321;
+  box-shadow: 0 0 8px #7ed321;
+  animation: smtPulseDot 2s ease-in-out infinite;
+}
+
+@keyframes smtPulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 8px #7ed321; }
+  50%       { transform: scale(1.3); opacity: 0.7; box-shadow: 0 0 16px #7ed321; }
+}
+
+/* ── Main Heading Typography (Pixel Font) ── */
+.smt__title {
+  font-family: var(--font-pixel, 'Press Start 2P', monospace);
+  font-size: clamp(1.4rem, 3.4vw, 2.4rem);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 0;
+  text-align: center;
+}
+
+/* ── Subtitle ── */
+.smt__sub {
+  font-size: clamp(0.88rem, 1.6vw, 0.98rem);
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.7;
+  max-width: 440px;
+  margin: 0;
+  text-align: center;
+}
+
+/* ── CTA Buttons (Pure Vanilla CSS) ── */
+.smt__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.smt__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: 1;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.smt__btn--primary {
+  background: #e8ff4d;
+  color: #080808;
+  border: 1px solid #e8ff4d;
+  box-shadow: 0 4px 20px rgba(232, 255, 77, 0.35);
+}
+
+.smt__btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(232, 255, 77, 0.5);
+  background: #f0ff66;
+}
+
+.smt__btn--secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.smt__btn--secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.smt__btn-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.smt__btn:hover .smt__btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ── Trust Line ── */
+.smt__trust {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.35);
+  line-height: 1.6;
+  margin: 0;
+  text-align: center;
+}
+
+/* ── Navigation Hints ── */
+.smt__nav-hints {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.smt__nav-link {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.smt__nav-link:hover {
+  color: #e8ff4d;
+}
+
+.smt__nav-divider {
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Responsive Behavior ── */
+@media (max-width: 900px) {
+  .smt__top-bar {
+    padding: 0 20px;
+  }
+  .smt__corner {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .smt-section {
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+    min-height: auto !important;
+  }
+  .smt__top-bar {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .smt__center {
+    gap: 1.25rem !important;
+  }
+  .smt__btn {
+    padding: 11px 22px;
+    font-size: 0.88rem;
+  }
+}

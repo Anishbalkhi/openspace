@@ -49,6 +49,7 @@ export default function CursorGlowTrail() {
       ix: -900, iy: -900,   // inner lerp position
       rx: -900, ry: -900,   // ring-dot lerp position
       hovering:    false,
+      inNormalZone: false,  // true when over cart or live support
       currentHue:  72,
       rainbowHue:  72,
       cycleT:      0,
@@ -61,6 +62,17 @@ export default function CursorGlowTrail() {
     const onMove = (e) => {
       s.mx = e.clientX;
       s.my = e.clientY;
+
+      const target = e.target;
+      s.inNormalZone = Boolean(
+        target && (
+          target.closest('.cart-drawer') ||
+          target.closest('.cart-overlay') ||
+          target.closest('[data-os-widget]') ||
+          target.closest('.os-overlay') ||
+          target.closest('.os-launcher')
+        )
+      );
     };
 
     /* ── Hover: spotlight pulses on interactive elements ────────────── */
@@ -80,6 +92,17 @@ export default function CursorGlowTrail() {
     const draw = (ts) => {
       const dt = Math.min((ts - s.lastTS) / 1000, 0.05);
       s.lastTS = ts;
+
+      /* — Visibility in normal cursor zones (Cart & Live Support) — */
+      if (s.inNormalZone) {
+        outer.style.opacity = '0';
+        inner.style.opacity = '0';
+        rdot.style.opacity  = '0';
+      } else {
+        outer.style.opacity = '1';
+        inner.style.opacity = '1';
+        rdot.style.opacity  = '1';
+      }
 
       /* — Hue: rainbow in hero, section-aware elsewhere — */
       s.rainbowHue = (s.rainbowHue + dt * 45) % 360;

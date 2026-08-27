@@ -1,4 +1,5 @@
 import { LuCalendar, LuArrowRight } from 'react-icons/lu';
+import { Footer } from '../../Layout';
 import './BlogPage.css';
 
 const BLOG_POSTS = [
@@ -179,6 +180,7 @@ const BlogPage = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

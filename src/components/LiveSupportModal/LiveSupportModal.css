@@ -1,0 +1,637 @@
+/*
+  LiveSupportModal.css
+  Minimal, single-accent redesign. All rules are scoped to [data-os-widget]
+  to prevent bleeding from the site's global CSS.
+*/
+
+:root {
+  --os-ink: #17181c;
+  --os-ink-soft: #6b6f76;
+  --os-line: #e7e7e9;
+  --os-surface: #ffffff;
+  --os-muted: #f5f5f6;
+  --os-accent: #17181c; /* single neutral accent — buttons, focus, links */
+}
+
+/* ─── Launcher Bubble ─────────────────────────────────────────────────── */
+.os-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9000;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: var(--os-ink);
+  border: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.16);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  padding: 0;
+  outline: none;
+}
+.os-launcher:hover {
+  transform: scale(1.04);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+/* ─── Overlay ─────────────────────────────────────────────────────────── */
+.os-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17,17,20,0.24);
+  z-index: 9100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 24px;
+  animation: osOverlayIn 0.15s ease-out;
+}
+@keyframes osOverlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── Widget Card (Isolation Root) ───────────────────────────────────── */
+[data-os-widget] {
+  all: initial;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 380px;
+  height: 600px;
+  max-height: calc(100vh - 48px);
+  background: var(--os-surface);
+  color: var(--os-ink);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.14), 0 0 0 1px rgba(0,0,0,0.04);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  animation: osCardIn 0.16s ease-out;
+}
+@keyframes osCardIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+[data-os-widget] *, [data-os-widget] *::before, [data-os-widget] *::after {
+  box-sizing: border-box;
+  font-family: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────── */
+[data-os-widget] .w-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--os-surface);
+  border-bottom: 1px solid var(--os-line);
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+}
+[data-os-widget] .w-hd__left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+[data-os-widget] .w-hd__titles h3 {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--os-ink);
+  line-height: 1.2;
+  margin: 0;
+}
+[data-os-widget] .w-hd__titles span {
+  font-size: 12px;
+  color: var(--os-ink-soft);
+  display: block;
+  margin-top: 1px;
+}
+[data-os-widget] .w-hd__actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  position: relative;
+}
+[data-os-widget] .w-icon-btn {
+  all: unset;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--os-ink-soft);
+  font-size: 16px;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+[data-os-widget] .w-icon-btn:hover {
+  background: var(--os-muted);
+  color: var(--os-ink);
+}
+
+/* ─── Options Popover ────────────────────────────────────────────────── */
+[data-os-widget] .w-popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 208px;
+  background: var(--os-surface);
+  border-radius: 10px;
+  border: 1px solid var(--os-line);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  padding: 4px;
+  z-index: 100;
+  animation: osPopIn 0.12s ease-out;
+}
+@keyframes osPopIn {
+  from { opacity: 0; transform: translateY(-2px); }
+  to   { opacity: 1; transform: translateY(0);     }
+}
+[data-os-widget] .w-popover__item {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--os-ink);
+  transition: background 0.12s ease;
+}
+[data-os-widget] .w-popover__item:hover {
+  background: var(--os-muted);
+}
+[data-os-widget] .w-popover__divider {
+  height: 1px;
+  background: var(--os-line);
+  margin: 4px 0;
+}
+
+/* ─── Chat Body ──────────────────────────────────────────────────────── */
+[data-os-widget] .w-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  background: var(--os-surface);
+  scroll-behavior: smooth;
+}
+[data-os-widget] .w-body::-webkit-scrollbar {
+  width: 4px;
+}
+[data-os-widget] .w-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+[data-os-widget] .w-body::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.12);
+  border-radius: 4px;
+}
+
+[data-os-widget] .w-date {
+  text-align: center;
+  font-size: 11px;
+  color: var(--os-ink-soft);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+[data-os-widget] .w-sender {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--os-ink-soft);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+[data-os-widget] .w-bot-bubble {
+  background: var(--os-muted);
+  color: var(--os-ink);
+  border-radius: 14px;
+  border-bottom-left-radius: 4px;
+  padding: 11px 14px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  max-width: 88%;
+  margin-bottom: 14px;
+  white-space: pre-line;
+}
+[data-os-widget] .w-user-bubble {
+  align-self: flex-end;
+  background: var(--os-ink);
+  color: #ffffff;
+  border-radius: 14px;
+  border-bottom-right-radius: 4px;
+  padding: 10px 13px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  max-width: 84%;
+  margin-bottom: 10px;
+  white-space: pre-line;
+}
+
+/* ─── Typing Dots ─────────────────────────────────────────────────────── */
+[data-os-widget] .w-typing {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--os-muted);
+  border-radius: 14px;
+  border-bottom-left-radius: 4px;
+  padding: 11px 14px;
+  max-width: 60px;
+  margin-bottom: 10px;
+}
+[data-os-widget] .w-typing__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--os-ink-soft);
+  animation: osDot 1.2s ease-in-out infinite;
+}
+[data-os-widget] .w-typing__dot:nth-child(2) { animation-delay: 0.15s; }
+[data-os-widget] .w-typing__dot:nth-child(3) { animation-delay: 0.3s; }
+@keyframes osDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%            { transform: translateY(-3px); opacity: 1; }
+}
+
+/* ─── Onboarding Step Card ───────────────────────────────────────────── */
+[data-os-widget] .w-step-row {
+  margin-bottom: 16px;
+}
+[data-os-widget] .w-step-form {
+  background: var(--os-surface);
+  border: 1px solid var(--os-line);
+  border-radius: 14px;
+  padding: 14px;
+}
+[data-os-widget] .w-step-form label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--os-ink);
+  margin-bottom: 8px;
+}
+[data-os-widget] .w-step-form input {
+  all: unset;
+  display: block;
+  width: 100%;
+  border: 1px solid var(--os-line);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 13px;
+  color: var(--os-ink);
+  background: var(--os-muted);
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+[data-os-widget] .w-step-form input:focus {
+  border-color: var(--os-accent);
+  background: var(--os-surface);
+  outline: none;
+}
+[data-os-widget] .w-step-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+[data-os-widget] .w-step-counter {
+  font-size: 12px;
+  color: var(--os-ink-soft);
+}
+[data-os-widget] .w-next-btn {
+  all: unset;
+  cursor: pointer;
+  background: var(--os-accent);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: 999px;
+  transition: opacity 0.14s;
+  display: inline-flex;
+  align-items: center;
+}
+[data-os-widget] .w-next-btn:hover {
+  opacity: 0.85;
+}
+
+/* ─── Suggestion Box & Theme Chips ────────────────────────────────────── */
+[data-os-widget] .w-suggestions-box {
+  margin-bottom: 16px;
+  animation: osPopIn 0.2s ease-out;
+}
+
+[data-os-widget] .w-suggestions-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--os-ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  padding-left: 2px;
+}
+
+[data-os-widget] .w-suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+[data-os-widget] .w-theme-chip {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--os-surface);
+  border: 1px solid var(--os-line);
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--os-ink);
+  text-align: left;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+[data-os-widget] .w-theme-chip:hover {
+  background: var(--os-muted);
+  border-color: #cfd1d6;
+  transform: translateX(2px);
+}
+
+[data-os-widget] .w-theme-chip__icon {
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+[data-os-widget] .w-theme-chip__label {
+  flex: 1;
+  font-size: 13px;
+}
+
+[data-os-widget] .w-theme-chip__arrow {
+  font-size: 14px;
+  color: var(--os-ink-soft);
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+[data-os-widget] .w-theme-chip:hover .w-theme-chip__arrow {
+  transform: translateX(2px);
+  color: var(--os-ink);
+}
+
+/* ─── FAQ Quick Chips ─────────────────────────────────────────────────── */
+[data-os-widget] .w-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+[data-os-widget] .w-faq-chip {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 9px 12px;
+  background: var(--os-surface);
+  border: 1px solid var(--os-line);
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--os-ink);
+  text-align: left;
+  transition: border-color 0.12s, background 0.12s;
+  box-sizing: border-box;
+}
+[data-os-widget] .w-faq-chip:hover {
+  background: var(--os-muted);
+  border-color: #d4d4d6;
+}
+
+/* ─── Channel Views (Messenger / Instagram) ──────────────────────────── */
+[data-os-widget] .w-channel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 32px 24px;
+  overflow-y: auto;
+  background: var(--os-surface);
+}
+[data-os-widget] .w-channel h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--os-ink);
+  margin: 16px 0 8px;
+}
+[data-os-widget] .w-channel__sub {
+  font-size: 13px;
+  color: var(--os-ink-soft);
+  line-height: 1.5;
+  margin: 0 0 10px;
+  max-width: 280px;
+}
+[data-os-widget] .w-channel__instr {
+  font-size: 12.5px;
+  color: var(--os-ink-soft);
+  line-height: 1.5;
+  margin: 0 0 20px;
+  max-width: 270px;
+}
+[data-os-widget] .w-qr-box {
+  width: 152px;
+  height: 152px;
+  padding: 12px;
+  border: 1px solid var(--os-line);
+  border-radius: 14px;
+  background: var(--os-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+[data-os-widget] .w-channel__link {
+  font-size: 13px;
+  color: var(--os-ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: color 0.14s;
+  display: inline;
+}
+[data-os-widget] .w-channel__link:hover {
+  color: var(--os-ink-soft);
+}
+
+/* ─── Chat Input Bar ─────────────────────────────────────────────────── */
+[data-os-widget] .w-input-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background: var(--os-surface);
+  border-top: 1px solid var(--os-line);
+  flex-shrink: 0;
+}
+
+[data-os-widget] .w-input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--os-muted);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0 14px;
+  transition: border-color 0.14s, background 0.14s;
+}
+
+[data-os-widget] .w-input-wrap:focus-within {
+  border-color: var(--os-accent);
+  background: var(--os-surface);
+}
+
+[data-os-widget] .w-input-search-icon {
+  font-size: 15px;
+  color: var(--os-ink-soft);
+  flex-shrink: 0;
+}
+
+[data-os-widget] .w-input-bar input {
+  all: unset;
+  flex: 1;
+  padding: 9px 0;
+  font-size: 13px;
+  color: var(--os-ink);
+  box-sizing: border-box;
+}
+
+[data-os-widget] .w-input-bar input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+[data-os-widget] .w-input-bar input::placeholder {
+  color: var(--os-ink-soft);
+}
+
+[data-os-widget] .w-send-btn {
+  all: unset;
+  cursor: pointer;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--os-accent);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+  transition: opacity 0.14s, transform 0.14s;
+}
+
+[data-os-widget] .w-send-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+[data-os-widget] .w-send-btn:not(:disabled):hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────────── */
+[data-os-widget] .w-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 0;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--os-ink-soft);
+  background: var(--os-surface);
+  border-top: 1px solid var(--os-muted);
+  flex-shrink: 0;
+}
+
+/* ─── Mobile ─────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .os-overlay {
+    padding: 0;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  [data-os-widget] {
+    max-width: 100%;
+    height: 95dvh;
+    border-radius: 16px 16px 0 0;
+  }
+  .os-launcher {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .os-overlay, [data-os-widget], .w-popover, .w-typing__dot {
+    animation: none !important;
+  }
+}
+
+/* ─── Native Normal Cursor Restoration ────────────────────────────────── */
+.os-overlay,
+.os-launcher,
+[data-os-widget],
+[data-os-widget] * {
+  cursor: auto !important;
+}
+
+.os-launcher,
+[data-os-widget] button,
+[data-os-widget] a,
+[data-os-widget] [role="button"],
+[data-os-widget] .w-icon-btn,
+[data-os-widget] .w-next-btn,
+[data-os-widget] .w-send-btn,
+[data-os-widget] .w-faq-chip,
+[data-os-widget] .w-popover__item,
+[data-os-widget] .w-channel__link {
+  cursor: pointer !important;
+}
+
+[data-os-widget] input,
+[data-os-widget] textarea {
+  cursor: text !important;
+}

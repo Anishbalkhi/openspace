@@ -59,18 +59,19 @@
 
 .blog-hero__title {
   font-family: var(--font-pixel);
-  font-size: 2.2rem;
+  font-size: clamp(1.35rem, 4vw, 2.2rem);
   font-weight: 700;
   letter-spacing: -0.02em;
   color: #ffffff;
   margin-bottom: 1.25rem;
   text-transform: uppercase;
   text-shadow: 0 2px 25px rgba(255, 255, 255, 0.2);
+  line-height: 1.35;
 }
 
 .blog-hero__subtitle {
   font-family: var(--font-mono);
-  font-size: 0.95rem;
+  font-size: clamp(0.82rem, 2vw, 0.95rem);
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.65);
   max-width: 620px;
@@ -92,12 +93,22 @@
 }
 
 @media (max-width: 640px) {
+  .blog-page {
+    padding-top: 80px;
+    padding-bottom: 4rem;
+  }
+  .blog-container {
+    padding: 0 1rem;
+  }
+  .blog-hero {
+    margin: 0.5rem auto 2.5rem;
+  }
   .blog-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
-  .blog-hero__title {
-    font-size: 1.6rem;
+  .blog-card__content {
+    padding: 1.15rem 1.15rem 1.35rem;
   }
 }
 

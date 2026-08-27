@@ -740,3 +740,36 @@
   line-height: 1.7;
   color: #AAAAAA;
 }
+
+/* ── Responsive Refinements ── */
+@media (max-width: 640px) {
+  .srv-section {
+    padding: 3.5rem 1rem 4rem;
+  }
+  .srv-filter-bar {
+    max-width: calc(100vw - 2rem);
+    overflow-x: auto;
+    scrollbar-width: none;
+    justify-content: flex-start;
+    border-radius: 12px;
+    padding: 0.3rem;
+  }
+  .srv-filter-bar::-webkit-scrollbar { display: none; }
+  .srv-filter-pill {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.52rem;
+  }
+  .srv-card__visual {
+    aspect-ratio: 16 / 11;
+  }
+  .srv-card__body {
+    padding: 1.25rem 1rem 1.5rem;
+  }
+  .srv-faq-question {
+    padding: 1rem;
+    font-size: 0.78rem;
+  }
+  .srv-faq-answer {
+    padding: 0 1rem 1rem 1rem;
+  }
+}

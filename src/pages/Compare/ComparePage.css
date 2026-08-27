@@ -138,6 +138,8 @@
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
+  width: 100%;
+  padding: 0 0.5rem;
 }
 
 .cmp-billing-toggle {
@@ -148,6 +150,7 @@
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(12px);
+  max-width: 100%;
 }
 
 .cmp-billing-btn {
@@ -183,6 +186,7 @@
   background: #22c55e;
   color: #000;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 /* ── Search & Filter Controls ── */
@@ -192,6 +196,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  width: 100%;
 }
 
 .cmp-search-box {
@@ -245,6 +250,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.5rem;
+  width: 100%;
 }
 
 .cmp-cat-tab {
@@ -279,6 +285,60 @@
 @media (min-width: 768px) {
   .cmp-mobile {
     display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .cmp-header {
+    margin-bottom: 2.25rem;
+  }
+  .cmp-billing-toggle {
+    width: 100%;
+    max-width: 440px;
+  }
+  .cmp-billing-btn {
+    flex: 1;
+    padding: 0.55rem 0.45rem;
+    font-size: clamp(0.42rem, 2.2vw, 0.48rem);
+    justify-content: center;
+    text-align: center;
+    gap: 0.3rem;
+  }
+  .cmp-save-badge {
+    padding: 0.12rem 0.35rem;
+    font-size: 0.38rem;
+  }
+  .cmp-cat-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    justify-content: flex-start;
+    max-width: 100%;
+    padding: 0.35rem 0.25rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cmp-cat-tabs::-webkit-scrollbar { display: none; }
+  .cmp-cat-tab {
+    flex-shrink: 0;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.46rem;
+  }
+  .cmp-mobile-tabs {
+    margin-bottom: 1.5rem;
+  }
+  .cmp-mobile-tab-btn {
+    padding: 0.55rem 0.35rem;
+    font-size: clamp(0.44rem, 2.2vw, 0.5rem);
+  }
+}
+
+@media (max-width: 520px) {
+  .cmp-btn-subtext {
+    display: none;
+  }
+  .cmp-billing-btn {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.5rem;
   }
 }
 
@@ -471,10 +531,13 @@
   backdrop-filter: blur(20px);
   padding: 1.5rem;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .cmp-table {
   width: 100%;
+  min-width: 680px;
   border-collapse: separate;
   border-spacing: 0;
 }
