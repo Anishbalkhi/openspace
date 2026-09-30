@@ -1,4 +1,4 @@
-# OpenSpaces
+# OpenSpaces  https://openspacess.netlify.app/
 
 OpenSpaces is a dark, editorial Shopify theme showcase designed for activewear and fashion brands. It presents a collection of premium, no-code storefront themes through an immersive single-page experience, combining product-focused imagery with motion, interactive previews, and clear pricing information.
 
